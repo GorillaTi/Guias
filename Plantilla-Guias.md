@@ -1,4 +1,3 @@
-----
 ## GUIA DE INSTALACION 
 # DNS SERVIDORES DEBIAN CORES
 
@@ -8,8 +7,6 @@ Nivel: Todos
 Elaborado por: Edmundo Cespedes Ayllon
 Tecnico Responsable Data Center, GAMS
 Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com);
-
----
 
 1. Identificar la interfaz de Red
 $ 
