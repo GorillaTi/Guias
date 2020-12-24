@@ -10,7 +10,7 @@
   qm set VMID --agent 1
   ```
 
-- ingresamos al la VM y instalamos el agente
+- Ingresamos al la VM y instalamos el agente
 
   Debian
 

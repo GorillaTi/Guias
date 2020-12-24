@@ -1,4 +1,18 @@
-## Tares en DB SIGMA
+GUIA DE INSTALACION 
+# BASE DE DATOS SIGMA
+---
+## ACERCA DE:
+Versión: 1.1
+Fecha: 01-012-2020
+Nivel: Todos
+Área: Data Center
+Elaborado por: Edmundo Cespedes Ayllon
+Técnico Responsable Data Center, GAMS
+Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
+
+---
+
+## Tareas en DB SIGMA
 ### Subir servicios de la base de datos
 Ingresamos al servidor  y cambiamos de usuario al usuario oracle
 ```bash
@@ -15,7 +29,7 @@ su - oracle
 2. Montamos las bases de datos
 
    ```sql
-   startup
+   startup;
    ```
 
    Salimos de oracle
@@ -47,7 +61,7 @@ su - oracle
    ```
 3. Desmontamos la base de datos oracle
    ```bash
-   shutdown immediat
+   shutdown immediate;
    ```
 ### Apagamos el servidor
 Salimos del usuario oracle
@@ -58,5 +72,3 @@ Apagamos el servidor
 ```bash
 shutdown -h now
 ```
-
-$0$0P3*d

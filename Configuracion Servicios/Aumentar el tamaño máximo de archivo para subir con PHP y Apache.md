@@ -10,6 +10,10 @@ Existen varias formas de evitar este  límite impuesto en una aplicación basada
 
 Primero de todo tenemos que localizar el archivo de configuración (global) de PHP (**php.ini**) que puede estar ubicado en diferentes rutas dependiendo del sistema  operativo o de la distribución Linux que usemos. Y una vez localizado,  tenemos que editarlo y modificar las siguientes líneas:
 
+```bash
+sudo find / -name archivo.buscado
+```
+
 ```
 upload_max_filesize = 10M
 post_max_size = 20M
