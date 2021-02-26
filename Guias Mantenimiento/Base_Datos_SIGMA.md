@@ -7,7 +7,7 @@ Fecha: 01-012-2020
 Nivel: Todos
 Área: Data Center
 Elaborado por: Edmundo Cespedes Ayllon
-Técnico Responsable Data Center, GAMS
+Técnico Encargado Data Center - GAMS
 Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ---

@@ -30,6 +30,14 @@
   systemctl status qemu-guest-agent
   ```
 
+- Habilitamos el levantar al iniciar el sistema operativo
+
+  ```bash
+  systemctl enable qemu-guest-agent
+  ```
+  
+  
+  
 - iniciamos el servicio
 
   ```bash

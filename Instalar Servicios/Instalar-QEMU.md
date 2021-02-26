@@ -5,7 +5,7 @@
 ## Instalndo QEMU
 
 ```bash
-sudo apt-get install qemu-kvm qemu virt-manager virt-viewer libvirt-clients -s
+sudo apt install qemu-kvm qemu virt-manager virt-viewer libvirt-clients
 ```
 
 En caso de procesador intel: 

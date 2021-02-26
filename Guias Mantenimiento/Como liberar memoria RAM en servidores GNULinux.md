@@ -64,3 +64,7 @@ O bien
 $ su -c "echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Caché de RAM y Swap liberadas'" root
 
 Después de probar ambos comandos, ejecutaremos el comando “free -h” antes y después de ejecutar el script y comprobaremos la caché.
+
+para que todos los usuarios puedena utilizar el scrop se gueda en la siguiente direccion
+
+/usr/local/bin/limpiar
