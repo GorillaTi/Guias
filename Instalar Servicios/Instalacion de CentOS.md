@@ -128,4 +128,10 @@ sudo dnf install dnf-utils
   sudo netstat -nputa|grep :53
 ```
 
-  
+## Revisamos si el sistema necesita reinicio.
+
+```bash
+    dnf whatprovides needs-restarting
+    needs-restarting -r
+```
+
