@@ -26,7 +26,6 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 * Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM.
 
   |  Tamaño   |   Tipo   | Punto de montaje |
-| :-------: | :------: | :--------------: |
   |  1024 MB  | Primaria |      /boot       |
   |  2048 MB  |   LVM    |       swap       |
   | min 20 GB |   LVM    |        /         |
