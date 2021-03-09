@@ -5,11 +5,17 @@ GUÍA DE INSTALACIÓN
 ## ACERCA DE:
 
 Versión: 1.0
+
 Fecha: 25-22-2021
+
 Nivel: Todos
+
 Área: Data Center
+
 Elaborado por: Edmundo Céspedes Ayllón
+
 Técnico Encargado Data Center - G.A.M.S.
+
 e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ## Instalación del S.O.
