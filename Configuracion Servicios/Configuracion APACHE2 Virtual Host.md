@@ -66,21 +66,38 @@ Ejemplo de configuracion:
 	</Directory>
 </VirtualHost>
 ```
+
 - Para habilitar el sitio se utiliza el comando
-  a2ensite sitio.ejemplo.conf
-  Se debe de recargar el servicio de apache2
-  sevice apache2 reload
+```bash
+a2ensite sitio.ejemplo.conf
+```
+
+Se debe de recargar el servicio de apache2
+
+```bash
+sevice apache2 reload
+```
 
 - Para deshabilitar el sitio se utiliza el comando
-  a2dissite sitio.ejemplo.conf
-  Se debe de recargar el servicio de apache2
-  sevice apache2 reload
 
-ver host virtuales activos
+```bash
+a2dissite sitio.ejemplo.conf
+```
+
+Se debe de recargar el servicio de apache2
+
+```bash
+sevice apache2 reload
+```
+
+- Ver host virtuales activos
+
+```bash
 apachectl -S
+```
 
 Ejemplo:
-```
+```output
 AH00112: Warning: DocumentRoot [/var/www/html/laravel-prueba] does not exist
 VirtualHost configuration:
 *:80                   is a NameVirtualHost
@@ -106,5 +123,10 @@ Define: MODSEC_2.9
 User: name="www-data" id=33
 Group: name="www-data" id=33
 ```
-registro de errores de apache2
-/var/log/apache2/error_log
+- ver los registro de errores de apache2
+
+```bash
+tail -f /var/log/apache2/error_log
+```
+
+

@@ -25,19 +25,19 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 * Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM.
 
-  |  Tamaño   |   Tipo   | Punto de montaje |
-  |  1024 MB  | Primaria |      /boot       |
-  |  2048 MB  |   LVM    |       swap       |
-  | min 20 GB |   LVM    |        /         |
-  | min 20 GB |   LVM    |      /home       |
-  
-   * Colocamos  el password para root definido por el encargado de Data Center
-  
- * Creamos el usuario sysadmin, registramos su password 
-   
-   * seleccionamos los servicios mínimos para su instalación
-     * SSH server
-     * Utilidades estándar del sistema 
+  |Tamaño|Tipo|Punto de montaje|
+  |----|----|----|
+  |1024 MB|Primaria|/boot|
+  |2048 MB|LVM|swap|
+  |min 20 GB|LVM|/|
+  |min 20 GB|LVM|/home|
+
+* Colocamos  el password para root definido por el encargado de Data Center
+* Creamos el usuario sysadmin, registramos su password 
+
+* seleccionamos los servicios mínimos para su instalación
+  * SSH server
+  * Utilidades estándar del sistema 
 
 2. Iniciamos sesión con *root* y verificamos que este corriendo el servicio ssh.
 

@@ -1,16 +1,22 @@
-## GUIA DE INSTALACIOIN DNS SERVIDORES DEBIAN CORES
+GUÍA DE :
+
+# INSTALACIÓN DE PROXMOX
 
 Versión 1.0
+
 Nivel: Todos
+
 Área: Data Center
-Elaborado por Edmundo Cespedes A.
-Tecnico Responsable Data Center, GAMS
-Email: ed.cespedesa@gmail.com
 
-1. Identificar la interfaz de Red
-   $ 
+Elaborado por Edmundo Céspedes A.
 
-### Quitar mensage de suscripcion
+Técnico Encargado Data Center, G.A.M.S.
+
+e-mail: ed.cespedesa@gmail.com
+
+---
+
+## Quitar mensaje de suscripción
 
 Ejecutar el comando 
 
@@ -18,14 +24,14 @@ Ejecutar el comando
 sed -i.bak "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js && systemctl restart pveproxy.service
 ```
 
-### Creal Cluster
+### Crear Cluster
 
 1. Clic en Create Cluster
 
    - Colocamos el nombre del Cluster
    -  
 
-2. interfaces de administracion y cluster
+2. interfaces de administración y cluster
 
    | **Servidor** | **IP**          | **Servicio** |
    | :----------- | --------------- | ------------ |
@@ -53,12 +59,9 @@ sed -i.bak "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-wi
    | svm08        | 192.168.14.108  | IA           |
    |              | 192.169.13.108  | Cluster      |
    |              | 192.169.100.108 | DMZ          |
-
+   | svm09        | 192.168.14.109  | IA           |
+   |              | 192.169.13.109  | Cluster      |
+   |              | 192.169.100.109 | DMZ          |
    
 
-3. 
-
-# ss -ltun | grep named
-
-#
-#
+ss -ltun | grep named
