@@ -16,6 +16,45 @@ e-mail: ed.cespedesa@gmail.com
 
 ---
 
+## Instalación de Proxmox
+
+Seguimos los pasos de instalación estándar.
+
+## Usar todo el espacio disponible
+
+1. Revisamos el espacio disponible
+
+   ```bash
+   vgdisplay | grep Free
+   ```
+
+2. Identificamos la partición a la cual deseamos añadir el espacio disponible
+
+   ```bash
+   fdisk -l
+   lvdisplay
+   df -h
+   ```
+
+3. Procedemos a extender  la partición
+
+   ```bash
+   lvm lvextend -l +100%FREE /dev/pve/data
+   ```
+
+4. Registramos los cambios en el sistema de particiones
+
+   ```bash
+   resize2fs /dev/pve/data
+   ```
+
+5. Verificamos los cambios
+
+   ```bash
+   lvdisplay
+   vgdisplay | grep Free
+   ```
+
 ## Quitar mensaje de suscripción
 
 Ejecutar el comando 
@@ -29,8 +68,7 @@ sed -i.bak "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-wi
 1. Clic en Create Cluster
 
    - Colocamos el nombre del Cluster
-   -  
-
+   
 2. interfaces de administración y cluster
 
    | **Servidor** | **IP**          | **Servicio** |
