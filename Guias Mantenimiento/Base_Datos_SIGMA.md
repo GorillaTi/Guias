@@ -1,4 +1,4 @@
-GUIA DE INSTALACION 
+GUIA DE: 
 # BASE DE DATOS SIGMA
 ---
 ## ACERCA DE:
@@ -12,13 +12,70 @@ Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ---
 
-## Tareas en DB SIGMA
-### Subir servicios de la base de datos
+## APP SIGMA
+
+### Servicios de Aplicaciones
+
+```bash
+sudo - oradev
+```
+
+#### Subir servicios de Aplicaciones
+
+1. iniciamos los servicios de OPMNCTL
+
+   ```bash
+   opmnctl startall
+   ```
+
+   verificamos el estado del servicio
+
+   ```bash
+   opmnctl status
+   ```
+
+   resultado
+
+   ```output
+   [oradev@appprod ~]$ opmnctl status
+   
+   Processes in Instance: PRODUCCION.appprod.src.sigma.gob.bo
+   -------------------+--------------------+---------+---------
+   ias-component      | process-type       |     pid | status
+   -------------------+--------------------+---------+---------
+   DSA                | DSA                |     N/A | Down
+   LogLoader          | logloaderd         |     N/A | Down
+   HTTP_Server        | HTTP_Server        |   11185 | Alive
+   dcm-daemon         | dcm-daemon         |   11189 | Alive
+   WebCache           | WebCache           |   11197 | Alive
+   WebCache           | WebCacheAdmin      |   11184 | Alive
+   OC4J               | home               |   11190 | Alive
+   OC4J               | OC4J_BI_Forms      |   11187 | Alive
+   rep_approd_prod    | ReportsServer      |   11324 | Alive
+   ```
+
+2. iniciamos servicios de reportes
+
+   ```bash
+   emctl start iasconsole
+   ```
+
+   verificamos el estado del servicio
+
+   ```bash
+   emctl status iasconsole
+   ```
+
+3. 
+
+## DB SIGMA
+
+### Servicios de la base de datos
 Ingresamos al servidor  y cambiamos de usuario al usuario oracle
 ```bash
 su - oracle
 ```
-### Subir servicios de la base de datos
+#### Subir servicios de la base de datos
 
 1. Ingresamos a oracle
 
@@ -43,8 +100,14 @@ su - oracle
    ```bash
    lsnrctl start
    ```
+   
+   verificamos el estado del servicio
+   
+   ```bash
+   lsnrctl status
+   ```
 
-### Bajar servicio de la base de datos
+#### Bajar servicio de la base de datos
 1. Servicios de escucha de oracle
    - Verificar el estado le servicio de escucha
      ```bash
