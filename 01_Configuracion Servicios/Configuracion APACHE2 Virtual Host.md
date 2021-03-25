@@ -1,15 +1,36 @@
+Gia de:
 
+# Configuración de VirtualHost
 
-# Carpetas de Trabajo APACHE2
+## ACERCA DE:
 
-## Ubicaciones de los archivos de configuración
+Versión: 1.0
+
+Fecha: 25-02-2021
+
+Nivel: Todos
+
+Área: Data Center
+
+Elaborado por: Edmundo Céspedes Ayllón
+
+Técnico Encargado Data Center - G.A.M.S.
+
+e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
+
+---
+
+## Carpetas de Trabajo APACHE2
+
+Ubicaciones de los archivos de :
 
 Configuraciones
 /etc/apache2
 Alojamiento
 /var/www/html
 
-Carpeta de configuración de virtual host
+## Carpeta de configuración de virtual host
+
 /etc/apache2/site-avaible/
 /etc/apache2/site-enable/
 
@@ -33,7 +54,7 @@ Ejemplo de configuracion:
 ```
 
 ----LARAVEL-----
-```
+```code
 <VirtualHost *:80>
 	ServerName soporte.sucre.bo
 	ServerAlias www.soporte.sucre.bo
@@ -41,7 +62,6 @@ Ejemplo de configuracion:
 	DocumentRoot /var/www/html/soporte/public/ 
 	ErrorLog ${APACHE_LOG_DIR}/error_soporte.log
 	CustomLog ${APACHE_LOG_DIR}/access_soporte.log combined
-	#DirectoryIndex index.php
 	<Directory "/var/www/html/soporte/public">
 		Options +Indexes +FollowSymLinks
 		DirectoryIndex index.php
@@ -69,31 +89,31 @@ Ejemplo de configuracion:
 
 - Para habilitar el sitio se utiliza el comando
 ```bash
-a2ensite sitio.ejemplo.conf
+sudo a2ensite sitio.ejemplo.conf
 ```
 
 Se debe de recargar el servicio de apache2
 
 ```bash
-sevice apache2 reload
+sudo sevice apache2 reload
 ```
 
 - Para deshabilitar el sitio se utiliza el comando
 
 ```bash
-a2dissite sitio.ejemplo.conf
+sudo a2dissite sitio.ejemplo.conf
 ```
 
 Se debe de recargar el servicio de apache2
 
 ```bash
-sevice apache2 reload
+sudo sevice apache2 reload
 ```
 
 - Ver host virtuales activos
 
 ```bash
-apachectl -S
+sudo apachectl -S
 ```
 
 Ejemplo:

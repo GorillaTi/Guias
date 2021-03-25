@@ -2,7 +2,7 @@
 
 ---
 
-## Instalación en linux
+## Instalación en Linux
 
 - habilitar el agente en la consola del nodo de Proxmox
 
@@ -18,7 +18,7 @@
   apt-get install qemu-guest-agent
   ```
 
-  Redhat
+  RedHat
 
   ```bash
   yum install qemu-guest-agent
@@ -33,10 +33,8 @@
 - Habilitamos el levantar al iniciar el sistema operativo
 
   ```bash
-  systemctl enable qemu-guest-agent
+  systemctl enable --now qemu-guest-agent
   ```
-  
-  
   
 - iniciamos el servicio
 

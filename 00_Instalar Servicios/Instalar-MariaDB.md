@@ -1,62 +1,49 @@
-## Instalación De MariaDB en CentOS 8
+Guía de:
 
-1. Instalamos CentOS 8 minimal, solo con lo necesario.
-   * Configuramos la interface red 
-   * Configuramos con el servidor de hora
-   * Colocamos  el password para root definido por el encargado de Data Center
-   * Creamos el usuario sysadmin, registramos su password y le damos privilegios de administrador
+## Instalación De MariaDB
 
-2. Iniciamos sesión con *root* y verificamos que este corriendo el servicio ssh.
+## ACERCA DE:
 
-3. Nos conectamos al servidor mediante ssh
+Versión: 1.0
+
+Fecha: 01-12-2020
+
+Nivel: Todos
+
+Área: Data Center
+
+Elaborado por: Edmundo Cespedes Ayllon
+
+Técnico Encargado Data Center - GAMS
+
+e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
+
+----
+
+1. Instalamos CentOS 8 minimal, de acuerdo al manual
+
+2. Nos conectamos al servidor mediante ssh
 
    ```bash
    ssh sysadmin@ipservidor
    ```
 
-4.  Instalamos el repositorio de fedora
-
-   ```bash
-   sudo dnf install epel-release -y
-   ```
-
-5. Actualizamos e instalamos las actualizaciones.
+3. Actualizamos e instalamos las actualizaciones.
 
    ```bash
    sudo dnf update -y
    ```
 
-6. Creamos el usuario *desarrollo*
+
+## En CenOS 8
+
+4. Instalamos mariadb
 
    ```bash
-   sudo adduser desarrollo
+   sudo dnf install mariadb-server -y
    ```
 
-7. Creamos contraseña de para el usuario *desarrollo*
-
-   ```bash
-   sudo passwd desarrollo
-   ```
-
-8. Incluimos al usuario *desarrollo* al grupo *sudoers*.
-
-   ```bash
-   sudo usermod -aG wheel desarrollo
-   ```
-
-9. Verificamos que el usuario desarrollo se encentra en el grupo wheel.
-
-   ```bash
-   sudo lid -g wheel
-   ```
-
-10. Instalamos mariadb
-
-    ```bash
-    sudo dnf install mariadb-server -y
-    ```
-
-11. Revisamos el estado del servidor mariadb.
+10. Revisamos el estado del servidor mariadb.
 
     ```bash
     sudo systemctl status mariadb
@@ -68,13 +55,13 @@
     sudo systmctl start mariadb
     ```
 
-12. Habilitamos el servicio de mariadb para que inicie con el sistema
+11. Habilitamos el servicio de mariadb para que inicie con el sistema
 
     ```bash
     sudo systemctl enable mariadb
     ```
 
-13. Aseguramos la instalación de mariadb
+12. Aseguramos la instalación de mariadb
 
     ```bash
     sudo mysql_secure_installation
@@ -82,13 +69,13 @@
 
     el usuario root no tiene una contraseña das "Y" pedirá una contraseña para ese usuario, le das "Y" a todo  
 
-14. Conexión a la base de datos
+13. Conexión a la base de datos
 
     ```bash
     mysql -u root -p
     ```
 
-15. Creamos el usuario *sysadmin* y *desarrollo* para la base de datos con acceso remoto
+14. Creamos el usuario *sysadmin* y *desarrollo* para la base de datos con acceso remoto
 
     ```mysql
     mysql> GRANT ALL ON *.* TO 'desarrollo'@'%' IDENTIFIED BY 'pass_usuario' WITH GRANT OPTION;
@@ -96,19 +83,25 @@
     mysql> select user, host from mysql.user
     ```
 
-16. Habilitamos el acceso remoto editando el archivo de configuración.
+15. Habilitamos el acceso remoto editando el archivo de configuración.
 
     ```bash
     sudo nano /etc/my.cnf.d/mariadb-server.cnf
     ```
 
-    habilitamos borrando # de la línea bind-address = 0.0.0.0, reiniciamos el servicio mariadb.
+    habilitamos borrando # de la línea 
+
+    ```output
+    bind-address = 0.0.0.0,
+    ```
+
+    reiniciamos el servicio mariadb.
 
     ```bash
     sudo systemctl restart mariadb
     ```
 
-17. Deshabilitamos SElinix
+16. Deshabilitamos SElinix
 
     revisamos el estado del servicio
 
@@ -150,7 +143,7 @@
     SELinux status:                 disabled
     ```
 
-18. Habilitamos los puertos del servicio mariadb el firewall
+17. Habilitamos los puertos del servicio mariadb el firewall
 
     Verificamos el estado del firewall
 

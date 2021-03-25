@@ -1,15 +1,21 @@
-GUÍA DE INSTALACIÓN 
+Guía de:
 
 # Instalación De Apache  y PHP. 
 
 ## ACERCA DE:
 
 Versión: 1.0
+
 Fecha: 25-02-2021
+
 Nivel: Todos
+
 Área: Data Center
+
 Elaborado por: Edmundo Céspedes Ayllón
+
 Técnico Encargado Data Center - G.A.M.S.
+
 e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ------
@@ -18,13 +24,23 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 1. Instalamos y configuramos el servidor conforme a la Guía de Instalación de CentOS 8.
 
-2. Instalamos Apache2
+### Instalamos Apache2
+
+2. Actualizamos
+
+   ```bash
+   sudo dnf upgrade
+   ```
+
+3. Instalamos http
 
    ```bash
    sudo dnf install -y httpd
    ```
 
-3. Habilitamos el  los puertos http y https en el firewall
+### Configuración  de Firewall
+
+4. Habilitamos el  los puertos http y https en el firewall
 
    - Verificamos el estado del firewall
 
@@ -49,21 +65,21 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    firewall-cmd --add-service=https --permanent
    ```
 
-   - Reiniciamos el servicio del firewall    
+   - Reiniciamos el servicio del firewall   
 
-     ```bash
+   ```bash
    firewall-cmd --reload
-     ```
+   ```
 
    - Verificamos los servicios habilitados
 
-     ```bash
+   ```bash
    sudo firewall-cmd --list-services
-     ```
+   ```
 
-4. Instalamos PHP
+### Instalamos PHP
 
-   - Revisamos la versión de php en los repositorios
+5. Revisamos la versión de PHP en los repositorios
 
    ```bash
    sudo dnf module list php
@@ -75,13 +91,13 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
    https://rpms.remirepo.net/wizard/
 
-5. instalamos los módulos de php
+6. instalamos los módulos de php
 
    ```bash
    sudo dnf install -y php php-opcache php-curl php-common php-mysqlnd php-gd
    ```
 
-6. habilitamos los servicios de php
+7. habilitamos los servicios de php
 
    ```bash
    sudo systemctl enable --now php-fpm.service
@@ -125,7 +141,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
    http://app.sucre.bo/info.php
 
-7. Habilitando la publicación por medio de enlaces simbólicos desde las carpetas /home a /var/www/html
+8. Habilitando la publicación por medio de enlaces simbólicos desde las carpetas /home a /var/www/html
 
    modificamos la configuración de apache2
 
@@ -216,7 +232,36 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    sudo ss -tpan
    ```
 
-7. Configuraciones de seguridad de Apache2
+### Configuración de Firewall
+
+ Comprobamos el estado de la iptables
+
+   ```bash
+   sudo iptables -L
+   ```
+
+ Habilitamos los puertos
+
+   ```bash
+   sudo ufw allow ssh
+   sudo ufw allow http
+   sudo ufw allow https
+   sudo ufw allow mysql
+   ```
+
+Para rangos de puertos
+
+```bash
+sudo ufw allow in 1000:2000/udp
+```
+
+Habilitamos el firewall
+
+   ```bash
+sudo ufw enable
+   ```
+
+   ### Configuraciones de seguridad de Apache2
 
    * ubicarse en la carpeta de configuración
 
@@ -237,7 +282,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
      sudo nano charset.conf
      ```
 
-     des cometamos la linea 
+     des cometamos la línea
 
      ```output
      AddDefaultCharset UTF-8
@@ -350,7 +395,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    sudo apt install php7.4-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,bcmath} -y
    ```
 
-### Prueba de Funcionamiento de la instalación de php
+## Prueba de Funcionamiento de la instalación de php
 
    * Para probar que todo esta funcionando nos creamos  carpeta `test` y archivo de prueba `index.php`
 
@@ -371,7 +416,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
         * http://192.168.14.95/test
         * http://app.sucre.bo/test
 
-### Archivo de Configuración php.ini
+## Archivo de Configuración php.ini
 
 * Para editar el archivo de configuración
 
@@ -390,7 +435,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
   max_input_time = 1000
   ```
 
-### Configuración para en enlaces simbólicos de `/home` a` /var/www/html`
+## Configuración para en enlaces simbólicos de `/home` a` /var/www/html`
 
 * Editar el archivo `apache.conf`
 
@@ -400,7 +445,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 * Insertamos el siguiente código
 
-  ```properties
+  ```http
   <Directory /var/www/html/ >
   	Options Indexes FollowSymLinks MultiViews
   	AllowOverride All
@@ -421,7 +466,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
   sudo systemctl reload apache2.service 
   ```
 
-### Prueba de funcionamiento de enlace simbólico
+## Prueba de funcionamiento de enlace simbólico
 
 * Movemos el directorio `/test` 
 
@@ -444,4 +489,173 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 * Revisamos en el navegador
 
   * http://192.168.14.95/test
-     * http://app.sucre.bo/test
+  * http://app.sucre.bo/test
+
+## Instalación de certificado SSL
+
+Instalamos certbot
+
+apache
+
+```bash
+sudo apt install -y certbot python3-certbot-apache
+```
+
+nginx
+
+```bash
+sudo apt install -y certbot python3-certbot-nginx
+```
+
+Iniciamos la instalación y auto configuración del certificado
+
+Sin configura apache o nginx
+
+```bash
+sudo certbot certonly \
+    -d damiancondori.com \
+    --noninteractive \
+    --standalone \
+    --agree-tos \
+    --register-unsafely-without-email
+```
+
+configurando Apache
+
+```bash
+ sudo certbot --apache -d damiancondori.com -d www.damiancondori.com
+```
+
+configurando Nginx
+
+```
+sudo certbot --nginx -d damiancondori.com -d www.damiancondori.com
+```
+
+resultado
+
+```output
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator standalone, Installer None
+Obtaining a new certificate
+Performing the following challenges:
+http-01 challenge for damiancondori.com
+Waiting for verification...
+Cleaning up challenges
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/damiancondori.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/damiancondori.com/privkey.pem
+   Your cert will expire on 2021-06-20. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot renew"
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+```
+
+Configurando VirtualHost  Manual
+
+Apache
+
+000-default.conf
+
+```output
+<VirtualHost *:80>
+        #ServerName www.example.com
+        #ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        <FilesMatch \.php$>
+             SetHandler "proxy:unix:/var/run/php/php7.4-fpm.sock|fcgi://localhost"
+        </FilesMatch>
+
+        ErrorLog /error.log
+        CustomLog /access.log combined
+        RewriteEngine on
+        RewriteCond %{SERVER_NAME} =damiancondori.com [OR]
+        RewriteCond %{SERVER_NAME} =www.damiancondori.com
+        RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
+```
+
+ 000-default-le-ssl.conf
+
+```output
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+        #ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+        ServerName damiancondori.com
+        Include /etc/letsencrypt/options-ssl-apache.conf
+        ServerAlias www.damiancondori.com
+        SSLCertificateFile /etc/letsencrypt/live/damiancondori.com/fullchain.pem
+        SSLCertificateKeyFile /etc/letsencrypt/live/damiancondori.com/privkey.pem
+
+        <FilesMatch \.php$>
+             SetHandler "proxy:unix:/var/run/php/php7.4-fpm.sock|fcgi://localhost"
+        </FilesMatch>
+
+        ErrorLog /error.log
+        CustomLog /access.log combined
+</VirtualHost>
+</IfModule>
+```
+
+Nginx
+
+```
+server {
+        listen 80 default_server;
+        return 301 https://$host$request_uri;
+        }
+
+server {
+        listen 443 ssl;
+
+        ssl_certificate     /etc/letsencrypt/live/test2.albertcoronado.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/test2.albertcoronado.com/privkey.pem;
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        location / {
+                try_files $uri $uri/ =404;
+                }
+        }
+```
+
+Verificamos el estado del VH
+
+```bash
+sudo apachectl -S
+```
+
+```otput
+VirtualHost configuration:
+*:443                  damiancondori.com (/etc/apache2/sites-enabled/000-default-le-ssl.conf:2)
+*:80                   vmi532936.contaboserver.net (/etc/apache2/sites-enabled/000-default.conf:1)
+ServerRoot: "/etc/apache2"
+Main DocumentRoot: "/var/www/html"
+Main ErrorLog: "/var/log/apache2/error.log"
+Mutex watchdog-callback: using_defaults
+Mutex rewrite-map: using_defaults
+Mutex ssl-stapling-refresh: using_defaults
+Mutex ssl-stapling: using_defaults
+Mutex proxy: using_defaults
+Mutex ssl-cache: using_defaults
+Mutex default: dir="/var/run/apache2/" mechanism=default
+PidFile: "/var/run/apache2/apache2.pid"
+Define: DUMP_VHOSTS
+Define: DUMP_RUN_CFG
+User: name="www-data" id=33
+Group: name="www-data" id=33
+```
+

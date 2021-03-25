@@ -44,8 +44,8 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 3. Instalamos las características sudo
 
    ```bash
-   sudo apt update
-   sudo apt install sudo
+   apt update
+   apt install sudo
    ```
 
 4. damos permisos root al usuario creado en la instalación
@@ -125,3 +125,10 @@ sudo apt install -y net-tools bind9utils
 ```bash
 ip addr show
 ```
+
+## Revisamos Servicios
+
+```bash
+service --status-all
+```
+
