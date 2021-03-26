@@ -1,6 +1,6 @@
 Guía de:
 
-# DNS SERVIDORES DEBIAN CORES
+# Instalación de Zabbix
 
 ---
 ## ACERCA DE:
@@ -16,11 +16,7 @@ Elaborado por: Edmundo Cespedes Ayllon
 
 Técnico Encargado Data Center - GAMS
 
-Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
+e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ---
 
-1. Identificar la interfaz de Red
-$ 
-
-ss -ltun | grep named
