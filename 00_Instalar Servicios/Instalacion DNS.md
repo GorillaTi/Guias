@@ -11,6 +11,14 @@ Email: ed.cespedesa@gmail.com
 1.- Identificar la interfaz de Red
 $ 
 8.- 
-# ss -ltun | grep named
+
+ss -ltun | grep named
+
 #
 #
+
+comprobar estado del registro en los DNS
+
+```bash
+nslookup -type=ns tudominio.com
+```

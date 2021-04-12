@@ -1,8 +1,6 @@
-### GUIA DE INSTALACION 
+Guia de 
 
-# DNS SERVIDORES DEBIAN CORES
-
----
+# Servidor NTP
 
 ## ACERCA DE:
 
@@ -14,21 +12,21 @@ Nivel: Todos
 
 Área: Data Center
 
-Elaborado por: Edmundo Cespedes Ayllon
+Elaborado por: Edmundo Céspedes Ayllón
 
-Técnico Encargado Data Center - GAMS
+Técnico Encargado Data Center - G.A.M.S.
 
-Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
+e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ---
 
-## CONFIGURACION MEDIANTE NTP
+## CONFIGURACIÓN MEDIANTE NTP
 
 1. Probamos si obtenemos la hora del servidor ntpd
 
-```bash
-$ sudo ntpdate hora.sucre.bo
-```
+  ```bash
+  $ sudo ntpdate hora.sucre.bo
+  ```
 
 2. Ver que sistema operativo se esta usando
 
@@ -46,103 +44,102 @@ $ sudo ntpdate hora.sucre.bo
 
 3. Instalamos ntp 
 
-  * Debian
+* Debian
 
   ```bash
   $ sudo apt install ntp -y
   ```
 
-  * CentOS
+* CentOS
 
   ```bash
   $ sudo dnf install ntp -y (chrony)
   ```
 
-4. Verificamos la Instalacion ntp 
+4. Verificamos la Instalación NTP
 
-  * Debian
+* Debian
 
   ```bash
   $ sudo dpkg -l ntp
   ```
-  * CentOS
+* CentOS
 
-  ```
+  ```bash
   $ sudo rpm -q ntp
   ```
 
-  * Debian
-    
-```bash
-    $ sudo nano /etc/ntp.conf 
-    ```
-    
-    * CentOS
-    
-      ```bash
-      $ sudo nano /etc/ntp.conf
-      ```
-    
-      Insertamos el servidor
-    
-      ```bash
-      server hora.sucre.bo iburst
-      ```
-    
-      Probamos si tenemos conexion con el servidor NTP
-    
-      ```bash
-      $ ping hora.sucre.bo -c 3
-      ```
-    
-      Revisamos y Reiniciamos el servicio NTP
-    
-    * Debian
-    
-    ```bash
-    $ sudo /etc/init.d/ntp status
-    $ sudo /etc/init.d/ntp restart 
-    ```
-    
-    * CentOS
-    
-      ```bash
-      $ sudo systemctl status ntpd
-      $ sudo systemctl restart ntpd.service
-      ```
-    
-      Revisamos Sisisncroniza
-    
-      ```bash
-      $ sudo ntpq -p
-      ```
-5. CONFIGURACION MEDIANTE COMADO
-
-  ```bash
-  $ date
-  ```
-
-  ```output
-  Mon Oct 12 09:43:36 BOT 2020
-  ```
-
-  listamos zonas horias
-
-  ```bash
-  $ timedatectl list-timezones
-  ```
-
-  Ahora podemos configurar la zona horaria usando el comando siguiente:
-
-  ```bash
-  $ timedatectl set-timezone
-  $ sudo timedatectl set-timezone America/La_Paz
-  ```
-
-  Establecemos la Hora y la Fecha
-
-  ```bash
-  $ date  --set "2020-10-12 12:44:00"
-  ```
-
+* Debian
   
+  ```bash
+  $ sudo nano /etc/ntp.conf 
+  ```
+* CentOS
+
+  ```bash
+  $ sudo nano /etc/ntp.conf
+  ```
+
+  Insertamos el servidor
+
+  ```bash
+  server hora.sucre.bo iburst
+  ```
+
+  Probamos si tenemos conexión con el servidor NTP
+
+  ```bash
+  $ ping hora.sucre.bo -c 3
+  ```
+
+  Revisamos y Reiniciamos el servicio NTP
+
+* Debian
+
+  ```bash
+  $ sudo /etc/init.d/ntp status
+  $ sudo /etc/init.d/ntp restart 
+  ```
+
+  * CentOS
+
+  ```bash
+  $ sudo systemctl status ntpd
+  $ sudo systemctl restart ntpd.service
+  ```
+
+  Revisamos la sincronía
+
+  ```bash
+  $ sudo ntpq -p
+  ```
+## CONFIGURACIÓN MEDIANTE COMANDO
+
+comprobamos las fecha y hora
+
+```bash
+$ date
+```
+
+```output
+Mon Oct 12 09:43:36 BOT 2020
+```
+
+Listamos zonas horarias
+
+```bash
+$ timedatectl list-timezones
+```
+
+Ahora podemos configurar la zona horaria usando el comando siguiente:
+
+```bash
+$ timedatectl set-timezone
+$ sudo timedatectl set-timezone America/La_Paz
+```
+
+Establecemos la Hora y la Fecha
+
+```bash
+$ date  --set "2020-10-12 12:44:00"	
+```

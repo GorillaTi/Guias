@@ -513,7 +513,7 @@ Sin configura apache o nginx
 
 ```bash
 sudo certbot certonly \
-    -d damiancondori.com \
+    -d tudominio.com \
     --noninteractive \
     --standalone \
     --agree-tos \
@@ -523,13 +523,13 @@ sudo certbot certonly \
 configurando Apache
 
 ```bash
- sudo certbot --apache -d damiancondori.com -d www.damiancondori.com
+sudo certbot --apache -d tudominio.com -d www.tudominio.com --register-unsafely-without-email
 ```
 
 configurando Nginx
 
-```
-sudo certbot --nginx -d damiancondori.com -d www.damiancondori.com
+```bash
+sudo certbot --nginx -d tudominio.com -d www.tudominio.com --register-unsafely-without-email
 ```
 
 resultado
@@ -657,5 +657,24 @@ Define: DUMP_VHOSTS
 Define: DUMP_RUN_CFG
 User: name="www-data" id=33
 Group: name="www-data" id=33
+```
+
+Eliminar certificado SSL
+
+```bash
+sudo certbot delete
+```
+
+elijes el dominio al cual pertenece el certificado
+
+```bash
+1 dominio1.com
+2 dominio2.com
+```
+
+o
+
+```bash
+sudo certbot delete --cert-name ejemplo.com
 ```
 

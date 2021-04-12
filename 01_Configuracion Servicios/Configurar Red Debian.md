@@ -1,28 +1,44 @@
-###################################################################################
-GUIA DE CONFIGURACION RED EN SERVIDORES DEBIAN CORES
+Guia de 
+
+# CONFIGURACION RED EN SERVIDORES DEBIAN CORES
 
 Versión 1.0
+
 Nivel: Todos
+
 Área: Data Center
+
 Elaborado por Edmundo Cespedes
+
 Tecnico Responsable Data Center, GAMS
-Email: ed.cespedesa@gmail.com
-###################################################################################
+
+e-mail: ed.cespedesa@gmail.com
+
+---
+
 1.- Identificar la interfaz de Red
-$ ifconfig
-$ ifconfig -a
-# ip -4 address
+ifconfig
+ifconfig -a
+
+ip a
+
+ip add
+
+ip -4 address
 
 posible salida eth0
 
 2.- Detenemos los servicion de gestopres de Red
-# systemctl stop NetworkManager.service
-# systemctl disable NetworkManager.service
-o
-$ sudo /etc/init.d/networking stop
-o
-# systemctl stop networking
 
+systemctl stop NetworkManager.service
+
+systemctl disable NetworkManager.service
+
+o
+sy$ sudo /etc/init.d/networking stop
+o
+
+systemctl stop networking
 
 2.-  Editar la configuracion ya sea con vi o nano.
 $ sudo vi /etc/network/interfaces
@@ -31,14 +47,45 @@ a.- Para dhcp
 auto eth0
 iface eth0 inet dhcp
 b.- Para IP estatica
-# Configurar IP estatica en eth0
+
+Configurar IP estatica en eth0
+
 auto eth0
 iface eth0 inet static
 address 192.168.1.110
-gateway 192.168.1.1
+ipagateway 192.168.1.1
 netmask 255.255.255.0
 network 192.168.1.0
 broadcast 192.168.1.255
+
+o
+
+```bash
+cat /etc/network/interfaces
+
+This file describes the network interfaces available on your system
+
+and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+The loopback network interface
+
+auto lo
+iface lo inet loopback
+
+The primary network interface
+
+allow-hotplug ens18
+iface ens18 inet static
+	address 192.168.14.95/24
+	gateway 192.168.14.10
+
+dns-* options are implemented by the resolvconf package, if installed
+
+​	dns-nameservers 192.168.14.60 192.168.14.61
+​	dns-search sucre.bo
+```
 
 Nota: para configurar una segunda IP a una mistma interface de red se agrega lo siguiente.
 auto eth0:1
@@ -58,20 +105,26 @@ nameserver 10.50.50.131
 
 
 6.- Guardamos y reiniciamos el servicio.
-# systemctl restart NetworkManager.service
-# systemctl status NetworkManager.service
+
+systemctl restart NetworkManager.service
+
+systemctl status NetworkManager.service
+
 o
 $ sudo /etc/init.d/networking restart
 o
-# systemctl restart networking
-# systemctl status networking
 
+systemctl restart networking
+
+systemctl status networking
 
 7.- Verificamos el estado
 $ ifconfig
 o
-# ip -4 address
-y
-# ip route 
 
+ip -4 address
+
+y
+
+ip route 
 
