@@ -7,11 +7,15 @@ GUÍA DE INSTALACIÓN
 ## ACERCA DE:
 
 Versión: 1.0
+
 Fecha: 14-12-2020
+
 Nivel: Todos
+
 Área: Data Center
+
 Elaborado por: Edmundo Céspedes Aillón
-Técnico Responsable Data Center, G.A.M.S.
+
 E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 -----

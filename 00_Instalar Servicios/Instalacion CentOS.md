@@ -1,8 +1,8 @@
-GUÍA DE INSTALACIÓN 
+Guía de:
 
 # Instalación de CentOS
 
-## ACERCA DE:
+## Acerca de:
 
 Versión: 1.0
 
@@ -13,8 +13,6 @@ Nivel: Todos
 Área: Data Center
 
 Elaborado por: Edmundo Céspedes Ayllón
-
-Técnico Encargado Data Center - G.A.M.S.
 
 e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
@@ -122,7 +120,6 @@ sudo dnf update
 ## Instalar paquetes adicionales 
 
 - net-tools y DNS bind-utils
-  
 ```bash
 sudo yum -y install net-tools bind-utils
 ```

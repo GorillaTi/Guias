@@ -14,8 +14,6 @@ Nivel: Todos
 
 Elaborado por: Edmundo Cespedes Ayllon
 
-Técnico Encargado Data Center - GAMS
-
 Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ---

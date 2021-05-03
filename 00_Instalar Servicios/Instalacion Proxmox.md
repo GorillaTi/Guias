@@ -2,15 +2,17 @@ GUÍA DE :
 
 # Instalación y configuración de Proxmox VE
 
-Versión 1.0
+## Acerca de
+
+Versión: 1.0
+
+Fecha: 2021-04-30
 
 Nivel: Intermedio y Avanzado
 
 Área: Data Center
 
 Elaborado por Edmundo Céspedes A.
-
-Técnico Encargado Data Center, G.A.M.S.
 
 e-mail: ed.cespedesa@gmail.com
 

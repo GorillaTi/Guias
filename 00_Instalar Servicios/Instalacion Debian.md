@@ -14,8 +14,6 @@ Nivel: Todos
 
 Elaborado por: Edmundo Céspedes Ayllón
 
-Técnico Encargado Data Center - G.A.M.S.
-
 e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ## Instalación del S.O.
@@ -109,7 +107,6 @@ sudo apt upgrade -y
 ## Instalar paquetes adicionales 
 
 - net-tools y DNS bind9utils
-  
 ```bash
 sudo apt install -y net-tools bind9utils
 ```

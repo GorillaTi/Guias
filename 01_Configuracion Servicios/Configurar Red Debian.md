@@ -4,13 +4,13 @@ Guia de
 
 Versión 1.0
 
+Fecha: 2021-04-30
+
 Nivel: Todos
 
 Área: Data Center
 
 Elaborado por Edmundo Cespedes
-
-Tecnico Responsable Data Center, GAMS
 
 e-mail: ed.cespedesa@gmail.com
 

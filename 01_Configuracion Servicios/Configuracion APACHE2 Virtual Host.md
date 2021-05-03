@@ -14,8 +14,6 @@ Nivel: Todos
 
 Elaborado por: Edmundo Céspedes Ayllón
 
-Técnico Encargado Data Center - G.A.M.S.
-
 e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ---
@@ -148,5 +146,4 @@ Group: name="www-data" id=33
 ```bash
 tail -f /var/log/apache2/error_log
 ```
-
 
