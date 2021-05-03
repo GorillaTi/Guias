@@ -192,8 +192,8 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
    creamos el enlace simbólico
 
-   ```
-   ln -s
+   ```bash
+   ln -s [origen] [destino]
    ```
 ## En Debian 10
 

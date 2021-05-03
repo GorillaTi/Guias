@@ -15,13 +15,13 @@ sqlplus / as sysdba
 iniciamos la base de datos
 
 ```sql
-startup
+startup;
 ```
 
 Iniciamos el servicio de escucha
 
 ```bash
-lsnrctl  startall
+lsnrctl start
 ```
 
 ```output
@@ -57,22 +57,22 @@ The command completed successfully
 ## Detener Base de Datos SIGMA
 
 Ingresamos al servidor y cambiamos al usuario  oracle
-```
+```bash
 su - oracle
 ```
 paramos el servicio de escucha de la base de datos
-```
+```bash
 lsnrctl stop
 ```
 ingresamos  al gestor de la base de datos
-```
+```bash
 sqlplus / as sysdba
 ```
 bajamos las bases de datos
-```
-shutdown
+```sql
+shutdown;
 ```
 o
-```
+```sql
 shutdown immediate;
 ```

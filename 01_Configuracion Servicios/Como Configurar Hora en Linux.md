@@ -84,6 +84,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
   ```bash
   server hora.sucre.bo iburst
+  server 192.168.14.50 iburst
   ```
 
   Probamos si tenemos conexión con el servidor NTP
