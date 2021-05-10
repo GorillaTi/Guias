@@ -142,7 +142,5 @@ E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 - Verificamos el estado de la configuración
 
   ```bash
-  sudo firewall-cmd --list-all
+  sudo firewall-cmd --list-allpo
   ```
-------
-  ###### Jefatura de Tecnologías de la Información - G.A.M.S.

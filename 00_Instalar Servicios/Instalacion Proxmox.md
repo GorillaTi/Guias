@@ -22,6 +22,31 @@ e-mail: ed.cespedesa@gmail.com
 
 Seguimos los pasos de instalación estándar.
 
+## Gestión de Usuarios
+
+### Autentificación IPAM
+
+#### Crear
+
+```bash
+useradd [nombre del usuario]
+passwd [nombre del usuario]
+groupadd watchman
+usermod -a -G watchman [nombre del usuario]
+```
+
+Posterior nos dirigimos a Datacentre y en permisos (Permissions) - Usuarios (User), creamos con el mismo nombre el usuario y con autentificación IPAM. 
+
+#### Eliminar 
+
+eliminaos el usuario dirigiendonos a  Datacentre y en permisos (Permissions) - Usuarios (User)
+
+luego en la consola ejecutamos el comando
+
+```bash
+deluser --remove-home [nombre del usuario]
+```
+
 ## Cambio de repositorios non-free
 
 Realizamos una copia de seguridad de los archivos de configuración del repositorio
@@ -125,39 +150,19 @@ sed -i.bak "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-wi
    
 2. interfaces de administración y clúster
 
-   | **Servidor** | **IP**          | **Servicio** |
-   | :----------- | --------------- | ------------ |
-   | svm01        | 192.168.14.101  | IA           |
-   |              | 192.169.13.101  | Cluster      |
-   |              | 192.169.100.101 | DMZ          |
-   | svm02        | 192.168.14.102  | IA           |
-   |              | 192.169.13.102  | Cluster      |
-   |              | 192.169.100.102 | DMZ          |
-   | svm03        | 192.168.14.103  | IA           |
-   |              | 192.169.13.103  | Cluster      |
-   |              | 192.169.100.103 | DMZ          |
-   | svm04        | 192.168.14.104  | IA           |
-   |              | 192.169.13.104  | Cluster      |
-   |              | 192.169.100.104 | DMZ          |
-   | svm05        | 192.168.14.105  | IA           |
-   |              | 192.169.13.105  | Cluster      |
-   |              | 192.169.100.105 | DMZ          |
-   | svm06        | 192.168.14.106  | IA           |
-   |              | 192.169.13.106  | Cluster      |
-   |              | 192.169.100.106 | DMZ          |
-   | svm07        | 192.168.14.107  | IA           |
-   |              | 192.169.13.107  | Cluster      |
-   |              | 192.169.100.107 | DMZ          |
-   | svm08        | 192.168.14.108  | IA           |
-   |              | 192.169.13.108  | Cluster      |
-   |              | 192.169.100.108 | DMZ          |
-   | svm09        | 192.168.14.109  | IA           |
-   |              | 192.169.13.109  | Cluster      |
-   |              | 192.169.100.109 | DMZ          |
+   | **Servidor** | **IP**         | **Servicio** |
+   | :----------- | -------------- | ------------ |
+   | svm01        | 192.168.14.101 | IA           |
+   | svm02        | 192.168.14.102 | IA           |
+   | svm03        | 192.168.14.103 | IA           |
+   | svm04        | 192.168.14.104 | IA           |
+   | svm05        | 192.168.14.105 | IA           |
+   | svm06        | 192.168.14.106 | IA           |
+   | svm07        | 192.168.14.107 | IA           |
+   | svm08        | 192.168.14.108 | IA           |
+   | svm09        | 192.168.14.109 | IA           |
 
 ## Adicionar Nodo al Cluster
-
-
 
 ## Eliminar Nodo de Cluster
 
