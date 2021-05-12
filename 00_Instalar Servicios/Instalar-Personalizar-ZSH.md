@@ -26,23 +26,23 @@ OPCIONAL: habilitar visualizar asteriscos en la contraseña
 sudo nano /etc/sudoers
 ```
 
-se adiciona el  la linea
+Se adiciona el  la linea
+
+```config
 Defaults    env_reset, pwfeedback
+```
 
 3. Para personalizar se necesita instalar
-   
 ```
 sudo apt install curl git -y
 ```
 
 4. Ejecutar zsh
-   
 ```
 zsh
 ```
 
 5. Editar perfil en el gestor de comando de su preferencia en el apartado de 
-   
 ```
    orden elegir /bin/zsh
 ```

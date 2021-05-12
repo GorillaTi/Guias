@@ -1,0 +1,3 @@
+for dominio in $(cat justdomains);
+de echo "local-zone: \"$domini\" static" >> /etc/unbound/local.d/blocklist;
+done
