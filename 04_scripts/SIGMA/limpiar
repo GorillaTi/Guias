@@ -1,0 +1,9 @@
+#!/bin/sh
+# Autor: ECA
+# Licencia: GNU GPLv3
+# Limpiar es un script para limpiar la caché y liberar memoria
+# Parametros: 
+#	1 entorno produccion
+#	2
+#	3 limpieza profunda NO RECOMENDADA
+sync ; echo 1 > /proc/sys/vm/drop_caches ; echo "RAM Liberada"
