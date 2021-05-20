@@ -1,5 +1,5 @@
 #!/bin/bash
-# Autor: Edmundo Cespedes
+# Autor: Edmundo Cespedes A.
 # Licencia: GNU GPLv2
 # NOMBRE: # cpbkpsigma
 # FUNCION:
@@ -24,6 +24,7 @@ ARCH_LOG='fullexpPROD.log';
 # Funciones
 #
 # Funcion Crear Directorio
+# Los parametros en viados a  la funcion son $1=DIR_DESTINO $2=CARPETA  
 func_create_dir(){
     echo "Creando Directorio /$2";
     local dirbkp=$1$2;
@@ -32,8 +33,8 @@ func_create_dir(){
     dirbkp_st=1
     echo $msg;
 }
-#
 # Funcion Verificar Directorio 
+# Los parametros en viados a  la funcion son $1=DIR_DESTINO $2=CARPETA  
 func_verifi_dir(){
     local dirbkp=$1$2;
     echo Verificando la existencia del Directorio '/'$2;
@@ -47,6 +48,9 @@ func_verifi_dir(){
         func_create_dir $1 $2;
     fi
 }
+# Funcion de Verificacion de Archivos
+# Los parametros enviados a  la funcion son $1=DIR_DESTINO $2=ARCH_BKP 
+# o ARCH_LOG 
 func_verifi_arch(){
     # Origen
     local arch="$1$2";
@@ -57,15 +61,23 @@ func_verifi_arch(){
         echo "Archivo $2 encontrado";
     else
         echo "Archivo $2 no encontrado";
+        echo "Generando Backup SIGMA";
+        # Cambio de usuario para poder ejecutar la copia de seguridad
+        su - oracle -c "/backup/PROD/export/fullexpPROD.sh";
     fi
 }
+# Funcion de Copiado de archvos
+# Los parametros enviados a  la funcion son $1=DIR_ORIGEN $2=DIR_DESTINO 
+# $3=ARCH_BKP o ARCH_LOG $4=CARPETA  
 func_copy_arch(){
     sleep 1
     echo Copiando: $3; 
     echo de $1 a $2$4;
-    cp -v $1$3 $2$4;
+    cp -fv $1$3 $2$4;
     echo Copia Realizada de $3;
 }
+# Funcion de Montado y desmontado del particion NFS del servidor de Backup
+# Los parametros para la funcion son 1=montado y 2=desmontado
 func_mount(){
     case $1 in
         1)
@@ -77,10 +89,15 @@ func_mount(){
             echo "Directorio Desmontado";
         ;;
         *)
-            echo "introduzca una opcion 1) Montar Particion 2) Desmontar Particion";
+            echo "introduzca un parametro al comando"; 
+            echo "1) Montar Particion";
+            echo "2) Desmontar Particion";
+            echo "Ejemplo func_mount 1";
         ;;
     esac
 }
+# Funcion para verificar si la particion para realizar los backups esta montada
+# El parametro para la funcion es $1=DIR_DESTINO
 func_verifi_mount(){
     local dirmount=$1;
     if [ -d $dirmount ];
@@ -96,30 +113,29 @@ func_verifi_mount(){
         #clear;
     fi
 }
-# ------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # SCRIPT
-#
-# Carpeta Mensual
+# -----------------------------------------------------------------------------
 #
 clear;
 echo Iniciando Copia de Backup SIGMA;
 #
-# Verificamos si esta montada la Unidad de Red 
+# Verificando si esta montada la Particion de Red 
 #
 func_verifi_mount $DIR_DESTINO;
 #
-# Verificando y/o creando carpeta Mensual
+# Verificando y/o creando carpeta del mes
 #
 CARPETA=$ANO$MES;
 func_verifi_dir $DIR_DESTINO $CARPETA;
 #
-# Verificando y/o creando Carpeta Diaria
+# Verificando y/o creando directorio destino
 #
 CARPETA=$ANO$MES$DIA;
 DIR_DESTINO=$DIR_DESTINO$ANO$MES'/';
 func_verifi_dir $DIR_DESTINO $CARPETA;
 #
-# Copiando archivos al servidor
+# Copia de los archivos de backup a la particion de red
 #
 if [ $dirbkp_st == 1 ];
 then
@@ -130,6 +146,5 @@ then
 else
     msg="No se pudo realizar el Backup no se tiene acceso a las carpetas";
 fi
-#sleep 1 
-#clear;
+# Mostramos el mensaje de finalizacion del script
 echo $msg;
