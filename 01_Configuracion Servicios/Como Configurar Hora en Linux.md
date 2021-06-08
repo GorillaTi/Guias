@@ -1,4 +1,4 @@
-Guia de 
+Guía de :
 
 # Servidor NTP
 
@@ -40,12 +40,12 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
   $ cat /etc/redhat-release
   ```
 
-3. Instalamos ntp 
+3. Instalamos ntp
 
 * Debian
 
   ```bash
-  $ sudo apt install ntp -y
+  $ sudo apt install ntp ntpdate ntpstat ntp-doc -y
   ```
 
 * CentOS
