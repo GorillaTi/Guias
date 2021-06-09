@@ -1,8 +1,24 @@
-# Aumentar el tamaño máximo de archivo para subir con PHP y Apache   
+Guía de:
+
+# Aumentar el tamaño máximo de archivo para subir con PHP y Apache 
+
+## ACERCA DE:
+
+Versión: 1.0.0
+
+Fecha: 2021-05-10
+
+Nivel: Todos
+
+Elaborado por: Edmundo Cespedes Ayllon
+
+Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
+
+---
 
 Cuando desarrollamos aplicaciones web en [PHP](http://vitaminaweb.com/tema/php/), corriendo bajo [Apache](http://vitaminaweb.com/tema/apache/), existe una limitación por defecto en el tamaño de los archivos que se  pueden subir desde el cliente (el navegador del usuario), que  normalmente es de 2 MB. Es decir, si queremos subir una imagen de 3 MB,  por ejemplo, el sistema nos devolvería un error a causa de este límite.
 
-Ésto, a la hora de desarrollar ciertas aplicaciones web, como un blog con [WordPress](http://vitaminaweb.com/tema/wordpress/) en el que tengamos que subir fotos o vídeos de más de 2 MB, o un sitio  web corporativo donde los usuarios puedan enviar documentación a través  de un formulario, etc., se convierte en un problema, con fácil solución  como vemos a continuación.
+Esto, a la hora de desarrollar ciertas aplicaciones web, como un blog con [WordPress](http://vitaminaweb.com/tema/wordpress/) en el que tengamos que subir fotos o vídeos de más de 2 MB, o un sitio  web corporativo donde los usuarios puedan enviar documentación a través  de un formulario, etc., se convierte en un problema, con fácil solución  como vemos a continuación.
 
 Existen varias formas de evitar este  límite impuesto en una aplicación basada en PHP y Apache. Vamos a ver 2  formas de resolver esta limitación:
 

@@ -4,9 +4,9 @@ Gia de:
 
 ## ACERCA DE:
 
-Versión: 1.0
+Versión: 1.0.0
 
-Fecha: 25-02-2021
+Fecha: 2021-02-25
 
 Nivel: Todos
 

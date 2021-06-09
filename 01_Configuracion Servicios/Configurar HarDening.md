@@ -1,6 +1,20 @@
-guía de: 
+Guía de: 
 
 # Hardening
+
+## ACERCA DE:
+
+Versión: 1.0.0
+
+Fecha: 10-05-2021
+
+Nivel: Todos
+
+Elaborado por: Edmundo Cespedes Ayllon
+
+Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
+
+---
 
 ## S.O. (Sistema Operativo)
 
@@ -87,7 +101,7 @@ Port [nro_puerto]
 
  ```bash
 ssh [ususario_servidor]@[IP_servidor] -p 3022
-```
+ ```
 
 ### 3. Limite la vinculación IP
 

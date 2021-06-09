@@ -1,14 +1,12 @@
-Guia de 
+Guía de :
 
 # CONFIGURACION RED EN SERVIDORES DEBIAN CORES
 
-Versión 1.0
+Versión 1.0.0
 
 Fecha: 2021-04-30
 
 Nivel: Todos
-
-Área: Data Center
 
 Elaborado por Edmundo Cespedes
 

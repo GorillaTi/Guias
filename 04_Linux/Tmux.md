@@ -12,13 +12,13 @@ iniciar nuevo con nombre de sesión:
 tmux new -s myname
 ```
 
-agregar:
+Volver a la sesión por numero:
 
 ```
 tmux a  #  (or at, or attach)
 ```
 
-agregar nombre:
+Volver a la sesión por nombre:
 
 ```
 tmux a -t myname
@@ -113,21 +113,19 @@ PREFIX : resize-pane -t 2 20 (Resizes the pane with the id of 2 down by 20 cells
 PREFIX : resize-pane -t -L 20 (Resizes the pane with the id of 2 left by 20 cells)
 ```
 
-## 
+## Modo de Copia:
 
-## Copy mode:
-
-Pressing PREFIX [ places us in Copy mode. We can then use our  movement keys to move our cursor around the screen. By default, the  arrow keys work. we set our configuration file to use Vim keys for  moving between windows and resizing panes so we wouldn’t have to take  our hands off the home row. tmux has a vi mode for working with the  buffer as well. To enable it, add this line to .tmux.conf:
+Presionar PREFIX `[`  nos coloca en modo de copia. Luego podemos usar nuestras teclas de movimiento para mover nuestro cursor por la pantalla. De forma predeterminada, las teclas de flecha funcionan. configuramos nuestro archivo de configuración para usar las teclas Vim para moverse entre ventanas y cambiar el tamaño de los paneles para no tener que quitar las manos de la fila de inicio. Tmux también tiene un modo vi para trabajar con el búfer. Para habilitarlo, agregue esta línea a `.tmux.conf` : 
 
 ```
 setw -g mode-keys vi
 ```
 
-With this option set, we can use h, j, k, and l to move around our buffer.
+Con esta opción establecida, podemos usar h, j, k y l para movernos por nuestro búfer.
 
-To get out of Copy mode, we just press the ENTER key. Moving around  one character at a time isn’t very efficient. Since we enabled vi mode,  we can also use some other visible shortcuts to move around the buffer.
+Para salir del modo Copiar, simplemente presionamos la tecla ENTER. Moverse un personaje a la vez no es muy eficiente. Dado que habilitamos el modo vi, también podemos usar algunos otros atajos visibles para movernos por el búfer.
 
-For example, we can use "w" to jump to the next word and "b" to jump  back one word. And we can use "f", followed by any character, to jump to that character on the same line, and "F" to jump backwards on the line.
+Por ejemplo, podemos usar "w" para saltar a la siguiente palabra y "b" para saltar una palabra hacia atrás. Y podemos usar "f", seguida de cualquier carácter, para saltar a ese carácter en la misma línea, y "F" para saltar hacia atrás en la línea. 
 
 ```
    Function                vi             emacs
@@ -163,8 +161,6 @@ For example, we can use "w" to jump to the next word and "b" to jump  back one w
    Transpose chars                        C-t
 ```
 
-## 
-
 ## Misc
 
 ```
@@ -174,9 +170,7 @@ t  big clock
 :  prompt
 ```
 
-## 
-
-## Configurations Options:
+## Opciones de Configuración:
 
 ```
 # Mouse support - set to on if you want to use the mouse
@@ -201,22 +195,18 @@ unbind Down
 bind Down last-window \; swap-pane -s tmp.1 \; kill-window -t tmp
 ```
 
-## 
-
-## Resources:
+## Recursos:
 
 - [tmux: Productive Mouse-Free Development](http://pragprog.com/book/bhtmux/tmux)
 - [How to reorder windows](http://superuser.com/questions/343572/tmux-how-do-i-reorder-my-windows)
 
-## 
-
-## Notes:
+## Notas:
 
 - 
 
 ## 
 
-## Changelog:
+## Registro de cambios:
 
 - 1411143833002 - Added [toggle zoom](https://gist.github.com/GorillaTi/50237d1f9cc038d111ff7589f4ad11d4#PanesSplits) under Panes (splits) section.
 - 1411143833002 - [Added Sync Panes](https://gist.github.com/GorillaTi/50237d1f9cc038d111ff7589f4ad11d4#syncPanes)
@@ -225,8 +215,9 @@ bind Down last-window \; swap-pane -s tmp.1 \; kill-window -t tmp
 
 ## 
 
-## Request an Update:
+## Solicitar Actualizaciones:
 
 We Noticed that our Cheatsheet is growing and people are coloberating to add new tips and tricks, so please tweet to me what would you like  to add and let's make it better!
 
 - Twitter: [@MohammedAlaa](http://twitter.com/MohammedAlaa)
+

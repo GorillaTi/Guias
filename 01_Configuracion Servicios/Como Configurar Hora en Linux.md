@@ -4,13 +4,11 @@ Guía de :
 
 ## ACERCA DE:
 
-Versión: 1.0
+Versión: 1.0.0
 
-Fecha: 01-12-2020
+Fecha: 2020-12-01
 
 Nivel: Todos
-
-Área: Data Center
 
 Elaborado por: Edmundo Céspedes Ayllón
 

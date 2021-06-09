@@ -4,7 +4,7 @@ Guía de:
 
 ---
 ## ACERCA DE:
-Versión: 1.0
+Versión: 1.0.1
 
 Fecha: 24-03.2021
 
@@ -13,8 +13,6 @@ Nivel: Todos
 Área: Data Center
 
 Elaborado por: Edmundo Cespedes Ayllon
-
-Técnico Encargado Data Center - GAMS
 
 e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
@@ -89,7 +87,7 @@ sudo systemctl enable --now zabbix-agent.service
 
 Comprobamos es estado del firewall
 
- 
+
 
 
 ### CentOS
@@ -172,3 +170,12 @@ public (active)
   rich rules:
 ```
 
+## SELinux
+
+Cambiar SElinux a modo permisivo si fuera necesario
+
+```bash
+setenforce 0 && sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
+```
+
+ 

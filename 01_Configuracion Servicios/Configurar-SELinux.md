@@ -1,4 +1,22 @@
-Deshabilitamos SElinix
+Guía de: 
+
+# SElinux
+
+## ACERCA DE:
+
+Versión: 1.0.0
+
+Fecha: 2021-03-01
+
+Nivel: Todos
+
+Elaborado por: Edmundo Cespedes Ayllon
+
+Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
+
+---
+
+## Deshabilitamos SElinix
 
 revisamos el estado del servicio
 
