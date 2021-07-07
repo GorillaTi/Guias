@@ -176,6 +176,14 @@ log-queries: yes
 log-replies: yes
 ```
 
+## Configuración de DNS Autoritativo
+
+
+
+## Configuración de DNS secundario
+
+
+
 ## TIPS
 
 Recuerde que hay 3 comandos con los que podemos reiniciar los servicios, esto ya queda a decisión de usted que comando usan.

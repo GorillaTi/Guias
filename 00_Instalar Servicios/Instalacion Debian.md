@@ -1,16 +1,14 @@
-GUÍA DE INSTALACIÓN 
+Guía de: 
 
 # Instalación de Debian
 
 ## ACERCA DE:
 
-Versión: 1.0
-
-Fecha: 25-22-2021
+Versión: 1.0.2
 
 Nivel: Todos
 
-Área: Data Center
+Área: CPD
 
 Elaborado por: Edmundo Céspedes Ayllón
 
@@ -101,7 +99,7 @@ cat /etc/*-release
 
 ```bash
 sudo apt update
-sudo apt upgrade -y
+sudo apt dist-upgrade -y
 ```
 
 ## Instalar paquetes adicionales 

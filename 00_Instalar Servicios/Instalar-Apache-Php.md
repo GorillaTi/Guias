@@ -4,17 +4,13 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0
-
-Fecha: 25-02-2021
+Versión: 1.0.1
 
 Nivel: Todos
 
-Área: Data Center
+Área: CPD
 
 Elaborado por: Edmundo Céspedes Ayllón
-
-Técnico Encargado Data Center - G.A.M.S.
 
 e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
@@ -198,7 +194,6 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 ## En Debian 10
 
 1. Instalamos y configuramos el servidor conforme a la Guía de Instalación de **Debian 10**
-   
 ### Instalación de Apache2
 
 2. Actualizamos e instalamos actualizaciones

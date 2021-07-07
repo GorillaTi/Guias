@@ -33,7 +33,7 @@ systemctl stop NetworkManager.service
 systemctl disable NetworkManager.service
 
 o
-sy$ sudo /etc/init.d/networking stop
+sudo /etc/init.d/networking stop
 o
 
 systemctl stop networking

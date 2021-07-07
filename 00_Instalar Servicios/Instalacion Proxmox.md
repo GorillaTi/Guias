@@ -39,7 +39,7 @@ Posterior nos dirigimos a Datacentre y en permisos (Permissions) - Usuarios (Use
 
 #### Eliminar 
 
-eliminaos el usuario dirigiendonos a  Datacentre y en permisos (Permissions) - Usuarios (User)
+eliminaos el usuario dirigiéndonos a  Datacentre y en permisos (Permissions) - Usuarios (User)
 
 luego en la consola ejecutamos el comando
 
