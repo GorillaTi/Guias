@@ -286,10 +286,10 @@ sudo ufw enable
    * Modificamos el archivo security.conf
 
      ```bash
-     sudo nano securyti.conf
+     sudo nano security.conf
      ```
 
-     des comentamos la linea
+     des comentamos la línea
 
      ```output
      ServerSignature Off
@@ -407,9 +407,9 @@ sudo ufw enable
    ?>
    ```
 
-   * Revisamos  el resultado en la ruta del navegador ya se por IP o por URl
+   * Revisamos  el resultado en la ruta del navegador ya se por IP o por URL
         * http://192.168.14.95/test
-        * http://app.sucre.bo/test
+        * http://[tu_dominio]/test
 
 ## Archivo de Configuración php.ini
 
@@ -484,7 +484,7 @@ sudo ufw enable
 * Revisamos en el navegador
 
   * http://192.168.14.95/test
-  * http://app.sucre.bo/test
+  * http://[tu_dominio]/test
 
 ## Instalación de certificado SSL
 

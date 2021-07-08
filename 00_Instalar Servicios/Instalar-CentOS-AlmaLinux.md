@@ -1,16 +1,14 @@
 Guía de:
 
-# Instalación de CentOS
+# Instalación de CentOS - Alma Linux
 
 ## Acerca de:
 
-Versión: 1.0
-
-Fecha: 25-22-2021
+Versión: 1.0.1
 
 Nivel: Todos
 
-Área: Data Center
+Área: CPD
 
 Elaborado por: Edmundo Céspedes Ayllón
 

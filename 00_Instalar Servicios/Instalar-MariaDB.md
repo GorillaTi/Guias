@@ -1,20 +1,16 @@
 Guía de:
 
-## Instalación De MariaDB
+# Instalación De MariaDB
 
 ## ACERCA DE:
 
-Versión: 1.0
+Versión: 1.0.1
 
-Fecha: 01-12-2020
+Nivel: Medio
 
-Nivel: Todos
-
-Área: Data Center
+Área: CPD
 
 Elaborado por: Edmundo Cespedes Ayllon
-
-Técnico Encargado Data Center - GAMS
 
 e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
@@ -35,7 +31,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    ```
 
 
-## En CenOS 8
+## En CenOS 8 - Alma Linux 8.x
 
 4. Instalamos mariadb
 
