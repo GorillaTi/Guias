@@ -129,7 +129,13 @@ sudo dnf install dnf-utils
 ## Revisamos los Puertos abiertos
 
 ```bash
-  sudo netstat -nputa|grep :53
+  sudo netstat -nputa
+```
+
+o
+
+```bash
+sudo ss -tpan
 ```
 
 ## Revisamos si el sistema necesita reinicio.
