@@ -199,13 +199,13 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 2. Actualizamos e instalamos actualizaciones
 
    ```bash
-   sudo apt update && sudo apt upgrade -y
+   sudo apt update && sudo apt dist-upgrade -y
    ```
 
 3. Instalamos apache2
 
    ```bash
-   sudo apt install apache2
+   sudo apt install apache2 apache2-doc
    ```
 
 4. Configuramos el auto inicio y iniciamos el servicio
