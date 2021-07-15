@@ -2,11 +2,11 @@ Guía de:
 
 # Instalación y Configuración DNS
 
-Versión 1.0
+Versión 1.0.1
 
-Nivel: medio
+Nivel: Medio
 
-Área: Data Center
+Área: CPD
 
 Elaborado por: Edmundo Cespedes A.
 
@@ -41,10 +41,10 @@ apt install nmap -y
 Herramientas
 
 ```bash
-apt install net-tool bind-utils
+apt install net-tool bind9-utils dnsutils
 ```
 
-4.- Auditar ser con NMAP
+4.- Auditar servicios locales con NMAP
 
 ```bash
 nmap localhost

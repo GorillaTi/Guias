@@ -54,7 +54,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 11. Habilitamos el servicio de mariadb para que inicie con el sistema
 
     ```bash
-    sudo systemctl enable mariadb
+    sudo systemctl enable --now mariadb
     ```
 
 12. Aseguramos la instalación de mariadb
@@ -74,9 +74,9 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 14. Creamos el usuario *sysadmin* y *desarrollo* para la base de datos con acceso remoto
 
     ```mysql
-    mysql> GRANT ALL ON *.* TO 'desarrollo'@'%' IDENTIFIED BY 'pass_usuario' WITH GRANT OPTION;
-    mysql> FLUSH PRIVILEGES;
-    mysql> select user, host from mysql.user
+    GRANT ALL ON *.* TO 'desarrollo'@'%' IDENTIFIED BY 'pass_usuario' WITH GRANT OPTION;
+    FLUSH PRIVILEGES;
+    select user, host from mysql.user;
     ```
 
 15. Habilitamos el acceso remoto editando el archivo de configuración.
@@ -171,10 +171,14 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
     sudo firewall-cmd --list-services
     ```
 
-    ###### Si fuera necesario el cambio de password o host de un usuario se puede utilizar la siguiente sentencia
+    :bangbang: **​NOTA.-** Si fuera necesario el cambio de password o host de un usuario se puede utilizar la siguiente sentencia
 
     ```mysql
-    mysql> UPDATE mysql.user SET Password=PASSWORD(‘NuevaContraseña’) WHERE USER=’nombreUsuario’ AND Host=”NombreHost”;
-    mysql> FLUSH PRIVILEGES;
-    mysql> select user, host from mysql.user
+    UPDATE mysql.user SET Password=PASSWORD(‘NuevaContraseña’) WHERE USER=’nombreUsuario’ AND Host=”NombreHost”;
+    ```
+    ```mysql
+    FLUSH PRIVILEGES;
+    ```
+    ```mysql
+    select user, host from mysql.user
     ```

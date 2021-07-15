@@ -1,13 +1,11 @@
 GUÍA DE: 
 # SERVIDORES SIGMA
 ## ACERCA DE:
-Versión: 1.1
-
-Fecha: 01-012-2020
+Versión: 1.1.1
 
 Nivel: Todos
 
-Área: Data Center
+Área: CPD
 
 Elaborado por: Edmundo Céspedes Ayllón
 
@@ -88,6 +86,8 @@ su - oracle
    sqlplus / as sysdba
    ```
 
+   
+
 2. Montamos las bases de datos
 
    ```sql
@@ -99,6 +99,8 @@ su - oracle
    ```sql
    exit
    ```
+
+   
 
 3. Iniciamos el servicio de listener
 

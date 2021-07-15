@@ -4,13 +4,11 @@ Gia de:
 
 ## ACERCA DE:
 
-Versión: 1.0.0
+Versión: 1.0.1
 
-Fecha: 2021-02-25
+Nivel: Medio
 
-Nivel: Todos
-
-Área: Data Center
+Área: CPD
 
 Elaborado por: Edmundo Céspedes Ayllón
 
@@ -23,20 +21,35 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 Ubicaciones de los archivos de :
 
 Configuraciones
+
+```bash
 /etc/apache2
+```
+
 Alojamiento
+
+```bash
 /var/www/html
+```
 
 ## Carpeta de configuración de virtual host
 
+```bash
 /etc/apache2/site-avaible/
+```
+
+```bash
 /etc/apache2/site-enable/
+```
 
-Archivo de configuracion por defecto
+Archivo de configuración por defecto
+
+```bash
 000-default.conf
+```
 
-Se crea archivos de configuracion deacuerdo al dominio o sub-dominio, sitio.ejemplo.conf
-Ejemplo de configuracion:
+Se crea archivos de configuración de acuerdo al dominio o sub-dominio, sitio.ejemplo.conf
+Ejemplo de configuración:
 ---NORMAL----
 
 ```
