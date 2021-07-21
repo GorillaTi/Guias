@@ -6,15 +6,13 @@ GUÍA DE INSTALACIÓN
 
 ## ACERCA DE:
 
-Versión: 1.0
+Versión: 1.0.1
 
-Fecha: 14-12-2020
+Nivel: Medio
 
-Nivel: Todos
+Área: CPD
 
-Área: Data Center
-
-Elaborado por: Edmundo Céspedes Aillón
+Elaborado por: Edmundo Céspedes Ayllón
 
 E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 

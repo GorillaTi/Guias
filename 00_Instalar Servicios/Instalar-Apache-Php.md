@@ -534,15 +534,15 @@ Saving debug log to /var/log/letsencrypt/letsencrypt.log
 Plugins selected: Authenticator standalone, Installer None
 Obtaining a new certificate
 Performing the following challenges:
-http-01 challenge for damiancondori.com
+http-01 challenge for [tudominio.com]
 Waiting for verification...
 Cleaning up challenges
 
 IMPORTANT NOTES:
  - Congratulations! Your certificate and chain have been saved at:
-   /etc/letsencrypt/live/damiancondori.com/fullchain.pem
+   /etc/letsencrypt/live/[tudominio.com]/fullchain.pem
    Your key file has been saved at:
-   /etc/letsencrypt/live/damiancondori.com/privkey.pem
+   /etc/letsencrypt/live/[tudominio.com]/privkey.pem
    Your cert will expire on 2021-06-20. To obtain a new or tweaked
    version of this certificate in the future, simply run certbot
    again. To non-interactively renew *all* of your certificates, run
@@ -572,8 +572,8 @@ Apache
         ErrorLog /error.log
         CustomLog /access.log combined
         RewriteEngine on
-        RewriteCond %{SERVER_NAME} =damiancondori.com [OR]
-        RewriteCond %{SERVER_NAME} =www.damiancondori.com
+        RewriteCond %{SERVER_NAME} =[tudominio.com] [OR]
+        RewriteCond %{SERVER_NAME} =www.[tudominio.com]
         RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
 </VirtualHost>
 ```
@@ -583,13 +583,13 @@ Apache
 ```output
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
-        #ServerAdmin webmaster@localhost
+        ServerAdmin [tucorreo]@[tudominio.com]
         DocumentRoot /var/www/html
-        ServerName damiancondori.com
+        ServerName [tudominio.com]
         Include /etc/letsencrypt/options-ssl-apache.conf
-        ServerAlias www.damiancondori.com
-        SSLCertificateFile /etc/letsencrypt/live/damiancondori.com/fullchain.pem
-        SSLCertificateKeyFile /etc/letsencrypt/live/damiancondori.com/privkey.pem
+        ServerAlias www.[tudominio.com]
+        SSLCertificateFile /etc/letsencrypt/live/[tudominio.com]/fullchain.pem
+        SSLCertificateKeyFile /etc/letsencrypt/live/[tudominio.com]/privkey.pem
 
         <FilesMatch \.php$>
              SetHandler "proxy:unix:/var/run/php/php7.4-fpm.sock|fcgi://localhost"
@@ -612,8 +612,8 @@ server {
 server {
         listen 443 ssl;
 
-        ssl_certificate     /etc/letsencrypt/live/test2.albertcoronado.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/test2.albertcoronado.com/privkey.pem;
+        ssl_certificate     /etc/letsencrypt/live/[tudominio.com]/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/[tudominio.com]/privkey.pem;
         ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
         ssl_ciphers         HIGH:!aNULL:!MD5;
 
@@ -633,10 +633,12 @@ Verificamos el estado del VH
 sudo apachectl -S
 ```
 
+
+
 ```otput
 VirtualHost configuration:
-*:443                  damiancondori.com (/etc/apache2/sites-enabled/000-default-le-ssl.conf:2)
-*:80                   vmi532936.contaboserver.net (/etc/apache2/sites-enabled/000-default.conf:1)
+*:443                  [tudominio.com] (/etc/apache2/sites-enabled/000-default-le-ssl.conf:2)
+*:80                   [tudominio.com] (/etc/apache2/sites-enabled/000-default.conf:1)
 ServerRoot: "/etc/apache2"
 Main DocumentRoot: "/var/www/html"
 Main ErrorLog: "/var/log/apache2/error.log"

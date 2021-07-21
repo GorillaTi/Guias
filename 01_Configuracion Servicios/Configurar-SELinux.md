@@ -6,9 +6,9 @@ Guía de:
 
 Versión: 1.0.0
 
-Fecha: 2021-03-01
-
 Nivel: Todos
+
+Área: CPD
 
 Elaborado por: Edmundo Cespedes Ayllon
 

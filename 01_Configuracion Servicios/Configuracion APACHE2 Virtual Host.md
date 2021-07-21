@@ -49,7 +49,9 @@ Archivo de configuración por defecto
 ```
 
 Se crea archivos de configuración de acuerdo al dominio o sub-dominio, sitio.ejemplo.conf
+
 Ejemplo de configuración:
+
 ---NORMAL----
 
 ```

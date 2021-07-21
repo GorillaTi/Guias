@@ -4,11 +4,11 @@ Guía de :
 
 ## ACERCA DE:
 
-Versión: 1.0.0
+Versión: 1.0.1
 
-Fecha: 2020-12-01
+Nivel: Medio
 
-Nivel: Todos
+Área: CPD
 
 Elaborado por: Edmundo Céspedes Ayllón
 

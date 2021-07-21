@@ -6,9 +6,7 @@ Guía de:
 
 Versión: 1.0.0
 
-Fecha: 10-05-2021
-
-Nivel: Todos
+Nivel: Avanzado
 
 Elaborado por: Edmundo Cespedes Ayllon
 
@@ -59,7 +57,7 @@ mount -o remount /home
 
 ## SSH
 
-La mayor parte de las  configuraciones seran realizadas en el archiv0 /etc/ssh/sshd.conf
+La mayor parte de las configuraciones serán realizadas en el archivo /etc/ssh/sshd.conf
 
 ```bash
 sudo nano etc/ssh/sshd.conf
