@@ -2,6 +2,8 @@ Guía de:
 
 # Instalación y Configuración DNS
 
+## ACERCA DE:
+
 Versión 1.0.1
 
 Nivel: Medio
@@ -14,7 +16,7 @@ Email: ed.cespedesa@gmail.com
 
 ---
 
-1.- Obtener un df -h y un free -h para guardar la información del estado de nuestro servidor.
+1.- Obtener un `df -h` y un  `free -h` para guardar la información del estado de nuestro servidor.
 
 ```bash
 df -h

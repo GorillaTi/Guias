@@ -5,7 +5,7 @@
 - Saber el tamaño las carpetas
 
   ```bash
-  du -bsh /fichero o carpeta
+  du -sh /fichero o carpeta
   ```
 
 - Eliminar los Archivos de BackUp

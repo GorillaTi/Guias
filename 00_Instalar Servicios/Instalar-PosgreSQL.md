@@ -1,4 +1,4 @@
-GUÍA DE INSTALACIÓN 
+Guía de: 
 
 # PostgreSQL
 

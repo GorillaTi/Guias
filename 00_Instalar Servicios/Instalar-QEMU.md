@@ -6,17 +6,13 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0
+Versión: 1.0.1
 
-Fecha: 25-02-2021
+Nivel: Medio
 
-Nivel: Todos
-
-Área: Data Center
+Área: CPD
 
 Elaborado por: Edmundo Céspedes Ayllón
-
-Técnico Encargado Data Center - G.A.M.S.
 
 e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 

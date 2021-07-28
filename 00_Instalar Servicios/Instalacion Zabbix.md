@@ -2,15 +2,12 @@ Guía de:
 
 # Instalación de Zabbix
 
----
 ## ACERCA DE:
-Versión: 1.0.1
-
-Fecha: 24-03.2021
+Versión: 1.0.2
 
 Nivel: Todos
 
-Área: Data Center
+Área: CPD
 
 Elaborado por: Edmundo Cespedes Ayllon
 
@@ -33,14 +30,14 @@ Ingresamos al gestor de base de datos ya sea en local o en remoto y ejecutamos l
 * Creamos la base de datos
 
   ```mysql
-  mysql> create database zabbix character set utf8 collate utf8_bin;
+  create database zabbix character set utf8 collate utf8_bin;
   ````
 
 * creamos el usuario y le damos todos los permisos hacia la DB
 
   ```mysql
-  mysql> create user zabbix@% identified by 'password';
-  mysql> grant all privileges on zabbix.* to zabbix@localhost;
+  create user zabbix@% identified by 'password';
+  grant all privileges on zabbix.* to zabbix@localhost;
   ```
 
 Copiamos y descomprimimos el contenido del archivo
