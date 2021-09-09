@@ -133,9 +133,9 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
    ingresamos a la ruta del navegador ya se por IP o por URl
 
-   http://192.168.14.95/info.php
+   http://192.168.0.95/info.php
 
-   http://app.sucre.bo/info.php
+   http://[tu_dominio]/info.php
 
 8. Habilitando la publicación por medio de enlaces simbólicos desde las carpetas /home a /var/www/html
 
@@ -177,13 +177,13 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    y movemos el archivo de /var/www/html a home/usuario
 
    ```bash
-   sudo mv -fv /var/www/html/info.php /home/sysadmin/test/
+   sudo mv -fv /var/www/html/info.php /home/[tu_usuario]/test/
    ```
 
    cambiamos el propietario el grupo
 
    ```bash
-   sudo chown -R sysadmin:sysadmin test/info.php
+   sudo chown -R [usuario]:[Grupo] test/info.php
    ```
 
    creamos el enlace simbólico
@@ -322,7 +322,7 @@ sudo ufw enable
      editamos la linea
 
      ```output
-     Listen 192.168.14.95:80
+     Listen 192.168.0.95:80
      ```
 
    * verificamos la configuraciones realizadas
@@ -466,24 +466,24 @@ sudo ufw enable
 * Movemos el directorio `/test` 
 
   ```bash
-  sudo mv -fv /var/www/html/test/ /home/sysadmin/
+  sudo mv -fv /var/www/html/test/ /home/[usuario]/
   ```
 
 * Cambiamos el propietario de la carpeta
 
   ```bash
-  sudo chown -R sysadmin:sysadmin test/
+  sudo chown -R [usuario]:[grupo] test/
   ```
 
 * Creamos el enlace simbólico
 
   ```bash
-  sudo ln -s /home/sysadmin/test/ /var/www/html/test
+  sudo ln -s /home/[usuario]/test/ /var/www/html/test
   ```
 
 * Revisamos en el navegador
 
-  * http://192.168.14.95/test
+  * http://192.168.0.95/test
   * http://[tu_dominio]/test
 
 ## Instalación de certificado SSL
@@ -632,8 +632,6 @@ Verificamos el estado del VH
 ```bash
 sudo apachectl -S
 ```
-
-
 
 ```otput
 VirtualHost configuration:

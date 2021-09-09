@@ -86,8 +86,6 @@ su - oracle
    sqlplus / as sysdba
    ```
 
-   
-
 2. Montamos las bases de datos
 
    ```sql
@@ -99,8 +97,6 @@ su - oracle
    ```sql
    exit
    ```
-
-   
 
 3. Iniciamos el servicio de listener
 

@@ -42,7 +42,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 3. Nos conectamos al servidor mediante ssh
 
    ```bash
-   ssh sysadmin@ipservidor
+   ssh [usuario]@[ipservidor]
    ```
 
 4. Habilitamos la interface web del servidor
