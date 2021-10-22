@@ -75,7 +75,7 @@ ssh-keygen
 
 Se tiene dos formas de enviar la clave publica al servidor
 
-* Opcion1
+* Opción 1
 
   ```bash
   ssh-copy-id [ususario_servidor]@[ip_servidor]

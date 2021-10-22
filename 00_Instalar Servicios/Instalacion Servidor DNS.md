@@ -99,7 +99,7 @@ systemctl status bind9
 systemctl enable --now bind9
 ```
 
-## Configurando Server de Cache y Recursivo
+## Configurando DNS Recursivo o Forwarder
 
 11.- Editar el fichero named.conf.options
 Debian
@@ -178,7 +178,11 @@ log-queries: yes
 log-replies: yes
 ```
 
-## Configuración de DNS Autoritativo
+## Configurando DNS de Cache
+
+
+
+## Configuración de DNS Autoritativo o de Zona
 
 
 

@@ -24,14 +24,21 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
   * Configuramos con el servidor de hora
 
-* Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM.
+* Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM con tipo de partición ZFS.
 
   |Tamaño|Tipo|Punto de montaje|
   |----|----|----|
   |1024 MB|Primaria|/boot|
   |2048 MB|LVM|swap|
-  |min 20 GB|LVM|/|
-  |min 20 GB|LVM|/home|
+  |min 15 GB <br />o  espacio restante|LVM|/|
+  | min 10 GB                           | LVM      | /home            |
+  | min 1 GB                            | LVM      | /tmp             |
+  |min 10 GB|LVM|/var|
+  | min 1GB                             | LVM      | /var/log         |
+  | min 1GB                             | LVM      | /var/log/audit   |
+  | min 1GB                             | LVM      | /var/tmp         |
+
+  **Nota.-** partición basa en un HDD de 40 GB
 
 * Colocamos  el password para root definido por el encargado de Data Center
 
@@ -148,5 +155,11 @@ sudo ss -tpan
 ```bash
     dnf whatprovides needs-restarting
     needs-restarting -r
+```
+
+## Interfaz de Administración
+
+```url
+https://ip-address-of-rhel8-server:9090
 ```
 
