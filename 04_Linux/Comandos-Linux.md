@@ -94,3 +94,7 @@ Remover  IP alias
 ```bash
 sudo ip address del 192.168.1.1/24 dev eth1
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7cc835eda235813b582e604a89ff97a021b7f94d
