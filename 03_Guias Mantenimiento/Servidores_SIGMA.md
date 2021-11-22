@@ -55,19 +55,43 @@ sudo - oradev
    rep_approd_prod    | ReportsServer      |   11324 | Alive
    ```
 
-   2. iniciamos servicios de reportes
+   2. Iniciamos servicios de reportes
 
    ```bash
    emctl start iasconsole
    ```
 
-   verificamos el estado del servicio
+   Verificamos el estado del servicio
 
    ```bash
    emctl status iasconsole
    ```
 
 #### Bajar servicios de Aplicaciones
+
+1. Bajamos servicios de reportes
+
+   ```bash
+   emctl start iasconsole
+   ```
+
+   Verificamos el estado del servivcio
+
+   ```bash
+   emctl status iasconsole
+   ```
+
+2. Bajamos los servicios de aplicaciones
+
+   ```bash
+   opmnctl stoptall
+   ```
+
+   Verificamos el estado del Servicio
+
+   ```bash
+   opmnctl status
+   ```
 
 ## DB SIGMA
 

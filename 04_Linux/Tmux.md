@@ -171,6 +171,8 @@ t  big clock
 
 ## Opciones de Configuración:
 
+Se las realiza en `~/.tmux.conf`
+
 ```
 # Mouse support - set to on if you want to use the mouse
 * setw -g mode-mouse off
@@ -192,6 +194,17 @@ set -g status-justify centre
 unbind Up bind Up new-window -d -n tmp \; swap-pane -s tmp.1 \; select-window -t tmp
 unbind Down
 bind Down last-window \; swap-pane -s tmp.1 \; kill-window -t tmp
+
+# Configurar Shell por defeccto
+set -g default-shell  "/bin/zsh"
+set -g default-command "/bin/zsh"
+
+```
+
+Ejecute par que se realizcen los cambios
+
+```bash
+tmux kill-server; tmux
 ```
 
 ## Recursos:

@@ -4,7 +4,7 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0.0
+Versión: 1.0.1
 
 Nivel: Avanzado
 
@@ -59,10 +59,18 @@ mount -o remount /home
 
 ## SSH
 
-La mayor parte de las configuraciones serán realizadas en el archivo /etc/ssh/sshd.conf
+La mayor parte de las configuraciones serán realizadas en el archivo:
+
+RedHat, CentOS, Alama Linux y Rocky Linux
 
 ```bash
-sudo nano etc/ssh/sshd.conf
+sudo nano etc/ssh/sshd_conf
+```
+
+Debian y Ubuntu
+
+```bash
+sudo nano etc/ssh/ssh_conf
 ```
 
 ### 1. Autenticación SSH siempre basada en clave pública
