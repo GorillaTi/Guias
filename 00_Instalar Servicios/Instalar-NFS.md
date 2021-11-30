@@ -1,3 +1,23 @@
+Guía de:
+
+# Instalación Servidor NFS
+
+---
+
+## ACERCA DE:
+
+Versión: 1.0.0
+
+Nivel: Todos
+
+Área: C.P.D.
+
+Elaborado por: Edmundo Céspedes Ayllón
+
+e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
+
+---
+
 1. Actualizamos el sistema operativo
 
    ```bash
@@ -75,11 +95,17 @@
 
     - Definitivo
 
-    ```
-    
+      Se edita el archivo `/etc/fstab`
+
+    ```bash
+    sudo vim /etc/fstab
     ```
 
+    ​	Insertamos al final del archivo
+
+    ```
     
+    ```
 
 12. 
 
