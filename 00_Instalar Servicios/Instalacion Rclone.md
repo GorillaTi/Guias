@@ -21,6 +21,12 @@ Instalamos `fuse` par montar directorios
 sudo apt install fuse
 ```
 
+Instalamos go
+
+```
+sudo apt install 
+```
+
 Montando directorio remoto
 
 ```bash

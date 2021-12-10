@@ -2,8 +2,6 @@ Guía de:
 
 # Instalación Servidor NFS
 
----
-
 ## ACERCA DE:
 
 Versión: 1.0.0
