@@ -6,7 +6,7 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0.1
+Versión: 1.1.0
 
 Nivel: Medio
 
@@ -39,19 +39,30 @@ E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
   postgres -V
   ```
   
+  o
+  
+  ```bash
+  poatgres --version
+  ```
+  
+  **Nota.-** No ejecutar con usuario root
+  
 - Iniciamos la base de datos de PostgreSQL
   
   ```bash
   sudo postgresql-setup --initdb --unit postgresql
   ```
+  
 - Configuramos el inicio automático del servicio
   ```bash
   systemctl enable postgresql
   ```
+  
 - Iniciamos el servicio
   ```bash
   systemctl start postgresql
   ```
+  
 - Verificamos el estado del servicio
   ```bash
   systemctl status postgresql
@@ -82,7 +93,7 @@ E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
   ```
 - Editamos el archivo
   ```bash
-  sudo nano /var/lib/pgsql/data/pg_hba.con
+  sudo nano /var/lib/pgsql/data/pg_hba.conf
   ```
 - Cambiamos o insertamos la línea
   ```
@@ -106,14 +117,22 @@ E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 - Conectarse a PostgreSQL
 
   ```bash
-  sudo -u postgres psqlInformacion
-  ```
-  o
-  ```bash
   sudo su postgres
+  ```
+  
+- Iniciamos la consola de PostgreSQL
+
+  ```bash
+  psql
   ```
 
 - Cambiamos la contraseña del usuario postgres
+
+  ```bash
+  alter user postgres with password ‘passwd’;
+  ```
+
+  o
 
   ```sql
   \password
@@ -140,5 +159,5 @@ E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 - Verificamos el estado de la configuración
 
   ```bash
-  sudo firewall-cmd --list-allpo
+  sudo firewall-cmd --list-all
   ```

@@ -4,7 +4,7 @@ Guía de:
 
 ## Acerca de:
 
-Versión: 1.0.1
+Versión: 1.1.0
 
 Nivel: Todos
 
@@ -158,6 +158,14 @@ sudo ss -tpan
 ```
 
 ## Interfaz de Administración
+
+Habilitacion de Administracion Web
+
+```bash
+ systemctl enable --now cockpit.socket
+```
+
+ Ingreso al Interface de adminis
 
 ```url
 https://ip-address-of-rhel8-server:9090
