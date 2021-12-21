@@ -1,6 +1,6 @@
 Guía de: 
 
-# SElinux
+# Configuración SElinux
 
 ## ACERCA DE:
 
