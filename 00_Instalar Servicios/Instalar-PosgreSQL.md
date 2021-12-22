@@ -80,7 +80,7 @@ E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
   sudo find / -name postgresql.conf
   ```
 - Editamos el archivo postgresql.conf
-    ```
+    ```bash
   sudo nano /var/lib/pgsql/data/postgresql.conf
   ```
 - Buscamos y des-comentamos la linea que sigue
@@ -128,7 +128,7 @@ E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 - Cambiamos la contraseña del usuario postgres
 
-  ```bash
+  ```sql
   alter user postgres with password ‘passwd’;
   ```
 
@@ -140,7 +140,7 @@ E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 - salimos de PostgreSQL
 
-  ```
+  ```sql
   \q
   ```
   
@@ -152,7 +152,7 @@ E-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 - Reiniciamos el Firewall
 
-  ```
+  ```bash
   sudo firewall-cmd --reload
   ```
 
