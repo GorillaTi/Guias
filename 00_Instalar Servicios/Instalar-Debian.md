@@ -64,6 +64,8 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    ssh sysadmin@ipservidor
    ```
 
+   Nota: Para habilitar el grupo sudo se debe de ejecutar desde `/sbin/usermod` 
+
 6. Creamos el usuario *desarrollo*
 
    ```bash
@@ -86,6 +88,12 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
    ```bash
    sudo cat /etc/group | grep sudo
+   ```
+   
+   o
+   
+   ```bash
+   getent group sudo
    ```
 
 ## Verificamos versión de S.O.

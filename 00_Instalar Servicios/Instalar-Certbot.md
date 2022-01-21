@@ -200,7 +200,7 @@ sudo certbot delete --cert-name ejemplo.com
 Generamos el certificado SSL
 
 ```bash
-sudo certbot certonly  --manual  --preferred-challenges=dns --email [t.email@] --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.[tu_dominio.com]
+sudo certbot certonly  --manual-auth-hook --preferred-challenges=dns --email [t.email@] --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.[tu_dominio.com]
 ```
 
 Los parámetros del comando son los siguientes:
@@ -307,7 +307,7 @@ Lo siguiente es probar el comando, pero añadiéndole un `post hook`, que permit
 Apache
 
 ```bash
-certbot renew --post-hook "systemctl restart nginx.service"
+certbot renew --post-hook "systemctl restart apache2.service"
 ```
 
 Nginx

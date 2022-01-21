@@ -94,3 +94,22 @@ Remover  IP alias
 ```bash
 sudo ip address del 192.168.1.1/24 dev eth1
 ```
+
+## Actualizar Fuentes Tipográficas
+
+```bash
+sudo fc-cache -f -v
+```
+
+## Ver información de un dominio o un servidor
+
+```bash
+curl -I 192.168.x.x
+```
+
+o
+
+```bash
+curl -I [mi.dominio.com]
+```
+

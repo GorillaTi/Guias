@@ -28,20 +28,20 @@ Opciones de particiones de particiones:
 
 - Básicas
 
-|  rw  | lectura - escritura |
-| :--: | :-----------------: |
-|  ro  |    solo lectura     |
+| rw  | lectura - escritura |
+|:---:|:-------------------:|
+| ro  | solo lectura        |
 
 - Avanzadas
 
-| File Sistem |       noexec       |       nosuid       |       nodev        |      noatime       |
-| :---------: | :----------------: | :----------------: | :----------------: | :----------------: |
-|     `/`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|   `/boot`   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|   `/var`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|   `/home`   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|   `/tmp`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|   `/usr`    |                    |                    | :white_check_mark: | :white_check_mark: |
+| File Sistem | noexec             | nosuid             | nodev              | noatime            |
+|:-----------:|:------------------:|:------------------:|:------------------:|:------------------:|
+| `/`         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `/boot`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `/var`      | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `/home`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `/tmp`      | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `/usr`      |                    |                    | :white_check_mark: | :white_check_mark: |
 
 **Nota.-** La partición `/usr` no debe de ponerse las particiones.
 
@@ -84,13 +84,13 @@ ssh-keygen
 Se tiene dos formas de enviar la clave publica al servidor
 
 * Opción 1
-
+  
   ```bash
   ssh-copy-id [ususario_servidor]@[ip_servidor]
   ```
 
 * Opción 2
-
+  
   ```bash
   cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >>  ~/.ssh/authorized_keys"
   ```
@@ -107,9 +107,9 @@ Port [nro_puerto]
 
 **Nota** se deberá tomar en cuenta el numero de puerto al momento de realizar la conexión por ejemplo
 
- ```bash
+```bash
 ssh [ususario_servidor]@[IP_servidor] -p 3022
- ```
+```
 
 ### 3. Limite la vinculación IP
 
