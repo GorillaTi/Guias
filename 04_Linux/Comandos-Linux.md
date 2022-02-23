@@ -113,3 +113,11 @@ o
 curl -I [mi.dominio.com]
 ```
 
+## Descomprimir Archivos .TAR.GZ
+
+Descomprimir archivo
+
+```bash
+tar -xvf [nombre_archivo]
+```
+

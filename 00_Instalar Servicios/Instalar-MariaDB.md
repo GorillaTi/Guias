@@ -156,7 +156,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
     Adicionamos el servicio de forma permanente
 
     ```bash
-    firewall-cmd --add-service=http --permanent
+    firewall-cmd --add-service=mysql --permanent
     ```
 
     Reiniciamos el servicio del firewall

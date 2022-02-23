@@ -3,6 +3,7 @@ Guía de:
 # Instalación de Rclone
 
 ## ACERCA DE:
+
 Versión: 1.0.0
 
 Nivel: Todos
@@ -32,4 +33,3 @@ Montando directorio remoto
 ```bash
 rclone mount  --allow-other --allow-non-empty -v GoogleDrive:GADH /media/Micelanea/Users/edces/Mi\ unidad/GACH/ &
 ```
-

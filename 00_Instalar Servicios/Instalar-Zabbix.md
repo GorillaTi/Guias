@@ -3,6 +3,7 @@ Guía de:
 # Instalación de Zabbix
 
 ## ACERCA DE:
+
 Versión: 1.0.2
 
 Nivel: Todos
@@ -22,19 +23,19 @@ Instalamos conforme las instrucciones oficiales con todo en local.
 Ingresamos al gestor de base de datos ya sea en local o en remoto y ejecutamos los siguientes comandos
 
 * ingresamos a la gestor de base de datos
-
+  
   ```bash
   mysql -uroot -p
   ```
 
 * Creamos la base de datos
-
+  
   ```mysql
   create database zabbix character set utf8 collate utf8_bin;
-  ````
+  ```
 
 * creamos el usuario y le damos todos los permisos hacia la DB
-
+  
   ```mysql
   create user zabbix@% identified by 'password';
   grant all privileges on zabbix.* to zabbix@localhost;
@@ -83,9 +84,6 @@ sudo systemctl enable --now zabbix-agent.service
 ```
 
 Comprobamos es estado del firewall
-
-
-
 
 ### CentOS
 
@@ -174,5 +172,3 @@ Cambiar SElinux a modo permisivo si fuera necesario
 ```bash
 setenforce 0 && sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
 ```
-
- 

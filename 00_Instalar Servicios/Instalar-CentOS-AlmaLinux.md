@@ -24,13 +24,13 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
   * Configuramos con el servidor de hora
 
-* Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM con tipo de partición ZFS.
+* Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM con tipo de partición XFS.
 
   |Tamaño|Tipo|Punto de montaje|
   |----|----|----|
   |1024 MB|Primaria|/boot|
   |2048 MB|LVM|swap|
-  |min 15 GB <br />o  espacio restante|LVM|/|
+  |min 15 GB<br/>o  espacio restante|LVM|/|
   | min 10 GB                           | LVM      | /home            |
   | min 1 GB                            | LVM      | /tmp             |
   |min 10 GB|LVM|/var|
@@ -159,13 +159,13 @@ sudo ss -tpan
 
 ## Interfaz de Administración
 
-Habilitacion de Administracion Web
+Habilitación de Administración Web
 
 ```bash
  systemctl enable --now cockpit.socket
 ```
 
- Ingreso al Interface de adminis
+ Ingreso al Interfaz de administración.
 
 ```url
 https://ip-address-of-rhel8-server:9090
