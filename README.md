@@ -5,12 +5,10 @@
 
 # GUÍAS DE
 
-Instalación y configuración de servidores y servicios.
+01 [Instalación de Servicios](https://github.com/GorillaTi/guias/tree/main/01_Instalar_Servicios)
 
-01 [Instalación de Servicios](https://github.com/GorillaTi/guias/tree/main/00_Instalar%20Servicios)
+02 [Configuración de Servicios](https://github.com/GorillaTi/guias/tree/main/02_Configuracion_Servicios)
 
-02 [Guías de Configuración](https://github.com/GorillaTi/guias/tree/main/01_Configuracion%20Servicios)
-
-03 [Guías de Mantenimiento](https://github.com/GorillaTi/guias/tree/main/03_Guias%20Mantenimiento)
+03 [Mantenimiento de Servicios](https://github.com/GorillaTi/guias/tree/main/03_Guias_Mantenimiento)
 
 04 [Comando Linux](https://github.com/GorillaTi/Guias/tree/main/04_Linux)
