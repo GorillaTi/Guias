@@ -316,7 +316,7 @@ Nginx
 certbot renew --post-hook "systemctl restart nginx.service"
 ```
 
-### Añadir la renovación del  certificado en el cron del root. 
+### Añadir la renovación del  certificado en el cron del root.
 
 Buscamos las rutas absolutas de certbot y systemctl
 

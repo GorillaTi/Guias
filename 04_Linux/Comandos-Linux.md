@@ -17,7 +17,7 @@ scp [usuari]@[servidor]:[directorio_servidor] [direccion_local]
 ```
 
 ```bash
-rsync --partial --progress --rsh:ssh [usuari]@[servidor]:[directorio_servidor] [direccion_local]
+rsync --partial --progress --rsh:ssh [usuario]@[servidor]:[directorio_servidor] [direccion_local]
 ```
 
 ### Remoto - Servidor
@@ -121,3 +121,35 @@ Descomprimir archivo
 tar -xvf [nombre_archivo]
 ```
 
+## Laravel
+
+### Archivos de configuracion de rutas
+
+```bash
+sudo vim /var/www/html[aplicacion]/config/adminlt.php
+```
+
+```bash
+sudo vim /var/www/html[aplicacion]/public/js/script.js
+```
+
+### Limpiar cache de Laravel
+
+```bash
+php artisan cache:clear
+php artisan config:clear
+php artisan config:cache
+```
+
+### Limpiar vistas (view)
+
+```bash
+php artisan view:clear
+```
+
+### Limpiar rutas
+
+```bash
+php artisan route:clear
+php artisan route:cache
+```

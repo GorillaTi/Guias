@@ -71,6 +71,7 @@ ps -ef | grep named
 ```
 
 8.- Validar que el servicio de DNS esta a la escucha en los puertos 53 en los protocolos TCP y UDP
+
 ```bash
 ss -ltun | grep :53
 ```
@@ -89,6 +90,7 @@ nmap localhost
 ```
 
 9.- Validar el status del servicio de Bind9
+
 ```bash
 systemctl status bind9
 ```
@@ -109,6 +111,7 @@ nano /etc/bind/named.conf.options
 ```
 
 CentOS
+
 ```bash
 nano /etc/named.conf
 ```
@@ -122,12 +125,12 @@ acl nombre-lista{
     172.16.0.0/12    
 };
 options{
-	allow-query{nombre-lista;};
-	allow-recursive{nombre-lista;};
+    allow-query{nombre-lista;};
+    allow-recursive{nombre-lista;};
 };
 forwarders{
-	8.8.8.8;
-	8.8.4.4;
+    8.8.8.8;
+    8.8.4.4;
 };
 ```
 
@@ -145,6 +148,7 @@ tail -f /var/log/syslog
 ```
 
 CentOS
+
 ```bash
 tail -f /var/named/data/named_stats.txt
 ```
@@ -178,26 +182,26 @@ log-queries: yes
 log-replies: yes
 ```
 
+## Verificar sintaxis de configuracion
+
+```bash
+sudo named-checkconfig
+```
+
 ## Configurando DNS de Cache
-
-
 
 ## Configuración de DNS Autoritativo o de Zona
 
-
-
 ## Configuración de DNS secundario
-
-
 
 ## TIPS
 
 Recuerde que hay 3 comandos con los que podemos reiniciar los servicios, esto ya queda a decisión de usted que comando usan.
 
 ```bash
-systemctl start|stop|restart bind9 		(named)
-service bind9 start|stop|restart   		(named)
-/etc/init.d/bind9 start|stop|restart   	(named)
+systemctl start|stop|restart bind9         (named)
+service bind9 start|stop|restart           (named)
+/etc/init.d/bind9 start|stop|restart       (named)
 ```
 
 Pruebas de servicio
@@ -221,7 +225,6 @@ Segmento de redes locales
 TTL recomendadas
 
 ```config
-180 		preparar para cambios
+180         preparar para cambios
 3600 a 7200 para produccion
 ```
-
