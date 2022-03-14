@@ -1,6 +1,6 @@
 Guía de:
 
-# Instalación De Apache  y PHP. 
+# Instalación De Apache  y PHP.
 
 ## ACERCA DE:
 
@@ -23,13 +23,13 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 ### Instalamos Apache2
 
 2. Actualizamos
-
+   
    ```bash
    sudo dnf upgrade
    ```
 
 3. Instalamos http
-
+   
    ```bash
    sudo dnf install -y httpd
    ```
@@ -37,38 +37,38 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 ### Configuración  de Firewall
 
 4. Habilitamos el  los puertos http y https en el firewall
-
+   
    - Verificamos el estado del firewall
-
+   
    ```bash
    systemctl status firewalld
    ```
-
+   
    - Verificamos los servicios habilitados
-
+   
    ```bash
    sudo firewall-cmd --list-services
    ```
-
+   
    ```bash
    sudo firewall-cmd --list-all
    ```
-
+   
    - Adicionamos el servicio de forma permanente
-
+   
    ```bash
    firewall-cmd --add-service=http --permanent
    firewall-cmd --add-service=https --permanent
    ```
-
+   
    - Reiniciamos el servicio del firewall   
-
+   
    ```bash
    firewall-cmd --reload
    ```
-
+   
    - Verificamos los servicios habilitados
-
+   
    ```bash
    sudo firewall-cmd --list-services
    ```
@@ -76,173 +76,175 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 ### Instalamos PHP
 
 5. Revisamos la versión de PHP en los repositorios
-
+   
    ```bash
    sudo dnf module list php
    ```
-
+   
    Si la versiones disponibles cubren nuestras necesidades, la instalamos
-
+   
    Caso contrario adicionamos el repositorio para versiones mas actuales en la pagina 
-
+   
    https://rpms.remirepo.net/wizard/
 
 6. instalamos los módulos de php
-
+   
    ```bash
    sudo dnf install -y php php-opcache php-curl php-common php-mysqlnd php-gd
    ```
 
 7. habilitamos los servicios de php
-
+   
    ```bash
    sudo systemctl enable --now php-fpm.service
    ```
-
+   
    revisamos el estado del servicio
-
+   
    ```bash
    sudo systemctl status php-fpm.service
    ```
-
+   
    revisamos la versión de php
-
+   
    ```bash
    php -v
    ```
-
+   
    recargamos la configuración del servidor apache2
-
+   
    ```bash
    sudo systemctl reload hhpd
    ```
-
+   
    para probar que todo esta funcionando nos creamos un archivo de prueba
-
+   
    ```bash
    sudo nano /var/www/html/info.php
    ```
-
+   
     ingresamos el siguiente código
-
+   
    ```php
    <?php
    phpinfo();
    ?>
    ```
-
+   
    ingresamos a la ruta del navegador ya se por IP o por URl
-
+   
    http://192.168.0.95/info.php
-
+   
    http://[tu_dominio]/info.php
 
 8. Habilitando la publicación por medio de enlaces simbólicos desde las carpetas /home a /var/www/html
-
+   
    modificamos la configuración de apache2
-
+   
    ```bash
    sudo nano /etc/httpd/conf/httpd.conf 
    ```
-
+   
    la necesaria para lo requerido
-
+   
    ```tex
    <Directory /var/www/html/ >
-   	Options Indexes FollowSymLinks MultiViews
-   	AllowOverride All
-   	Order allow,deny
-   	allow from all
+       Options Indexes FollowSymLinks MultiViews
+       AllowOverride All
+       Order allow,deny
+       allow from all
    </Directory>
    ```
-
+   
    comprobamos la configuración de apache2
-
+   
    ```bash
    apachectl -t
    ```
-
+   
    recargamos la configuración del servidor apache2
-
+   
    ```bash
    sudo systemctl reload hhpd
    ```
-
+   
    creamos una carpeta en la carpeta personal 
-
+   
    ```bash
    mkdir test
    ```
-
+   
    y movemos el archivo de /var/www/html a home/usuario
-
+   
    ```bash
    sudo mv -fv /var/www/html/info.php /home/[tu_usuario]/test/
    ```
-
+   
    cambiamos el propietario el grupo
-
+   
    ```bash
    sudo chown -R [usuario]:[Grupo] test/info.php
    ```
-
+   
    creamos el enlace simbólico
-
+   
    ```bash
    ln -s [origen] [destino]
    ```
-## En Debian 10
+   
+   ## En Debian 10
 
-1. Instalamos y configuramos el servidor conforme a la Guía de Instalación de **Debian 10**
-### Instalación de Apache2
+9. Instalamos y configuramos el servidor conforme a la Guía de Instalación de **Debian 10**
+   
+   ### Instalación de Apache2
 
-2. Actualizamos e instalamos actualizaciones
+10. Actualizamos e instalamos actualizaciones
+    
+    ```bash
+    sudo apt update && sudo apt dist-upgrade -y
+    ```
 
-   ```bash
-   sudo apt update && sudo apt dist-upgrade -y
-   ```
+11. Instalamos apache2
+    
+    ```bash
+    sudo apt install apache2 apache2-doc
+    ```
 
-3. Instalamos apache2
+12. Configuramos el auto inicio y iniciamos el servicio
+    
+    ```bash
+    sudo systemctl enable --now apache2.service
+    sudo systemctl start apache2.service
+    ```
 
-   ```bash
-   sudo apt install apache2 apache2-doc
-   ```
+13. Revisamos el estado del servicio.
+    
+    ```bash
+    sudo sytemctl status apache2.service
+    ```
 
-4. Configuramos el auto inicio y iniciamos el servicio
-
-   ```bash
-   sudo systemctl enable --now apache2.service
-   sudo systemctl start apache2.service
-   ```
-
-5. Revisamos el estado del servicio.
-
-   ```bash
-   sudo sytemctl status apache2.service
-   ```
-
-6. Revisamos los puertos
-
-   ```bash
-   sudo ss -tpan
-   ```
+14. Revisamos los puertos
+    
+    ```bash
+    sudo ss -tpan
+    ```
 
 ### Configuración de Firewall
 
  Comprobamos el estado de la iptables
 
-   ```bash
-   sudo iptables -L
-   ```
+```bash
+sudo iptables -L
+```
 
  Habilitamos los puertos
 
-   ```bash
-   sudo ufw allow ssh
-   sudo ufw allow http
-   sudo ufw allow https
-   sudo ufw allow mysql
-   ```
+```bash
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow mysql
+```
 
 Para rangos de puertos
 
@@ -252,175 +254,176 @@ sudo ufw allow in 1000:2000/udp
 
 Habilitamos el firewall
 
-   ```bash
+```bash
 sudo ufw enable
-   ```
+```
 
-   ### Configuraciones de seguridad de Apache2
+### Configuraciones de seguridad de Apache2
 
-   * ubicarse en la carpeta de configuración
+* ubicarse en la carpeta de configuración
+  
+  ```bash
+  cd /etc/apache2/conf-available/
+  ```
 
-     ```bash
-     cd /etc/apache2/conf-available/
-     ```
+* Respaldo de seguridad de los archivos charset.conf y security.con
+  
+  ```bash
+  sudo cp -rpfv charset.conf charset.conf.orig
+  sudo cp -rpfv security.conf security.conf.orig
+  ```
 
-   * Respaldo de seguridad de los archivos charset.conf y security.con
+* Modificamos el archivo charset.conf 
+  
+  ```bash
+  sudo nano charset.conf
+  ```
+  
+  des cometamos la línea
+  
+  ```output
+  AddDefaultCharset UTF-8
+  ```
 
-     ```bash
-     sudo cp -rpfv charset.conf charset.conf.orig
-     sudo cp -rpfv security.conf security.conf.orig
-     ```
+* Modificamos el archivo security.conf
+  
+  ```bash
+  sudo nano security.conf
+  ```
+  
+  des comentamos la línea
+  
+  ```output
+  ServerSignature Off
+  ```
+  
+  y cometamos la linea
+  
+  ```output
+  #ServerSignature On 
+  ```
 
-   * Modificamos el archivo charset.conf 
+* nos ubicamos en
+  
+  ```bash
+  cd /etc/apache2/
+  ```
 
-     ```bash
-     sudo nano charset.conf
-     ```
+* Respaldamos el archivo ports.conf
+  
+  ```bash
+  sudo cp -rpfv ports.conf ports.conf.orig
+  ```
 
-     des cometamos la línea
+* editamos el archivo ports.conf
+  
+  ```bash
+  sudo nano ports.conf
+  ```
+  
+  editamos la linea
+  
+  ```output
+  Listen 192.168.0.95:80
+  ```
 
-     ```output
-     AddDefaultCharset UTF-8
-     ```
+* verificamos la configuraciones realizadas
+  
+  ```bash
+  sudo apache2ctl -t
+  ```
 
-   * Modificamos el archivo security.conf
+* reiniciamos el servicio de Apache2
+  
+  ```bash
+  sudo systemctl restart apache2.service
+  ```
 
-     ```bash
-     sudo nano security.conf
-     ```
-
-     des comentamos la línea
-
-     ```output
-     ServerSignature Off
-     ```
-
-     y cometamos la linea
-
-     ```output
-     #ServerSignature On 
-     ```
-
-   * nos ubicamos en
-
-     ```bash
-     cd /etc/apache2/
-     ```
-
-   * Respaldamos el archivo ports.conf
-
-     ```bash
-     sudo cp -rpfv ports.conf ports.conf.orig
-     ```
-
-   * editamos el archivo ports.conf
-
-     ```bash
-     sudo nano ports.conf
-     ```
-
-     editamos la linea
-
-     ```output
-     Listen 192.168.0.95:80
-     ```
-
-   * verificamos la configuraciones realizadas
-
-     ```bash
-     sudo apache2ctl -t
-     ```
-
-   * reiniciamos el servicio de Apache2
-
-     ```bash
-     sudo systemctl restart apache2.service
-     ```
-
-   * Revisamos los puertos
-
-     ```bash
-     sudo ss -tpan
-     ```
-
-     ```output
-     sysadmin@app01:/etc/apache2$ ss -tpan
-     State       Recv-Q      Send-Q           Local Address:Port              Peer Address:Port       
-     LISTEN      0           128              192.168.14.95:80                     0.0.0.0:*          
-     LISTEN      0           128                    0.0.0.0:22                     0.0.0.0:*          
-     ESTAB       0           0                192.168.14.95:22              192.168.14.254:49748      
-     LISTEN      0           128                       [::]:22                        [::]:* 
-     ```
-### Instalamos PHP 
-
+* Revisamos los puertos
+  
+  ```bash
+  sudo ss -tpan
+  ```
+  
+  ```output
+  sysadmin@app01:/etc/apache2$ ss -tpan
+  State       Recv-Q      Send-Q           Local Address:Port              Peer Address:Port       
+  LISTEN      0           128              192.168.14.95:80                     0.0.0.0:*          
+  LISTEN      0           128                    0.0.0.0:22                     0.0.0.0:*          
+  ESTAB       0           0                192.168.14.95:22              192.168.14.254:49748      
+  LISTEN      0           128                       [::]:22                        [::]:* 
+  ```
+  
+  ### Instalamos PHP
 5. Descargamos Sury PPA for PHP 7.4 usando `wget`
-
+   
    ```bash
    sudo apt -y install lsb-release apt-transport-https ca-certificates wget
    sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
    ```
-
+   
    adicionamos el APP descargada al servidor
-
+   
    ```bash
    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
    ```
 
 6. Actualizamos la lista de repositorios
-
+   
    ```bash
    sudo apt update
    ```
 
 7. Instalamos php
-
+   
    ```bash
    sudo apt install php7.4
    ```
 
 8. Verificamos la versión instalada
-
+   
    ```bash
    php -v
    ```
 
 9. Instalamos exenciones básicas de PHP
-
+   
    ```bash
    sudo apt install php7.4-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,bcmath} -y
    ```
 
 ## Prueba de Funcionamiento de la instalación de php
 
-   * Para probar que todo esta funcionando nos creamos  carpeta `test` y archivo de prueba `index.php`
+* Para probar que todo esta funcionando nos creamos  carpeta `test` y archivo de prueba `index.php`
+  
+  ```bash
+  sudo mkdir /var/www/html/test
+  sudo nano /var/www/html/test/index.php
+  ```
 
-   ```bash
-   sudo mkdir /var/www/html/test
-   sudo nano /var/www/html/test/index.php
-   ```
+* Ingresamos el siguiente código
+  
+  ```php
+  <?php
+  phpinfo();
+  ?>
+  ```
 
-   * Ingresamos el siguiente código
-
-   ```php
-   <?php
-   phpinfo();
-   ?>
-   ```
-
-   * Revisamos  el resultado en la ruta del navegador ya se por IP o por URL
-        * http://192.168.14.95/test
-        * http://[tu_dominio]/test
+* Revisamos  el resultado en la ruta del navegador ya se por IP o por URL
+  
+  * http://192.168.14.95/test
+  * http://[tu_dominio]/test
 
 ## Archivo de Configuración php.ini
 
 * Para editar el archivo de configuración
-
+  
   ```bash
   sudo nano /etc/php/7.4/fpm/php.ini
   ```
 
-*  Parámetros básicos de configuración para modificar
-
+* Parámetros básicos de configuración para modificar
+  
   ```output
   upload_max_filesize = 32M 
   post_max_size = 48M 
@@ -433,30 +436,30 @@ sudo ufw enable
 ## Configuración para en enlaces simbólicos de `/home` a` /var/www/html`
 
 * Editar el archivo `apache.conf`
-
+  
   ```bash
   sudo nano apache.conf
   ```
 
 * Insertamos el siguiente código
-
+  
   ```http
   <Directory /var/www/html/ >
-  	Options Indexes FollowSymLinks MultiViews
-  	AllowOverride All
-  	Order allow,deny
-  	allow from all
+      Options Indexes FollowSymLinks MultiViews
+      AllowOverride All
+      Order allow,deny
+      allow from all
   </Directory>
   ```
 
 * Verificamos la configuraciones realizadas
-
+  
   ```bash
   sudo apache2ctl -t
   ```
 
 * Recargamos la Configuración de Apache.
-
+  
   ```bash
   sudo systemctl reload apache2.service 
   ```
@@ -464,25 +467,25 @@ sudo ufw enable
 ## Prueba de funcionamiento de enlace simbólico
 
 * Movemos el directorio `/test` 
-
+  
   ```bash
   sudo mv -fv /var/www/html/test/ /home/[usuario]/
   ```
 
 * Cambiamos el propietario de la carpeta
-
+  
   ```bash
   sudo chown -R [usuario]:[grupo] test/
   ```
 
 * Creamos el enlace simbólico
-
+  
   ```bash
   sudo ln -s /home/[usuario]/test/ /var/www/html/test
   ```
 
 * Revisamos en el navegador
-
+  
   * http://192.168.0.95/test
   * http://[tu_dominio]/test
 
@@ -672,4 +675,3 @@ o
 ```bash
 sudo certbot delete --cert-name ejemplo.com
 ```
-
