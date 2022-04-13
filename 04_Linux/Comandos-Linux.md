@@ -8,6 +8,8 @@ sudo fdisk -l
 lsblk
 ```
 
+---
+
 ## Copiar archivos en Red
 
 ### Servidor - Remoto
@@ -30,11 +32,15 @@ scp [usuari]@[servidor]:[directorio_servidor] [direccion_local]
 rsync --partial --progress --rsh:ssh [usuari]@[servidor]:[directorio_servidor] [direccion_local]
 ```
 
+---
+
 ## Editar Archivo de Forma Remota
 
 ```bash
 vim scp://[Servidor]//[ubicacion_archivo]
 ```
+
+---
 
 ## Buscar y reemplazar en VIM
 
@@ -75,6 +81,8 @@ A continuación algunos ejemplos del potencial que tienen tanto las expresiones 
 - `:%s/^(?:[0-9a-f]{2}[\-:]?){6}(?<![\-:])$//g` elimina las direcciones MAC
 - `:%s/<!\[CDATA\[(.*)\]\]>//g` eliminar etiquetas `CDATA`
 
+---
+
 ## IP alias con el comando `ip`
 
 Listar IP's asignadas del sistema
@@ -95,11 +103,15 @@ Remover  IP alias
 sudo ip address del 192.168.1.1/24 dev eth1
 ```
 
+---
+
 ## Actualizar Fuentes Tipográficas
 
 ```bash
 sudo fc-cache -f -v
 ```
+
+---
 
 ## Ver información de un dominio o un servidor
 
@@ -113,6 +125,8 @@ o
 curl -I [mi.dominio.com]
 ```
 
+---
+
 ## Descomprimir Archivos .TAR.GZ
 
 Descomprimir archivo
@@ -120,6 +134,8 @@ Descomprimir archivo
 ```bash
 tar -xvf [nombre_archivo]
 ```
+
+---
 
 ## Laravel
 
@@ -152,4 +168,120 @@ php artisan view:clear
 ```bash
 php artisan route:clear
 php artisan route:cache
+```
+
+---
+
+## SSH TIPOS DE CONEXIONES
+
+### Copiar clave publica al servidor
+
+```bash
+ssh-copy-id [usuario@ip_servidor]
+```
+
+### Ejecutar comando en el servidor ssh
+
+```bash
+ssh -t [usuario@ip_servidor] [comando]
+```
+
+### Conesxion usando un servidor ssh como proxy (proxy socks)
+
+```bash
+ssh -D [perto] [usuario@ip_servidor]
+```
+
+### Ejecutar aplicaiones Xserver por ssh
+
+```bash
+ssh -X [usuario@ip_servidor]
+```
+
+### Habilitando puerto local para acceder a servicio via ssh
+
+```bash
+ssh -L [puerto_local]:[ip_servidor2]:[puerto_remoto] [usuario@ip_servidor]
+```
+
+Si se te olvido realizar el forwarder de puerto puedes ejecutar en terminal para que te abra el interprete de ssh
+
+```bash
+~c
+```
+
+Luego insertar los parametros para el forward
+
+```bash
+-L [puerto_local]:[ip_servidor]:[puerto_remoto] 
+```
+
+### Tunel ssh reverso
+
+```bash
+ssh -R [puerto_local]:[ip_servidor2]:[puerto_remoto] [usuario@ip_servidor_esterno]
+```
+
+### Usar ser salto (jump) ssh
+
+Ejecutar agente ssh
+
+```bash
+eval `ssh-agent`
+```
+
+Cargamos el id_rsa_pub
+
+```bash
+ssh-add .ssh/id_rsa
+```
+
+Ver las llaves cargadas
+
+```bash
+ssh-add -l
+```
+
+Usamos el salto}
+
+```bash
+ssh -J [server1] [server2]
+```
+
+**Nota.-** Deben de estar cargadas las llaves de autentificcacion en los servidores y configurados los servidores en el archivo .ssh/config
+
+### Montar directorio por medio de ssh
+
+```bash
+sshf [usuario@ip_servidor]:[directorio] /mnt/[directorio_montaje]
+```
+
+### Editar archivo via ssh
+
+```bash
+vim scp://[usuario@ip_servidor]/[archivo]
+```
+
+**Nota.-** Para declarar dentro de un directorio se debe de usar `//`
+
+---
+
+## Cambiar ditribucion de teclado
+
+### De forma temporal
+
+```bash
+loadkeys es 
+```
+
+o
+
+```bash
+vim /etc/vconsole.conf
+```
+
+y escribimo s en el mismo
+
+```tex
+KEYMAP=es
 ```
