@@ -19,7 +19,7 @@ scp [usuari]@[servidor]:[directorio_servidor] [direccion_local]
 ```
 
 ```bash
-rsync --partial --progress --rsh:ssh [usuario]@[servidor]:[directorio_servidor] [direccion_local]
+rsync --partial --progress --rsh=ssh [usuario]@[servidor]:[directorio_servidor] [direccion_local]
 ```
 
 ### Remoto - Servidor
@@ -29,7 +29,7 @@ scp [usuari]@[servidor]:[directorio_servidor] [direccion_local]
 ```
 
 ```bash
-rsync --partial --progress --rsh:ssh [usuari]@[servidor]:[directorio_servidor] [direccion_local]
+rsync -uvzhe ssh --progress [usuari]@[servidor]:[directorio_servidor] [direccion_local]
 ```
 
 ---
@@ -282,6 +282,66 @@ vim /etc/vconsole.conf
 
 y escribimo s en el mismo
 
-```tex
+```text
 KEYMAP=es
 ```
+
+---
+
+## Eliminar paquetes obsoletos en Debian, Ubuntu y derivados
+
+Verificaremos si tenemos paquetes obsoletos, con el siguiente comando se listara los paquetes.
+
+```shell-session
+dpkg -l | grep -i ^rc
+```
+
+Con el siguiente comando se listaran los paquetes obsoletos, para luego ser eliminados, esto debe ser ejecutado como root.
+
+```shell-session
+dpkg -l |grep -i ^rc | cut -d " " -f 3 | xargs dpkg --purge
+```
+
+---
+
+## Migrar llaves apt-key a laves gpg
+
+Listamos las llaves apt-key
+
+```bash
+sudo apt-key list
+```
+
+Exportamos la llave apt-key
+
+```bash
+sudo apt-key export BE1229CF | sudo gpg --dearmour -o /usr/share/keyrings/microsoft.gpg
+```
+
+**Nota:** El valor`BE1229CF` se obtiene de los 8 ultimos caracteres del codigo `pub` .
+
+y muestra el mensaje
+
+```shell-session
+Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+```
+
+Ahora Actualizamos el archivo de configuracion del repositorio (ejemplo, `/etc/apt/sources.list.d/microsoft.list`), adicionamos la etiqueta`signed-by` segudo del directorio donde se encuentra la llave `gpg`:
+
+```bash
+deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge/ stable main
+```
+
+Procedemos a actualizar la cache del repositorio.
+
+```bash
+sudo apt update
+```
+
+Eliminar la llave apt-key exportada
+
+```bash
+sudo apt-key del BE1229CF
+```
+
+---
