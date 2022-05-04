@@ -200,10 +200,12 @@ sudo certbot delete --cert-name ejemplo.com
 Generamos el certificado SSL
 
 ```bash
-sudo certbot certonly  --manual-auth-hook --preferred-challenges=dns --email [t.email@] --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.[tu_dominio.com]
+sudo certbot certonly  --manual --preferred-challenges=dns --email [t.email@] --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.[tu_dominio.com]
 ```
 
+```bash
 Los parámetros del comando son los siguientes:
+```
 
 - **certonly:** obtiene o renueva un certificado, pero no lo instala.
 - **manual:** obtiene el certificado de forma interactiva.
