@@ -304,7 +304,7 @@ dpkg -l |grep -i ^rc | cut -d " " -f 3 | xargs dpkg --purge
 
 ---
 
-## Migrar llaves apt-key a laves gpg
+## Migrar llaves apt-key a llaves gpg
 
 Listamos las llaves apt-key
 
