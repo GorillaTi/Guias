@@ -345,3 +345,61 @@ sudo apt-key del BE1229CF
 ```
 
 ---
+
+## Comando Tar
+
+### Archivos .tar.gz:
+
+Comprimir:
+
+```bash
+tar.gz: tar -czvf empaquetado.tar.gz /carpeta/a/empaquetar/
+```
+
+Descomprimir:
+
+```bash
+tar.gz: tar -xzvf archivo.tar.gz
+```
+
+### Archivos .tar:
+
+Empaquetar:
+
+```bash
+tar -cvf paquete.tar /dir/a/comprimir/
+```
+
+Desempaquetar:
+
+```bash
+tar -xvf paquete.tar
+```
+
+### Archivos .gz:
+
+Comprimir:
+
+```bash
+gzip -9 index.php
+```
+
+Descomprimir:
+
+```bash
+gzip -d index.php.gz
+```
+
+### Archivos .zip:
+
+Comprimir:
+
+```bash
+zip archivo.zip carpeta
+```
+
+Descomprimir:
+
+```bas
+unzip archivo.zip
+```
