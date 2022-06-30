@@ -41,6 +41,16 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 * Colocamos  el password para root definido por el encargado de Data Center
 
 * Creamos el usuario sysadmin, registramos su password y le damos privilegios de administrador
+  
+  ## ##  SWAP recomendado
+  
+  | Min | Max | Swap |
+  | --- | --- | ---- |
+  | 0   | 4   | 2    |
+  | 4   | 16  | 4    |
+  | 16  | 64  | 8    |
+  | 64  | 256 | 16   |
+  | 256 | 512 | 32   |
 2. Iniciamos sesión con *root* y verificamos que este corriendo el servicio ssh.
 
 3. Nos conectamos al servidor mediante ssh
