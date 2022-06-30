@@ -400,6 +400,24 @@ zip archivo.zip carpeta
 
 Descomprimir:
 
-```bas
+```bash
 unzip archivo.zip
 ```
+
+---
+
+### Comando hostname
+
+Definiendo en local
+
+```bash
+hostnamectl set-hostname [nombre.host] --static
+```
+
+Definiendo en remoto
+
+```bash
+hostnamectl set-hostname [nombre.host] -H [usuario.server]@[ip.server]
+```
+
+---
