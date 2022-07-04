@@ -4,11 +4,9 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0.0
+Versión: 1.1.0
 
-Nivel: Todos
-
-Área: C.P.D.
+Nivel: Intermedio
 
 Elaborado por: Edmundo Céspedes Ayllón
 
@@ -16,100 +14,117 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ---
 
-1. Actualizamos el sistema operativo
+## Servidor
 
-   ```bash
-   dnf update
-   ```
+Actualizamos el sistema operativo
 
-2. Instalamos los paquetes necesarios
+```bash
+dnf update
+```
 
-   ```bash
-   dnf ins install nfs-utils
-   ```
+Instalamos los paquetes necesarios
 
-3. Procedemos a editar la configuración
+```bash
+dnf ins install nfs-utils
+```
 
-   ```bash
-   vim /etc/idmapd.conf
-   ```
+Procedemos a editar la configuración
 
-4. Insertamos el dominio
+```bash
+vim /etc/idmapd.conf
+```
 
-   ```
-   Domain = nfs.[mi_domiinio]
-   ```
+Insertamos el dominio
 
-5. Creamos los directorios a compartir
+```
+Domain = nfs.[mi_domiinio]
+```
 
-   ```bash
-   mkdir compartido
-   ```
+Creamos los directorios a compartir
 
-6. Configuramos el archivo para los directorios a compartir
+```bash
+mkdir compartido
+```
 
-   ```bash
-   vim /etc/exports
-   ```
+Configuramos el archivo para los directorios a compartir
 
-7. Insertamos la configuración
+```bash
+vim /etc/exports
+```
 
-   ```
-   /home/sysadmin/backup   192.168.200.0/24(rw,async,no_root_squash)
-   ```
+Insertamos la configuración
 
-8. Comprobamos que este correcta la configuración
+```
+/home/sysadmin/backup   192.168.200.0/24(rw,async,no_root_squash)
+```
 
-   ```bash
-   exportfs -rav
-   ```
+Comprobamos que este correcta la configuración
 
-9. Inicializamos el servicio NFS
+```bash
+exportfs -rav
+```
 
-   ```bash
-   systemctl enable --now rpcbind nfs-server
-   ```
+Inicializamos el servicio NFS
 
-10. Habilitar los puertos en el firewall
+```bash
+systemctl enable --now rpcbind nfs-server
+```
 
-    ```bash
-    firewall-cmd --add-service=nfs --permanent
-    firewall-cmd --reload
-    ```
+Habilitar los puertos en el firewall
 
-11. Montando directorios NFS
+```bash
+firewall-cmd --add-service=nfs --permanent
+firewall-cmd --reload
+```
 
-    Creamos Un directorio donde montar el directorio NFS
+## Cliente
 
-    ```bash
-    mkdir compartido
-    ```
+Comprobamos los directorios compartidos por el servidor
 
-    - Temporal
+```bash
+sudo showmount -e [ip_servidor o fqdn_servidor] 
+```
 
-    ```bash
-    sudo mount [ip_servidor_nfs]:[directorio_compartido] [directorio_destino]
-    ```
+Creamos un directorio donde montar el directorio NFS
 
-    - Definitivo
+```bash
+mkdir compartido
+```
 
-      Se edita el archivo `/etc/fstab`
+Damos permisos al directorio crado
 
-    ```bash
-    sudo vim /etc/fstab
-    ```
+```bash
+sudo chown nobody:nogroups [directorio_destino]  
+```
 
-    ​	Insertamos al final del archivo
+- Temporal
 
-    ```
-    
-    ```
+```bash
+sudo mount [ip_servidor_nfs]:[directorio_compartido] [directorio_destino]
+```
 
-12. 
+- Definitivo
 
-13. 
+Se edita el archivo `/etc/fstab`
 
-14. 
+```bash
+sudo vim /etc/fstab
+```
 
-15. 
+Insertamos al final del archivo
 
+```shell-session
+ip_servidr_nfs]:[directorio_compartido] [directorio_destino] nfs rw,async 00 
+```
+
+Montamos los directorios declararos
+
+```bash
+sudo mount -a
+```
+
+Verificamos que los directorios se montaron correctamente
+
+```bash
+df -h
+```
