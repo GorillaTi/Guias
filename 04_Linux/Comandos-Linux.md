@@ -406,7 +406,7 @@ unzip archivo.zip
 
 ---
 
-### Comando hostname
+## Comando hostname
 
 Definiendo en local
 
@@ -418,6 +418,46 @@ Definiendo en remoto
 
 ```bash
 hostnamectl set-hostname [nombre.host] -H [usuario.server]@[ip.server]
+```
+
+---
+
+## Limpiar Cache de DNS
+
+### Flush DNS – Systemd Resolved
+
+Comprobar estado del servicio
+
+```bash
+systemctl status systemd-resolved
+```
+
+Limpiamos la cache
+
+```bash
+sudo systemd-resolve --flush-caches
+```
+
+Reiniciamos el servicio
+
+```bash
+sudo systemctl restart systemd-resolved.service
+```
+
+### Flush DNS – NSCD
+
+Para la mayoría de las distribuciones basadas en RHEL
+
+Verificamos el estado del servicio
+
+```bash
+systemctl status nscd.service
+```
+
+Se reinicia el servicio y de esta manera se vacía la cache
+
+```bash
+sudo systemctl restart nscd.service
 ```
 
 ---
