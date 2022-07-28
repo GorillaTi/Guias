@@ -353,13 +353,13 @@ sudo apt-key del BE1229CF
 Comprimir:
 
 ```bash
-tar.gz: tar -czvf empaquetado.tar.gz /carpeta/a/empaquetar/
+tar -czvf empaquetado.tar.gz /carpeta/a/empaquetar/
 ```
 
 Descomprimir:
 
 ```bash
-tar.gz: tar -xzvf archivo.tar.gz
+tar -xzvf archivo.tar.gz
 ```
 
 ### Archivos .tar:
