@@ -4,7 +4,7 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0.1
+Versión: 1.1.0
 
 Nivel: Todos
 
@@ -73,7 +73,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    sudo firewall-cmd --list-services
    ```
 
-### Instalamos PHP
+### Instalación de PHP
 
 5. Revisamos la versión de PHP en los repositorios
    
@@ -114,7 +114,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    recargamos la configuración del servidor apache2
    
    ```bash
-   sudo systemctl reload hhpd
+   sudo systemctl reload htpd
    ```
    
    para probar que todo esta funcionando nos creamos un archivo de prueba
@@ -148,7 +148,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    la necesaria para lo requerido
    
    ```tex
-   <Directory /var/www/html/ >
+   <Directory /var/www/html/>
        Options Indexes FollowSymLinks MultiViews
        AllowOverride All
        Order allow,deny
@@ -165,7 +165,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    recargamos la configuración del servidor apache2
    
    ```bash
-   sudo systemctl reload hhpd
+   sudo systemctl reload htpd
    ```
    
    creamos una carpeta en la carpeta personal 
@@ -191,39 +191,39 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
    ```bash
    ln -s [origen] [destino]
    ```
-   
-   ## En Debian 10
 
-9. Instalamos y configuramos el servidor conforme a la Guía de Instalación de **Debian 10**
-   
-   ### Instalación de Apache2
+## En Debian 10
 
-10. Actualizamos e instalamos actualizaciones
+Instalamos y configuramos el servidor conforme a la Guía de Instalación de **Debian 10**
+
+### Instalación de Apache2
+
+    Actualizamos e instalamos actualizaciones
     
     ```bash
     sudo apt update && sudo apt dist-upgrade -y
     ```
-
-11. Instalamos apache2
+    
+    Instalamos apache2
     
     ```bash
     sudo apt install apache2 apache2-doc
     ```
-
-12. Configuramos el auto inicio y iniciamos el servicio
+    
+    Configuramos el auto inicio y iniciamos el servicio
     
     ```bash
     sudo systemctl enable --now apache2.service
     sudo systemctl start apache2.service
     ```
-
-13. Revisamos el estado del servicio.
+    
+    Revisamos el estado del servicio.
     
     ```bash
     sudo sytemctl status apache2.service
     ```
-
-14. Revisamos los puertos
+    
+    Revisamos los puertos
     
     ```bash
     sudo ss -tpan
@@ -231,166 +231,167 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ### Configuración de Firewall
 
- Comprobamos el estado de la iptables
+    - Comprobamos el estado de la iptables
+    
+    ```bash
+    sudo iptables -L
+    ```
+    
+    - Habilitamos los puertos
+    
+    ```bash
+    sudo ufw allow ssh
+    sudo ufw allow http
+    sudo ufw allow https
+    sudo ufw allow mysql
+    ```
+    
+    - Para rangos de puertos
+    
+    ```bash
+    sudo ufw allow in 1000:2000/udp
+    ```
+    
+    - Habilitamos el firewall
+    
+    ```bash
+    sudo ufw enable
+    ```
+
+### Instalamos PHP
+
+    - Descargamos Sury PPA for PHP 7.4 usando `wget`
+    
+    ```bash
+    sudo apt -y install lsb-release apt-transport-https ca-certificates wget
+    sudo wget -O /etc/apt/trusted.gpg.d/php.gpg     https://packages.sury.org/php/apt.gpg
+    ```
+    
+    - adicionamos el APP descargada al servidor
+    
+    ```bash
+    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee     /etc/apt/sources.list.d/php.list
+    ```
+    
+    - Actualizamos la lista de repositorios
+    
+    ```bash
+    sudo apt update
+    ```
+    
+    - Instalamos php
+    
+    ```bash
+    sudo apt install php7.4
+    ```
+    
+    Verificamos la versión instalada
+    
+    ```bash
+    php -v
+    ```
+
+Instalamos exenciones básicas de PHP
+
+    ```bash
+    sudo apt install php7.4-    {common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,bcmath} -y
+    ```
+
+## Configuraciones de seguridad de Apache2
+
+- ubicarse en la carpeta de configuración
 
 ```bash
-sudo iptables -L
+cd /etc/apache2/conf-available/
 ```
 
- Habilitamos los puertos
+- Respaldo de seguridad de los archivos charset.conf y security.con
 
 ```bash
-sudo ufw allow ssh
-sudo ufw allow http
-sudo ufw allow https
-sudo ufw allow mysql
+sudo cp -rpfv charset.conf charset.conf.orig
+sudo cp -rpfv security.conf security.conf.orig
 ```
 
-Para rangos de puertos
+- Modificamos el archivo charset.conf 
 
 ```bash
-sudo ufw allow in 1000:2000/udp
+sudo nano charset.conf
 ```
 
-Habilitamos el firewall
+- des cometamos la línea
+
+```output
+AddDefaultCharset UTF-8
+```
+
+- Modificamos el archivo security.conf
 
 ```bash
-sudo ufw enable
+sudo nano security.conf
 ```
 
-### Configuraciones de seguridad de Apache2
+- des comentamos la línea
 
-* ubicarse en la carpeta de configuración
-  
-  ```bash
-  cd /etc/apache2/conf-available/
-  ```
+```output
+ServerSignature Off
+```
 
-* Respaldo de seguridad de los archivos charset.conf y security.con
-  
-  ```bash
-  sudo cp -rpfv charset.conf charset.conf.orig
-  sudo cp -rpfv security.conf security.conf.orig
-  ```
+- cometamos la linea
 
-* Modificamos el archivo charset.conf 
-  
-  ```bash
-  sudo nano charset.conf
-  ```
-  
-  des cometamos la línea
-  
-  ```output
-  AddDefaultCharset UTF-8
-  ```
+```output
+#ServerSignature On 
+```
 
-* Modificamos el archivo security.conf
-  
-  ```bash
-  sudo nano security.conf
-  ```
-  
-  des comentamos la línea
-  
-  ```output
-  ServerSignature Off
-  ```
-  
-  y cometamos la linea
-  
-  ```output
-  #ServerSignature On 
-  ```
+- nos ubicamos en
 
-* nos ubicamos en
-  
-  ```bash
-  cd /etc/apache2/
-  ```
+```bash
+cd /etc/apache2/
+```
 
-* Respaldamos el archivo ports.conf
-  
-  ```bash
-  sudo cp -rpfv ports.conf ports.conf.orig
-  ```
+- Respaldamos el archivo ports.conf
 
-* editamos el archivo ports.conf
-  
-  ```bash
-  sudo nano ports.conf
-  ```
-  
-  editamos la linea
-  
-  ```output
-  Listen 192.168.0.95:80
-  ```
+```bash
+sudo cp -rpfv ports.conf ports.conf.orig
+```
 
-* verificamos la configuraciones realizadas
-  
-  ```bash
-  sudo apache2ctl -t
-  ```
+- Editamos el archivo ports.conf
 
-* reiniciamos el servicio de Apache2
-  
-  ```bash
-  sudo systemctl restart apache2.service
-  ```
+```bash
+sudo nano ports.conf
+```
 
-* Revisamos los puertos
-  
-  ```bash
-  sudo ss -tpan
-  ```
-  
-  ```output
-  sysadmin@app01:/etc/apache2$ ss -tpan
-  State       Recv-Q      Send-Q           Local Address:Port              Peer Address:Port       
-  LISTEN      0           128              192.168.14.95:80                     0.0.0.0:*          
-  LISTEN      0           128                    0.0.0.0:22                     0.0.0.0:*          
-  ESTAB       0           0                192.168.14.95:22              192.168.14.254:49748      
-  LISTEN      0           128                       [::]:22                        [::]:* 
-  ```
-  
-  ### Instalamos PHP
-5. Descargamos Sury PPA for PHP 7.4 usando `wget`
-   
-   ```bash
-   sudo apt -y install lsb-release apt-transport-https ca-certificates wget
-   sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-   ```
-   
-   adicionamos el APP descargada al servidor
-   
-   ```bash
-   echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
-   ```
+- Editamos la linea
 
-6. Actualizamos la lista de repositorios
-   
-   ```bash
-   sudo apt update
-   ```
+```output
+Listen 192.168.0.95:80
+```
 
-7. Instalamos php
-   
-   ```bash
-   sudo apt install php7.4
-   ```
+- Verificamos la configuraciones realizadas
 
-8. Verificamos la versión instalada
-   
-   ```bash
-   php -v
-   ```
+```bash
+sudo apache2ctl -t
+```
 
-9. Instalamos exenciones básicas de PHP
-   
-   ```bash
-   sudo apt install php7.4-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,bcmath} -y
-   ```
+- Reiniciamos el servicio de Apache2
+
+```bash
+sudo systemctl restart apache2.service
+```
+
+- Revisamos los puertos
+
+```bash
+sudo ss -tpan
+```
+
+```output
+sysadmin@app01:/etc/apache2$ ss -tpan
+State       Recv-Q      Send-Q           Local Address:Port              Peer Address:Port       
+LISTEN      0           128              192.168.14.95:80                     0.0.0.0:*          
+LISTEN      0           128                    0.0.0.0:22                     0.0.0.0:*          
+ESTAB       0           0                192.168.14.95:22              192.168.14.254:49748      
+LISTEN      0           128                       [::]:22                        [::]:* 
+```
 
 ## Prueba de Funcionamiento de la instalación de php
 
@@ -489,9 +490,9 @@ sudo ufw enable
   * http://192.168.0.95/test
   * http://[tu_dominio]/test
 
-## Instalación de certificado SSL
+## Certificado SSL
 
-Instalamos certbot
+### Instalamos certbot
 
 apache
 
@@ -510,12 +511,7 @@ Iniciamos la instalación y auto configuración del certificado
 Sin configura apache o nginx
 
 ```bash
-sudo certbot certonly \
-    -d tudominio.com \
-    --noninteractive \
-    --standalone \
-    --agree-tos \
-    --register-unsafely-without-email
+sudo certbot certonly -d tudominio.com --noninteractive --standalone --agree-tos --register-unsafely-without-email
 ```
 
 configurando Apache
@@ -556,13 +552,32 @@ IMPORTANT NOTES:
    Donating to EFF:                    https://eff.org/donate-le
 ```
 
-Configurando VirtualHost  Manual
+### Eliminar certificado SSL
 
-Apache
+```bash
+sudo certbot delete
+```
+
+elijes el dominio al cual pertenece el certificado
+
+```bash
+1 dominio1.com
+2 dominio2.com
+```
+
+o
+
+```bash
+sudo certbot delete --cert-name ejemplo.com
+```
+
+## Configurando VirtualHost  Manual
+
+### Apache
 
 000-default.conf
 
-```output
+```shell-session
 <VirtualHost *:80>
         #ServerName www.example.com
         #ServerAdmin webmaster@localhost
@@ -583,7 +598,7 @@ Apache
 
  000-default-le-ssl.conf
 
-```output
+```shell-session
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
         ServerAdmin [tucorreo]@[tudominio.com]
@@ -604,9 +619,9 @@ Apache
 </IfModule>
 ```
 
-Nginx
+### Nginx
 
-```
+```shell-session
 server {
         listen 80 default_server;
         return 301 https://$host$request_uri;
@@ -636,7 +651,7 @@ Verificamos el estado del VH
 sudo apachectl -S
 ```
 
-```otput
+```shell-session
 VirtualHost configuration:
 *:443                  [tudominio.com] (/etc/apache2/sites-enabled/000-default-le-ssl.conf:2)
 *:80                   [tudominio.com] (/etc/apache2/sites-enabled/000-default.conf:1)
@@ -655,23 +670,4 @@ Define: DUMP_VHOSTS
 Define: DUMP_RUN_CFG
 User: name="www-data" id=33
 Group: name="www-data" id=33
-```
-
-Eliminar certificado SSL
-
-```bash
-sudo certbot delete
-```
-
-elijes el dominio al cual pertenece el certificado
-
-```bash
-1 dominio1.com
-2 dominio2.com
-```
-
-o
-
-```bash
-sudo certbot delete --cert-name ejemplo.com
 ```
