@@ -81,7 +81,7 @@ sudo - oradev
    Verificamos el estado del servivcio
    
    ```bash
-   emctl status iasconsole
+   emctl stop iasconsole
    ```
 
 2. Bajamos los servicios de aplicaciones
