@@ -671,3 +671,11 @@ Define: DUMP_RUN_CFG
 User: name="www-data" id=33
 Group: name="www-data" id=33
 ```
+
+---
+
+## Hardening
+
+### Restricción de Acceso a Configuración .git
+
+  
