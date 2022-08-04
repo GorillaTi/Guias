@@ -29,17 +29,18 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM con tipo de partición XFS.
 
-| Tamaño                            | Tipo     | Punto de montaje |
-| --------------------------------- | -------- | ---------------- |
-| 1024 MB                           | Primaria | /boot            |
-| 2048 MB                           | LVM      | swap             |
-| min 15 GB<br/>o  espacio restante | LVM      | /                |
-| min 10 GB                         | LVM      | /home            |
-| min 1 GB                          | LVM      | /tmp             |
-| min 10 GB                         | LVM      | /var             |
-| min 1GB                           | LVM      | /var/log         |
-| min 1GB                           | LVM      | /var/log/audit   |
-| min 1GB                           | LVM      | /var/tmp         |
+| Tamaño                                                  | Tipo     | Punto de montaje |
+| ------------------------------------------------------- | -------- | ---------------- |
+| 512MB                                                   | ext4     | EFI              |
+| 250 MB - 1024 MB                                        | Primaria | /boot            |
+| 2048 MB                                                 | LVM      | swap             |
+| 3 GB Minina 5 GB Completa<br/>15 GB o  espacio restante | LVM      | /                |
+| min 10 GB                                               | LVM      | /home            |
+| min 1 GB                                                | LVM      | /tmp             |
+| min 10 GB                                               | LVM      | /var             |
+| min 1GB                                                 | LVM      | /var/log         |
+| min 1GB                                                 | LVM      | /var/log/audit   |
+| min 1GB                                                 | LVM      | /var/tmp         |
 
 > **Nota.-** partición basa en un HDD de 40 GB
 
@@ -49,13 +50,13 @@ Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM 
 
 ## SWAP recomendado
 
-| Min | Max | Swap |
-| --- | --- | ---- |
-| 0   | 4   | 2    |
-| 4   | 16  | 4    |
-| 16  | 64  | 8    |
-| 64  | 256 | 16   |
-| 256 | 512 | 32   |
+| RAM Min. | RAM Max. | Swap  |
+| -------- | -------- | ----- |
+| -        | 4 GB     | 2 GB  |
+| 4 GB     | 16 GB    | 4 GB  |
+| 16 GB    | 64 GB    | 8 GB  |
+| 64 GB    | 256 GB   | 16 GB |
+| 256 GB   | 512 GB   | 32 GB |
 
 2. Iniciamos sesión con *root* y verificamos que este corriendo el servicio ssh.
 
@@ -71,7 +72,7 @@ Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM 
    systemctl enable --now cockpit.socket
    ```
 
-5. Instalamos el repositorio de fedora
+5. Instalamos el repositorio de Fedora
    
    ```bash
    sudo dnf install -y epel-release
