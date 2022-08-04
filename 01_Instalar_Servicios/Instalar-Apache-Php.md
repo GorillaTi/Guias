@@ -678,4 +678,45 @@ Group: name="www-data" id=33
 
 ### Restricción de Acceso a Configuración .git
 
-  
+Editar el archivo de configuración
+
+- Debian
+
+```bash
+sudo vim /etc/apache2/apache2.conf
+```
+
+- CentOS
+
+```bash
+sudo vim /etc/httpd/httpd.conf
+```
+
+Insertamos el código para la restricción
+
+- Denegando el acceso al directorio 
+
+Opción 1
+
+```shell-session
+<Directory ~ “\.git”>
+    Order allow,deny
+    Deny from all
+</Directory>
+```
+
+Opción 2
+
+```shell-session
+<DirectoryMatch "^/.*/\.git/">
+  Deny from all
+</Directorymatch>
+```
+
+- Denegar el acceso por medios de código 404
+
+```shell-session
+RedirectMatch 404 /\.git
+```
+
+> **Nota.-** esto evita dar mayor información al atacante de la existencia del directorio de configuración .git
