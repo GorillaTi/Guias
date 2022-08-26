@@ -4,11 +4,11 @@ GUÍA DE:
 
 ## ACERCA DE:
 
-Versión: 1.1.1
+Versión: 1.1.2
 
 Nivel: Avanzado
 
-Área: CPD
+Área: C.P.D.
 
 Elaborado por: Edmundo Céspedes Ayllón
 
@@ -78,7 +78,7 @@ sudo - oradev
    emctl start iasconsole
    ```
    
-   Verificamos el estado del servivcio
+   Verificamos el estado del servicio
    
    ```bash
    emctl stop iasconsole
@@ -138,6 +138,14 @@ su - oracle
    lsnrctl status
    ```
 
+En el caso de contar con mas de una instancia
+
+```bash
+export ORACLE_SID=PROD
+```
+
+Posterior a ello se sigue desde al paso `1.`  
+
 #### Bajar servicio de la base de datos
 
 1. Servicios de escucha de oracle
@@ -164,6 +172,12 @@ su - oracle
    
    ```bash
    shutdown immediate;
+   ```
+
+4. salimos del gestor de base de datos
+   
+   ```sql
+   exit;
    ```
 
 ## Apagamos el servidor
