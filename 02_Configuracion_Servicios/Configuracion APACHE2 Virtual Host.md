@@ -4,7 +4,7 @@ Gia de:
 
 ## ACERCA DE:
 
-Versión: 1.0.1
+Versión: 1.2.0
 
 Nivel: Medio
 
@@ -121,7 +121,7 @@ Se debe de recargar el servicio de apache2
 sudo sevice apache2 reload
 ```
 
-### Para deshabilitar el sitio
+### Para des-habilitar el sitio
 
 ```bash
 sudo a2dissite sitio.ejemplo.conf
@@ -131,6 +131,12 @@ Se debe de recargar el servicio de apache2
 
 ```bash
 sudo sevice apache2 reload
+```
+
+o
+
+```bash
+sudo systemctl reload apache2.service
 ```
 
 ## Ver host virtuales activos
@@ -172,4 +178,126 @@ Group: name="www-data" id=33
 
 ```bash
 tail -f /var/log/apache2/error_log
+```
+
+## Habilitar Modulo rewrite
+
+Habilitar modulo `rewrite`
+
+```bash
+sudo a2enmod rewrite
+```
+
+Verificando que este habilitado
+
+```bash
+sudo apache2ctl -M
+```
+
+### Habilitar AllowOverride en:
+
+#### General
+
+Editar el archivo `apache2.conf`
+
+```bash
+sudo vim /etc/apache2/apache2.conf
+```
+
+Modificamos la lineas de `AllowOverride`
+
+```shell-session
+AllowOverride All
+```
+
+### Vhost
+
+Editar el archivo vhost en especifico
+
+```bash
+sudo vim /etc/apache2/site-available/[vhost_a_modificar]
+```
+
+Insertamos las siguientes configuraciones
+
+```shell-session
+<IfModule mod_ssl.c>
+<VirtualHost [ip_host]:443>
+    ServerName [name_site]
+    ServerAdmin [email_admin]
+    ServerAlias [alias_name_site]
+    DocumentRoot /var/www/html/website
+    DirectoryIndex index.html index.php
+    
+    ErrorLog /var/log/apache2/[name_site].log
+    CustomLog /var/log/apache2/[name_site].access.log combined
+
+    RewriteEngine on
+    #redirect https non-www to https www
+    #RewriteCond %{SERVER_NAME} !^www\.(.*)$ [NC]
+    #RewriteRule ^ https://www.%{SERVER_NAME}%{REQUEST_URI} [END,QSA,R=permanent]
+
+    SSLEngine on
+    Include /etc/letsencrypt/options-ssl-apache.conf
+    SSLCertificateFile /etc/letsencrypt/live/[name_site]/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/[name_site]/privkey.pem
+    # Config Acces Laravel
+    <Directory "/var/www/html/[directorio]/">
+        Options +Indexes +FollowSymLinks
+        DirectoryIndex index.php index.html
+        AllowOverride all
+        Require all granted
+             <IfModule mod_rewrite.c>
+                 <IfModule mod_negotiation.c>
+                     Options -MultiViews
+                 </IfModule>
+
+                 RewriteEngine On
+                 # Handle Authorization Header
+                 #RewriteCond %{HTTP:Authorization} .
+                 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+                 # Handle Front Controller...
+                 RewriteBase /portal/
+                 RewriteRule ^index\.php$ - [L]
+                 RewriteCond %{REQUEST_FILENAME} !-f
+                 RewriteCond %{REQUEST_FILENAME} !-d
+                 RewriteRule ./portal/index.php [L]
+            </IfModule>
+    </Directory>
+</VirtualHost>
+</IfModule>
+```
+
+Creamos el archivo `.htaccess` en el directorio raíz de la aplicación
+
+```bash
+sudo vim /var/www/html/[directorio]/.htaccess
+```
+
+Insertamos el siguiente código
+
+```shell-session
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /portal/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /portal/index.php [L]
+</IfModule>
+```
+
+> *Nota.-* Configuración recomendada par WordPress y URLs amigables.
+
+Reiniciar servicio `apache`
+
+```bash
+sudo systemctl restart apache2.service
+```
+
+o
+
+```bash
+sudo apache2ctl restart
 ```
