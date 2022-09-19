@@ -461,3 +461,19 @@ sudo systemctl restart nscd.service
 ```
 
 ---
+
+## Error initramfs Ubuntu
+
+Comandos para reparar el error initramfs
+
+```bash
+fsck -f /dev/sdaX
+```
+
+o
+
+```bash
+fsck -c -y /dev/sdaX
+```
+
+> *Nota.-* encuentra la ruta del directorio destino en la linea `The root filesystem on /dev/sdaX needs a manual fsck`
