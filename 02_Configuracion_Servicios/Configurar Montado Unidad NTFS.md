@@ -60,3 +60,9 @@ Incluimos el nuevo dispositivo a montar
 ```shell-session
 UUID=6F1AA61039A123AB /home/user/test   ntfs-3g  defaults,permissions 0 0
 ```
+
+o
+
+```shell-session
+
+```
