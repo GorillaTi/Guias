@@ -1,10 +1,10 @@
-Gia de:
+Guía de:
 
-# Configuración de VirtualHost
+# Configuración de Virtual Host
 
 ## ACERCA DE:
 
-Versión: 1.2.0
+Versión: 1.2.2
 
 Nivel: Medio
 
@@ -151,13 +151,13 @@ Ejemplo:
 AH00112: Warning: DocumentRoot [/var/www/html/laravel-prueba] does not exist
 VirtualHost configuration:
 *:80                   is a NameVirtualHost
-         default server mensaje.sucre.bo.local (/etc/apache2/sites-enabled/000-default.conf:1)
-         port 80 namevhost mensaje.sucre.bo.local (/etc/apache2/sites-enabled/000-default.conf:1)
-         port 80 namevhost credenciales.sucre.bo.local (/etc/apache2/sites-enabled/credenciales.conf:1)
-                 alias credenciales.sucre.bo.local
-         port 80 namevhost registro.sucre.bo.local (/etc/apache2/sites-enabled/registro.conf:1)
-                 alias registro.sucre.bo.local
-         port 80 namevhost test.gams.bo (/etc/apache2/sites-enabled/test.conf:1)
+         default server [url_sitio].local (/etc/apache2/sites-enabled/000-default.conf:1)
+         port 80 namevhost [url_sitio].local (/etc/apache2/sites-enabled/000-default.conf:1)
+         port 80 namevhost [url_sitio].local (/etc/apache2/sites-enabled/credenciales.conf:1)
+                 alias [url_sitio].local
+         port 80 namevhost [url_sitio].local (/etc/apache2/sites-enabled/registro.conf:1)
+                 [url_sitio].local
+         port 80 namevhost [url_sitio] (/etc/apache2/sites-enabled/[url_sitio].conf:1)
 ServerRoot: "/etc/apache2"
 Main DocumentRoot: "/var/www/html"
 Main ErrorLog: "/var/log/apache2/error.log"
@@ -210,7 +210,7 @@ Modificamos la lineas de `AllowOverride`
 AllowOverride All
 ```
 
-### Vhost
+### VHost
 
 Editar el archivo vhost en especifico
 
@@ -226,9 +226,9 @@ Insertamos las siguientes configuraciones
     ServerName [name_site]
     ServerAdmin [email_admin]
     ServerAlias [alias_name_site]
-    DocumentRoot /var/www/html/website
+    DocumentRoot /var/www/html/[dir_public]
     DirectoryIndex index.html index.php
-    
+
     ErrorLog /var/log/apache2/[name_site].log
     CustomLog /var/log/apache2/[name_site].access.log combined
 
@@ -241,8 +241,9 @@ Insertamos las siguientes configuraciones
     Include /etc/letsencrypt/options-ssl-apache.conf
     SSLCertificateFile /etc/letsencrypt/live/[name_site]/fullchain.pem
     SSLCertificateKeyFile /etc/letsencrypt/live/[name_site]/privkey.pem
+    
     # Config Acces Laravel
-    <Directory "/var/www/html/[directorio]/">
+    <Directory "/var/www/html/[dir_public]/">
         Options +Indexes +FollowSymLinks
         DirectoryIndex index.php index.html
         AllowOverride all
@@ -301,3 +302,157 @@ o
 ```bash
 sudo apache2ctl restart
 ```
+
+## Configurar VHost para Proxy Reverso
+
+Crear el archivo de configuración del vhost  para el puerto 80
+
+- Debian
+
+```bash
+sudo vim /etc/apache2/site-availeable/[nombre_host]
+```
+
+- RHEL
+
+```bash
+sudo vim /etc/httpd/conf.d/[nombre_archivo]
+```
+
+Insertamos la siguiente configuración 
+
+```shell-session
+<VirtualHost *:80>
+        ServerAdmin [email_admin_site]
+        ServerName [ip_servidor]
+        ServerAlias [ip_servidor]
+
+        RewriteEngine On
+
+        DocumentRoot "/var/www/html/[dir_app]"
+        <Directory "/var/www/html/sigec/[dir_app]">
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+                Require all granted
+        </Directory>
+</VirtualHost>
+```
+
+Recargamos el servicio
+
+- Debian
+
+```bash
+sudo systemctl restart apache2.service
+```
+
+- RHEL
+
+```bash
+sudo systemctl restart httpd.service
+```
+
+## Asignación de Puertos
+
+Editamos el archivo `ports.conf` o `httpd.conf`
+
+Debian
+
+```bash
+nano /etc/apache2/ports.conf
+```
+
+RHEL
+
+```bash
+nano /etc/httpd/conf/httpd.conf
+```
+
+Incluimos la linea siguiente
+
+```bash
+Listen [numero_puerto]
+```
+
+Editamos o creamos el archivo VHost
+
+Debian
+
+```bash
+sudo vim /etc/apache2/site-avaliable/[vhost_arch]
+```
+
+RHEL
+
+```bash
+sudo vim /etc/httpd/conf.d/[vhost_arch]
+```
+
+Insertamos la siguiente configuración
+
+```shell-session
+<VirtualHost *:[numero_puerto]
+    ServerAdmin .......
+</VirtualHost> 
+```
+
+### Reiniciamos el servicio
+
+Debian
+
+```bash
+sudo systemctl restart apache2
+```
+
+RHEL
+
+```bash
+sudo systemctl restart httpd
+```
+
+### Verificamos el estado de los puertos
+
+```bash
+sudo netstat -tlpn| grep apache
+```
+
+o
+
+```bash
+sudo ss -tlpn| grep apache
+```
+
+### Probar su funcionamiento usamos un navegador web
+
+```textile
+http://[ip_serv]:[numero_puerto]
+```
+
+### Habilitar puertos en Firewall y SELinux
+
+Instalamos el gestor interactivo de SELinux
+
+```bash
+sudo dnf install policycoreutils
+```
+
+Habilitamos la política para el numero de Puerto
+
+```bash
+sudo semanage port -a -t http_port_t -p tcp [numero_puerto]
+sudo semanage port -m -t http_port_t -p tcp [numero_puerto]
+```
+
+> **Nota.-** En caso del problemas con `semanager`
+> 
+> Instalar la alternativa
+> 
+> ```bash
+> sudo dnf install policycoreutils-python
+> ```
+
+[Reiniciamos el Servicio](/Guias/02_Configuracion_Servicios/Configuracion APACHE2 Virtual Host###Reiniciamos el servicio)
+
+Verificamos el Estado de los puertos del Servicio
