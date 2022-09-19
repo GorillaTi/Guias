@@ -381,16 +381,28 @@ sudo systemctl restart apache2.service
 - Revisamos los puertos
 
 ```bash
-sudo ss -tpan
+sudo ss -tpan | grep apache
 ```
 
-```output
+```sh-session
 sysadmin@app01:/etc/apache2$ ss -tpan
 State       Recv-Q      Send-Q           Local Address:Port              Peer Address:Port       
 LISTEN      0           128              192.168.14.95:80                     0.0.0.0:*          
 LISTEN      0           128                    0.0.0.0:22                     0.0.0.0:*          
 ESTAB       0           0                192.168.14.95:22              192.168.14.254:49748      
 LISTEN      0           128                       [::]:22                        [::]:* 
+```
+
+o
+
+```bash
+sudo netstat -tlpn| grep apache
+```
+
+```shell-session
+sysadmin@app02:~$ sudo netstat -tlpn | grep apache
+tcp6       0      0 :::80                   :::*                    LISTEN      41521/apache2
+tcp6       0      0 :::8081                 :::*                    LISTEN      41521/apache2
 ```
 
 ## Prueba de Funcionamiento de la instalación de php
@@ -645,7 +657,7 @@ server {
         }
 ```
 
-Verificamos el estado del VH
+Verificamos el estado del VHost
 
 ```bash
 sudo apachectl -S
