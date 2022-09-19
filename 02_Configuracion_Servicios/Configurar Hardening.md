@@ -83,17 +83,17 @@ ssh-keygen
 
 Se tiene dos formas de enviar la clave publica al servidor
 
-* Opción 1
-  
-  ```bash
-  ssh-copy-id [ususario_servidor]@[ip_servidor]
-  ```
+- Opción 1
 
-* Opción 2
-  
-  ```bash
-  cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >>  ~/.ssh/authorized_keys"
-  ```
+```bash
+ssh-copy-id [ususario_servidor]@[ip_servidor]
+```
+
+- Opción 2
+
+```bash
+cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >>  ~/.ssh/authorized_keys"
+```
 
 ### 2. Cambio de puerto por defecto
 
@@ -249,7 +249,21 @@ De forma predeterminada, los usuarios pueden navegar por los directorios  del se
 
 Esta configuración se la mostraremos próximamente en un nuevo artículo.
 
-### 18. Comprobación de configuración
+### 18. Editar el banner de Ingreso
+
+```bash
+sudo vim /etc/issue.net
+```
+
+> **Nota.-** Por temas legales se recomienda aclara que el servidor es privado
+
+Habilitamos el `Banner` en `/etc/ssh/sshd_config` 
+
+```bash
+Banner /etc/issue.net
+```
+
+### 19. Comprobación de configuración
 
 Para comprobar el archivo de configuración y detectar cualquier error antes de reiniciar SSHD, ejecute:
 
@@ -269,10 +283,38 @@ o
 systemctl restart sshd
 ```
 
-**TIP** es importante tener en cuenta que se puede limitar el acceso a este servicio solo a la LAN de la organización o a través de una VPN  para casos que se requiera un acceso externo, las redes mas utilizadas par una LAN son:
+> **Nota.-** es importante tener en cuenta que se puede limitar el acceso a este servicio solo a la LAN de la organización o a través de una VPN  para casos que se requiera un acceso externo, las redes mas utilizadas par una LAN son:
 
 ```conf
 192.168.0.0/16
 10.0.0.0/8
 172.16.0.0/12
+```
+
+### 20. Configurando SELinux
+
+Listamos los protocolo
+
+```bash
+sudo semanage port -l | grep ssh 
+```
+
+Habilitando Puerto
+
+```bash
+sudo semanage port -a -t ssh_port_t -p tcp [port]
+```
+
+Reiniciamos el servicio
+
+### 21. Configurando Firewall
+
+```bash
+sudo firewall-cmd --permanent --zone=public --add-port=[port]/tcp
+```
+
+Reiniciamos el Firewall
+
+```bash
+sudo firewall-cmd --reload
 ```
