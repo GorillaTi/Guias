@@ -4,7 +4,7 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0.0
+Versión: 1.2.0
 
 Nivel: Medio
 
@@ -17,6 +17,8 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 ---
 
 ## Instalación de Certbot
+
+### Instalación por Repositorio (no tiene la ultima versión)
 
 Instalamos certbot
 
@@ -40,6 +42,64 @@ Verificamos la instalacion
 
 ```bash
 sudo cerbot --version
+```
+
+### Instalación por PIP
+
+Instalación de dependencias
+
+Debian/Ubuntu
+
+```bash
+sudo apt install python3 python3-venv libaugeas0
+```
+
+RHEL/Fedora/CentOS
+
+```bash
+sudo dnf install python3 augeas-libs
+```
+
+Eliminando posibles instalaciones de Certbot
+
+Debian/Ubuntu
+
+```bash
+sudo apt-get remove certbot
+```
+
+RHEL/Fedora/CentOS
+
+```bash
+sudo dnf remove 
+```
+
+Configurando Python virtual environment
+
+```bash
+sudo python3 -m venv /opt/certbot/
+```
+
+```bash
+sudo /opt/certbot/bin/pip install --upgrade pip
+```
+
+Instalar Certbot
+
+```bash
+sudo /opt/certbot/bin/pip install certbot
+```
+
+Preparacion del comando Certbot
+
+```bash
+sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot
+```
+
+### Actualiazacion
+
+```bash
+sudo /opt/certbot/bin/pip install --upgrade certbot
 ```
 
 ## Certificado SSL mediante Dominio
@@ -348,4 +408,10 @@ Nginx
 
 ```
 00 2,14 * * * /usr/bin/certbot renew --quiet --post-hook "/bin/systemctl restart nginx.service"
+```
+
+o
+
+```bash
+echo "0 0,12 * * * root /opt/certbot/bin/python -c 'import random; import time; time.sleep(random.random() * 3600)' && sudo certbot renew -q" | sudo tee -a /etc/crontab > /dev/null
 ```
