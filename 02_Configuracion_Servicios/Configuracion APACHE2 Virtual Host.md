@@ -241,7 +241,7 @@ Insertamos las siguientes configuraciones
     Include /etc/letsencrypt/options-ssl-apache.conf
     SSLCertificateFile /etc/letsencrypt/live/[name_site]/fullchain.pem
     SSLCertificateKeyFile /etc/letsencrypt/live/[name_site]/privkey.pem
-    
+
     # Config Acces Laravel
     <Directory "/var/www/html/[dir_public]/">
         Options +Indexes +FollowSymLinks
@@ -393,9 +393,23 @@ sudo vim /etc/httpd/conf.d/[vhost_arch]
 Insertamos la siguiente configuración
 
 ```shell-session
-<VirtualHost *:[numero_puerto]
-    ServerAdmin .......
-</VirtualHost> 
+<VirtualHost *:[numero_puerto]>
+        ServerAdmin [mail_admin]
+        ServerName [ip_servidor]
+        ServerAlias [ip_servidor]
+
+        RewriteEngine On
+
+        DocumentRoot "/var/www/html/[dir_app]"
+        <Directory "/var/www/html/[dir_app]">
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+                Require all granted
+        </Directory>
+</VirtualHost>
+
 ```
 
 ### Reiniciamos el servicio
