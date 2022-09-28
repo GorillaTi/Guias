@@ -2,7 +2,7 @@ Guía de :
 
 # Instalación de Zimbra OSE
 
-Versión 1.1.2
+Versión 2.0.1
 
 Nivel: Avanzado
 
@@ -31,7 +31,7 @@ Nota: con 200 MB por usuario como mínimo tomando en cuanta la calidad de servic
 
 ### Avanzado
 
-Para evitar problemas de llenado en el directorio /var/log deberemos realizar un swaoparticionamiento  como el siguiente:
+Para evitar problemas de llenado en el directorio /var/log deberemos realizar un particionamiento  como el siguiente:
 
 | P.M.  | Tipo     | Formato | Min    | Obs.                                |
 |:-----:|:--------:|:-------:|:------:|:-----------------------------------:|
@@ -209,11 +209,13 @@ echo "nameserver [ip.servidor.dns] >> resolv.conf
 
 ### Pruebas de Funcionamiento de DNS
 
-Probamos la resolución con dig y mx
+Probamos la resolución con dig sobre mx
+
+```bash
+dig mx [dominio]
+```
 
 ```shell-session
-dig mx [dominio]
-
 ; <<>> DiG 9.11.3-1ubuntu1.9-Ubuntu <<>> mx [dominio]
 ;; global options: +cmd
 ;; Got answer:
@@ -234,11 +236,19 @@ dig mx [dominio]
 ;; MSG SIZE  rcvd: 65<code></code>
 ```
 
-Probamos la resolución con dig y a
+o
+
+```bash
+dig MX ecim.co.cu +short
+```
+
+Probamos la resolución con dig sobre a
+
+```bash
+dig [fqdm.dominio]
+```
 
 ```shell-session
-dig [fqdm.dominio]
-
 ; <<>> DiG 9.11.3-1ubuntu1.9-Ubuntu <<>> [fqdm.dominio]
 ;; global options: +cmd
 ;; Got answer:
@@ -259,7 +269,13 @@ dig [fqdm.dominio]
 ;; MSG SIZE  rcvd: 65<code></code>
 ```
 
-### Configurando nombre del Hostname y Hosts
+o
+
+```bash
+dig A mta.ecim.co.cu +short
+```
+
+## Configurando nombre del Hostname y Hosts
 
 #### Manual
 
@@ -285,8 +301,10 @@ Definimos los siguientes parámetros
 
 ```shell-session
 127.0.0.1 localhost
-[ip.servidor]    [fqdn] [hostname]
+[ip.servidor]    [fqdn.servidor] [hostname]
 ```
+
+> **Nota.-** deshabilitamos comentando las resoluciones por IP6 por que estas generan problemas en la instalación.
 
 ### Por Comando
 
@@ -299,7 +317,7 @@ hostnamectl
 Configuramos los cambios del hostname
 
 ```bash
-hostnamectl set-hostname geeksforgeeks --static
+sudo hostnamectl set-hostname [fqdn.servidor] --static
 ```
 
 Reiniciamos el Servidor
@@ -308,7 +326,91 @@ Reiniciamos el Servidor
 sudo reboot
 ```
 
-### ## Instalando Zimbra Collaboration OSE
+## Pre-requisitos
+
+### Ubuntu/Debian
+
+No es necesario la instalación de paquetes adicionales
+
+### RHEL/CentOS/AlmaLinux/RockyLinux
+
+#### Deshabilitamos SELinux
+
+```bash
+sudo vim /etc/sysconfig/selinux
+```
+
+Cambiamos el estado
+
+```shell-session
+disabled
+```
+
+Reinicimos el servidor
+
+```bash
+sudo reboot
+```
+
+#### Firewall
+
+Detenemos el Servicio
+
+```bash
+sudo systemctl stop firewalld
+```
+
+Deshabilitamos el Servicio
+
+```bash
+sudo systemctl disable firewalld
+```
+
+#### Habilitando repositorios adicionales
+
+Instalamos dnf plugins
+
+```bash
+sudo install dnf-plugins-core
+```
+
+Instalamos repositorio epel
+
+```bash
+sudo dnf install epel-release dnf-utils
+```
+
+o
+
+```bash
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+```
+
+Habilitamos el repositorio
+
+```bash
+sudo dnf config-manager --enable epel
+```
+
+Repositorio PowerTool
+
+```bash
+sudo dnf config-manager --set-enabled powertools
+```
+
+Comprobando los repostorios
+
+```bash
+sudo dnf repolist
+```
+
+#### Instalando paquetes necesarios
+
+```bash
+sudo dnf -y install bash-completion vim curl wget unzip openssh-clients telnet net-tools sysstat perl-core libaio nmap-ncat libstdc++.so.6 bind-utils tar
+```
+
+## Instalando Zimbra Collaboration OSE
 
 Creamos el directorio
 
@@ -322,9 +424,9 @@ Ingresamos al directorio creado
 cd /tmp/zcs
 ```
 
-Descargamos Zimbra 9 de: 
+### Descargamos Zimbra 9 de:
 
-### Zextras
+#### Zextras
 
 Para Ubuntu 18.x
 
@@ -332,7 +434,7 @@ Para Ubuntu 18.x
 wget http://download.zextras.com/zcs-9.0.0_OSE_UBUNTU18_latest-zextras.tgz
 ```
 
-### Zimbra
+#### Zimbra
 
 - Par Ubuntu 18.x
 
@@ -348,11 +450,13 @@ wget https://files.zimbra.com/downloads/8.8.15_GA/zcs-8.8.15_GA_4179.UBUNTU20_64
 
 Para descarga actualizada y par otros sistemas operativos se realizad de [Zimbra Collaboration OSE](https://www.zimbra.com/downloads/zimbra-collaboration-open-source/)
 
-### Descomprimimos el paquete descargado
+### Descomprimir el paquete descargado
 
 ```bash
 tar -xzvf zcs-9.0.0_OSE_UBUNTU18_latest-zextras.tgz
 ```
+
+### Instalamos Zimbra
 
 Nos ubicamos en el directorio generado 
 
@@ -360,7 +464,7 @@ Nos ubicamos en el directorio generado
 cd zimbra-installer/
 ```
 
-ejecutamos
+Ejecutamos
 
 ```bash
 ./install.sh
@@ -376,7 +480,7 @@ Select the packages to install
 Install zimbra-ldap [Y]
 Install zimbra-logger [Y]
 Install zimbra-mta [Y]
-Install zimbra-dnscache [Y] n
+Install zimbra-dnscache [Y] n -con dns de zona no es necesario
 Install zimbra-snmp [Y]
 Install zimbra-store [Y]
 Install zimbra-apache [Y]
@@ -390,7 +494,7 @@ Install zimbra-chat [Y] n (opcional)
 The system will be modified.  Continue? [N] y
 ```
 
-Mostrara un erro es normal, debemos de especificar nuestro dominio
+Mostrara un **erro es normal**, debemos de especificar nuestro dominio
 
 ```shell-session
 DNS ERROR resolving MX for mail.[nuestro_dominio]
@@ -421,7 +525,54 @@ Notify Zimbra of your installation? [Yes] n
 Configuration complete - press return to exit
 ```
 
-Probamos el funcionamiento del servidor
+> Si se presenta el **ERROR** en instalaciones RHEL/AlmaLinux/RockyLinux
+> 
+> ```shell-session
+> zimbra-proxy-components
+> ...
+> ERROR: Unable to install required packages
+> Fix the issues with remote package installation and rerun the installer
+> ```
+> 
+> **Solución**
+> 
+> Limpieza de los paquetes
+> 
+> ```bash
+> sudo yum clean packages
+> ```
+> 
+> Instalamos los paquetes necesarios
+> 
+> ```bash
+> sudo yum -y install zimbra-core-components zimbra-ldap-components zimbra-mta-components zimbra-dnscache-components zimbra-snmp-components zimbra-jetty-distribution zimbra-store-components zimbra-apache-components zimbra-spell-components zimbra-memcached zimbra-proxy-components
+> ```
+> 
+> Volver a ejecutar
+> 
+> ```bash
+> ./install
+> ```
+> 
+> PS: talvez tambien se necesite esta configuracion
+> 
+> ```bash
+> touch /var/log/zimbra-stats.log
+> ```
+> 
+> ```bash
+> chown zimbra:zimbra /var/log/zimbra-stats.log
+> ```
+> 
+> ```bash
+> nmcli connection modify $Mail_Interface ipv6.method ignore
+> ```
+> 
+> ```bash
+> sudo yum install nc
+> ```
+
+### Probamos el funcionamiento del servidor
 
 Usuario normal
 
@@ -435,7 +586,7 @@ Usuario administrador
 https://mail.[nuestro_dominio]:7071/zimbraAdmin
 ```
 
-Probando el servicio
+### Probando el servicio
 
 Verificando versión de instalación
 
@@ -467,7 +618,7 @@ Instalar acl
 sudo apt install acl
 ```
 
-Asignacion de permisos
+Asignación de permisos
 
 ```bash
 sudo setfacl -R -m u:zimbra:rwx /etc/letsencrypt/
@@ -503,7 +654,7 @@ Desplegamos el certificado
 /opt/zimbra/bin/zmcertmgr deploycrt comm /etc/letsencrypt/live/mail.ntw.nat.cu/cert.pem /opt/zimbra/ssl/zimbra/commercial/commercial_ca.crt
 ```
 
-Verificacion del estado del certificado
+Verificación del estado del certificado
 
 ```bash
 /opt/zimbra/bin/zmcertmgr viewdeployedcrt
@@ -540,7 +691,7 @@ mynetworks = 127.0.0.0/8 [::1]/128 192.168.1.0/24.
 Ejecutamos el siguiente comando
 
 ```bash
-sudo su - zimbra -c "zmprov mcf zimbraMtaSmtpdSenderLoginMaps proxy:ldap:/opt/zimbra/conf/ldap-slm.cf +zimbraMtaSmtpdSenderRestrictions reject_authenticated_sender_login_mismatch"### Esto evitara que  
+sudo su - zimbra -c "zmprov mcf zimbraMtaSmtpdSenderLoginMaps proxy:ldap:/opt/zimbra/conf/ldap-slm.cf +zimbraMtaSmtpdSenderRestrictions reject_authenticated_sender_login_mismatch" 
 ```
 
 Esto evitara que usuarios autenticados en el servidor no puedan enviar correos  a nombre de otros.
