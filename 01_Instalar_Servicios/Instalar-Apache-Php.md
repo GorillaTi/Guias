@@ -4,7 +4,7 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.1.0
+Versión: 1.2.0
 
 Nivel: Todos
 
@@ -299,23 +299,26 @@ Instalamos exenciones básicas de PHP
 
 ## Configuraciones de seguridad de Apache2
 
-- ubicarse en la carpeta de configuración
+Ubicarse en la carpeta de configuración
 
 ```bash
 cd /etc/apache2/conf-available/
 ```
 
-- Respaldo de seguridad de los archivos charset.conf y security.con
+Respaldo de seguridad de los archivos **charset.conf ** y **security.con**
 
 ```bash
 sudo cp -rpfv charset.conf charset.conf.orig
 sudo cp -rpfv security.conf security.conf.orig
+sudo cp -rpfv ports.conf ports.conf.orig 
 ```
 
-- Modificamos el archivo charset.conf 
+### Charset
+
+- Modificamos el archivo **charset.conf**
 
 ```bash
-sudo nano charset.conf
+sudo vim charset.conf
 ```
 
 - des cometamos la línea
@@ -324,61 +327,75 @@ sudo nano charset.conf
 AddDefaultCharset UTF-8
 ```
 
-- Modificamos el archivo security.conf
+### Security
+
+- Modificamos el archivo **security.conf**
 
 ```bash
-sudo nano security.conf
+sudo vim security.conf
 ```
 
-- des comentamos la línea
+- des comentamos la línea y colocamos en **off**
 
-```output
+```shell-session
 ServerSignature Off
 ```
 
-- cometamos la linea
+- de comentamos la linea y colocamos en **Prod**
 
-```output
-#ServerSignature On 
+```shell-session
+ServerTokens Prod
 ```
 
-- nos ubicamos en
+### Ports
+
+Ubicamos en el directorio **apache2**
 
 ```bash
 cd /etc/apache2/
 ```
 
-- Respaldamos el archivo ports.conf
+Respaldo de seguridad de  **ports.conf**
 
 ```bash
-sudo cp -rpfv ports.conf ports.conf.orig
+sudo cp -rpfv ports.conf ports.conf.orig 
 ```
 
-- Editamos el archivo ports.conf
+Editamos el archivo **ports.conf**
 
 ```bash
-sudo nano ports.conf
+sudo vim ports.conf
 ```
 
-- Editamos la linea
+Editamos la linea
 
 ```output
 Listen 192.168.0.95:80
 ```
 
-- Verificamos la configuraciones realizadas
+Verificamos la configuraciones realizadas
 
 ```bash
 sudo apache2ctl -t
 ```
 
-- Reiniciamos el servicio de Apache2
+### Reinicio del Servicio
+
+Reiniciamos el servicio de Apache2
 
 ```bash
 sudo systemctl restart apache2.service
 ```
 
-- Revisamos los puertos
+o
+
+```bash
+sudo apache2ctl restart
+```
+
+### Revision del estado del Servicio
+
+Revisamos los puertos
 
 ```bash
 sudo ss -tpan | grep apache
@@ -424,27 +441,33 @@ tcp6       0      0 :::8081                 :::*                    LISTEN      
 
 * Revisamos  el resultado en la ruta del navegador ya se por IP o por URL
   
-  * http://192.168.14.95/test
+  * http://[ip_servidor]/test
   * http://[tu_dominio]/test
 
 ## Archivo de Configuración php.ini
 
-* Para editar el archivo de configuración
-  
-  ```bash
-  sudo nano /etc/php/7.4/fpm/php.ini
-  ```
+Para editar el archivo de configuración
 
-* Parámetros básicos de configuración para modificar
-  
-  ```output
-  upload_max_filesize = 32M 
-  post_max_size = 48M 
-  memory_limit = 256M 
-  max_execution_time = 600 
-  max_input_vars = 3000 
-  max_input_time = 1000
-  ```
+```bash
+sudo nano /etc/php/7.4/fpm/php.ini
+```
+
+Parámetros básicos de configuración para modificar
+
+```shell-session
+upload_max_filesize = 32M 
+post_max_size = 48M 
+memory_limit = 256M 
+max_execution_time = 600 
+max_input_vars = 3000 
+max_input_time = 1000
+```
+
+Ocultar version de PHP
+
+```shell-session
+expose_php = Off
+```
 
 ## Configuración para en enlaces simbólicos de `/home` a` /var/www/html`
 
