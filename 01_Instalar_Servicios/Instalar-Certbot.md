@@ -112,7 +112,7 @@ Apache
 sudo certbot --apache -d [tu_dominio.com] -d www.[tu_dominio.com] --register-unsafely-without-email
 ```
 
-para subdominio especifico
+Para sub-dominio especifico
 
 ```bash
 sudo certbot --apache -d subdominio.[tu_dominio.com] --register-unsafely-without-email
