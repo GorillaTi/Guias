@@ -58,9 +58,9 @@ Ejemplo de configuración:
 
 ```shell-session
 <VirtualHost *:80> ---(*) es la IP - (:80) Numero de Puerto
-    ServerName sitio.ejemplo.com --nombre del servidor
+    ServerName [tu_dominio.com]--nombre del servidor
     ServerAdmin datacenter.gams@sucre.bo -- direccion email del sysadmin
-    ServerAlias www.sitio.ejemplo.com -- alias de sitio
+    ServerAlias www.[tu_dominio.com] -- alias de sitio
     DocumentRoot /var/www/html -- carpeta donde se aloja el sitio
     DirectoryIndex index.html -- archivo principal del sitio.
     ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -72,13 +72,13 @@ Ejemplo de configuración:
 
 ```shell-session
 <VirtualHost *:80>
-    ServerName soporte.sucre.bo
-    ServerAlias www.soporte.sucre.bo
-    ServerAdmin datacenter.gams@sucre.bo
-    DocumentRoot /var/www/html/soporte/public/ 
-    ErrorLog ${APACHE_LOG_DIR}/error_soporte.log
-    CustomLog ${APACHE_LOG_DIR}/access_soporte.log combined
-    <Directory "/var/www/html/soporte/public">
+    ServerName [tu_dominio.com]
+    ServerAlias www.[tu_dominio.com]
+    ServerAdmin [email_admin]
+    DocumentRoot /var/www/html/[directorio]/public/ 
+    ErrorLog ${APACHE_LOG_DIR}/error_[name_app].log
+    CustomLog ${APACHE_LOG_DIR}/access_[name_app].log combined
+    <Directory "/var/www/html/[directorio]/public">
         Options +Indexes +FollowSymLinks
         DirectoryIndex index.php
         AllowOverride None
@@ -409,7 +409,6 @@ Insertamos la siguiente configuración
                 Require all granted
         </Directory>
 </VirtualHost>
-
 ```
 
 ### Reiniciamos el servicio
