@@ -274,13 +274,13 @@ sshd -t
 Reiniciamos el servicio
 
 ```bash
-service restart sshd
+sudo service sshd restart
 ```
 
 o
 
 ```bash
-systemctl restart sshd
+sudo systemctl restart sshd
 ```
 
 > **Nota.-** es importante tener en cuenta que se puede limitar el acceso a este servicio solo a la LAN de la organización o a través de una VPN  para casos que se requiera un acceso externo, las redes mas utilizadas par una LAN son:
