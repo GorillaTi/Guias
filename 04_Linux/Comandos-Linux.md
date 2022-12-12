@@ -477,3 +477,27 @@ fsck -c -y /dev/sdaX
 ```
 
 > *Nota.-* encuentra la ruta del directorio destino en la linea `The root filesystem on /dev/sdaX needs a manual fsck`
+
+---
+
+## Habiltar PTPP en firewalld
+
+Habilitamos el puerto 1723/TCP
+
+```bash
+sudo firewall-cmd --permanent --zone=public --add-port=1723/tcp
+```
+
+Habilitando el protocolo `gre`
+
+```bash
+firewall-cmd --permanent --add-rich-rule='rule protocol value="gre" accept'
+```
+
+Recargamos la configuracion del firewall
+
+```bash
+sudo firewall-cmd --reload
+```
+
+---
