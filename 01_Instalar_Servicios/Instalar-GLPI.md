@@ -208,3 +208,13 @@ Acceso al sistema
 ```url
 http://[ip_servidor]
 ```
+
+---
+
+## Intalacion de Agente GLPI
+
+### Windows
+
+
+
+### Linux
