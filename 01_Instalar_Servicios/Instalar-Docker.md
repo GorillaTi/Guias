@@ -157,5 +157,3 @@ Revisando el funcionamiento del docker-compose
 ```bash
 docker-compose --version
 ```
-
-
