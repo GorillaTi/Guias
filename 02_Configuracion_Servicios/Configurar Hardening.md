@@ -119,7 +119,7 @@ La directiva `ListenAddress` especifica en qué direcciones IP se abrirá el  pu
 ListenAddress [IP_servidor]
 ```
 
-### 4. Deshabilitar el usuario ROOT para login
+### 4. Forzar el uso de protocolo 2
 
 Fuerza a utilizar una version de protocolo se recomienda la 2
 
