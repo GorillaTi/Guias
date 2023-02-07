@@ -124,13 +124,11 @@ sudo apt dist-upgrade -y
 net-tools y DNS bind9utils
 
 ```bash
-sudo apt install -y net-tools bind9utils vim git
+sudo apt install -y net-tools bind9utils vim git| Puertos abiertos
 ```
 
-## Revisamos los Puertos abiertos
-
 ```bash
-  sudo netstat -nputa|grep :53
+  sudo netstat -nputa | grep :53
 ```
 
 ### Revisar configuración de Red
