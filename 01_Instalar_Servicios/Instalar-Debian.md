@@ -16,105 +16,115 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ## Instalación del S.O.
 
-
 - Instalar SO siguiendo las instrucciones del instalador.
-
 * Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM.
-
-  |Tamaño|Tipo|Punto de montaje|
-  |----|----|----|
-  |1024 MB|Primaria|/boot|
-  |2048 MB|LVM|swap|
-  |min 20 GB|LVM|/|
-  |min 20 GB|LVM|/home|
+  
+  | Tamaño    | Tipo     | Punto de montaje |
+  | --------- | -------- | ---------------- |
+  | 1024 MB   | Primaria | /boot            |
+  | 2048 MB   | LVM      | swap             |
+  | min 20 GB | LVM      | /                |
+  | min 20 GB | LVM      | /home            |
 
 * Colocamos  el password para root definido por el encargado de Data Center
+
 * Creamos el usuario sysadmin, registramos su password 
 
 * seleccionamos los servicios mínimos para su instalación
+  
   * SSH server
   * Utilidades estándar del sistema 
 
-2. Iniciamos sesión con *root* y verificamos que este corriendo el servicio ssh.
+Iniciamos sesión con *root* y verificamos que este corriendo el servicio ssh.
 
-3. Instalamos las características sudo
+```bash
+systemctl statsus sshd.service
+```
 
-   ```bash
-   apt update
-   apt install sudo
-   ```
+## Dar permisos de Super Ususario
 
-4. damos permisos root al usuario creado en la instalación
+Instalamos las características sudo
 
-   ```bash
-   visudo
-   ```
+```bash
+apt update
+apt install sudo
+```
 
-   adicionamos el usuario como sigue
+### a) Editando el archivo de sudoers
 
-   ```output
-   # User privilege specification
-   root    ALL=(ALL:ALL) ALL
-   sysadmin ALL=(ALL:ALL) ALL
-   ```
+Ejecutando el comado
 
-5. Nos conectamos al servidor mediante ssh
+```bash
+visudo
+```
 
-   ```bash
-   ssh sysadmin@ipservidor
-   ```
+o editamos con el comado
 
-   Nota: Para habilitar el grupo sudo se debe de ejecutar desde `/sbin/usermod` 
+```bash
+vim /etc/sudoer
+```
 
-6. Creamos el usuario *desarrollo*
+adicionamos el usuario como sigue
 
-   ```bash
-   sudo adduser desarrollo
-   ```
+```output
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+sysadmin ALL=(ALL:ALL) ALL
+```
 
-7. Creamos contraseña de para el usuario *desarrollo*
+### b) Añadiendo el usuario al grupo sudo
 
-   ```bash
-   sudo passwd desarrollo
-   ```
+```bash
+usermod -aG sudo [usuario] 
+```
 
-8. Incluimos al usuario *desarrollo* al grupo **sudo**.
+> **Nota.-** Nos conectamos al servidor mediante ssh
+> 
+> ```bash
+> ssh sysadmin@ipservidor
+> ```
+> 
+> Para habilitar el grupo sudo se debe de ejecutar desde `/sbin/usermod`  o `su -` para poder usar el comado `usermod`
 
-   ```bash
-   sudo usermod -aG sudo desarrollo
-   ```
+Verificar los usuarios que forman parte del grupo sudo
 
-9. Verificamos que el usuario desarrollo se encentra en el grupo **sudo**.
+```bash
+getent group sudo
+```
 
-   ```bash
-   sudo cat /etc/group | grep sudo
-   ```
-   
-   o
-   
-   ```bash
-   getent group sudo
-   ```
+## Creamos el usuario desarrollo
+
+```bash
+sudo adduser desarrollo
+```
+
+Creamos contraseña de para el usuario *desarrollo*
+
+```bash
+sudo passwd desarrollo
+```
 
 ## Verificamos versión de S.O.
 
 ```bash
 cat /etc/*-release
 ```
+
 ## Actualizamos el S.O.
 
-- Con apt
+Verificar paquetes de actualizacion y actualizar al sistema
 
 ```bash
 sudo apt update
 sudo apt dist-upgrade -y
 ```
 
-## Instalar paquetes adicionales 
+## Instalar paquetes adicionales
 
-- net-tools y DNS bind9utils
+net-tools y DNS bind9utils
+
 ```bash
-sudo apt install -y net-tools bind9utils
+sudo apt install -y net-tools bind9utils vim git
 ```
 
 ## Revisamos los Puertos abiertos
@@ -134,4 +144,3 @@ ip addr show
 ```bash
 service --status-all
 ```
-
