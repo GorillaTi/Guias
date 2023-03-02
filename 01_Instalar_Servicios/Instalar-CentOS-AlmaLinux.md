@@ -4,7 +4,7 @@ Guía de:
 
 ## Acerca de:
 
-Versión: 1.1.0
+Versión: 1.1.1
 
 Nivel: Medio
 
@@ -147,16 +147,67 @@ sudo dnf update
 
 ## Instalar paquetes adicionales
 
-* net-tools y DNS bind-utils
+Mejoramos DNF
+
+Editamos el archivo de configuración `/etc/dnf/dnf.conf`
 
 ```bash
-sudo yum -y install net-tools bind-utils
+sudo vim /etc/dnf/dnf.conf
 ```
 
-* Instalamos utilidades de dnf
+Insertamos las siguientes configuraciones
+
+```shell-session
+fastestmirror=True
+max_parallel_downloads=10
+```
+
+instalando paquetes adicionales de dependencias
+
+```bash
+sudo dnf install dnf-plugins-core
+```
+
+### Instalando EPEL repo en AlmaLinux/Rocky
+
+Instalando epel release
+
+```bash
+sudo dnf install epel-release
+```
+
+Habilitando el Repositorio
+
+```bash
+sudo dnf config-manager --enable epel
+```
+
+### Habilitando PowerTools
+
+Instalando las urilidades de yum o dnf
+
+```bash
+sudo dnf install yum-utils
+```
+
+o
 
 ```bash
 sudo dnf install dnf-utils
+```
+
+Habilitamos el repositorio de las powertools
+
+```bash
+sudo dnf config-manager --set-enabled powertools
+```
+
+### Habilitando aplicativos adicionales
+
+net-tools y DNS bind-utils
+
+```bash
+sudo yum -y install net-tools bind-utils
 ```
 
 ## Revisamos los Puertos abiertos
