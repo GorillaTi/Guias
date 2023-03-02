@@ -297,6 +297,10 @@ Instalamos exenciones básicas de PHP
 sudo apt install php7.4-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,bcmath} -y
 ```
 
+## En Ubuntu
+
+
+
 ## Configuraciones de seguridad de Apache2
 
 Ubicarse en la carpeta de configuración
