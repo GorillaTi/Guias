@@ -406,7 +406,7 @@ unzip archivo.zip
 
 ---
 
-## Comando hostname
+## Comando hostnamectl
 
 Definiendo en local
 
@@ -414,11 +414,17 @@ Definiendo en local
 hostnamectl set-hostname [nombre.host] --static
 ```
 
+- **pretty**: Es el nombre de alta nivel y que puede incluir todo tipo de caracteres especiales, por ejemplo, «El laptop de David»
+- **static**: Es el que utiliza al inicializar el kernel del host, por ejemplo «laptop-de-david»
+- **transient**: Es el que especifica la configuración de la red. Solo se utiliza si el hostname «static» no es válido o no está configurado.
+
 Definiendo en remoto
 
 ```bash
 hostnamectl set-hostname [nombre.host] -H [usuario.server]@[ip.server]
 ```
+
+> **Nota.-** Solo el ususrio root puede modificar de forma remota el hostname
 
 ---
 
