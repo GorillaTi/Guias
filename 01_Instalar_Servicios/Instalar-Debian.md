@@ -4,7 +4,7 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0.2
+Versión: 1.0.3
 
 Nivel: Todos
 
@@ -124,14 +124,16 @@ sudo apt dist-upgrade -y
 net-tools y DNS bind9utils
 
 ```bash
-sudo apt install -y net-tools bind9utils vim git| Puertos abiertos
+sudo apt install -y net-tools bind9utils vim git
 ```
+
+## Revisando puertos abiertos
 
 ```bash
-  sudo netstat -nputa | grep :53
+sudo netstat -nputa | grep :53
 ```
 
-### Revisar configuración de Red
+## Revisar configuración de Red
 
 ```bash
 ip addr show
