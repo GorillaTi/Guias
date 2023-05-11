@@ -26,7 +26,7 @@ Remover posibles instalaciones antiguas
 sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
-### Actualizar e instalar depéndencias necesarias par docker
+### Actualizar e instalar dependencias necesarias par docker
 
 Actualizando S.O.
 
@@ -72,7 +72,7 @@ Prueba de funcionamiento
 sudo docker run hello-world
 ```
 
-Material de refencia en
+Material de referencia en
 
 https://docs.docker.com/engine/install/ubuntu/
 
@@ -80,7 +80,7 @@ https://docs.docker.com/engine/install/ubuntu/
 
 ## RHEL / Alma Linux
 
-### Registrando el repositorio de de Docker
+### Registrando el repositorio de Docker
 
 ```bash
 sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
@@ -122,9 +122,9 @@ groups
 
 ---
 
-## Habilitando politicas de firewall
+## Habilitando políticas de firewall
 
-Insertando la politica al firewall
+Insertando la políticas al firewall
 
 ```bash
 firewall-cmd --zone=public --add-masquerade --permanent
@@ -140,13 +140,13 @@ firewall-cmd --reload
 
 ## Instalado Docker-compose
 
-Descargando docker-composer
+Descargando docker-compose
 
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
 
-Otorgando  permisos de ejecucuin
+Otorgando  permisos de ejecución
 
 ```bash
 sudo chmod +x /usr/local/bin/docker-compose
