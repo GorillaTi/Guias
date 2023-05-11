@@ -211,10 +211,118 @@ http://[ip_servidor]
 
 ---
 
-## Intalacion de Agente GLPI
+## Instalación de Agente GLPI
 
 ### Windows
 
+Descargar el glpi-agent
 
+[Releases · glpi-project/glpi-agent · GitHub](https://github.com/glpi-project/glpi-agent/releases) 
+
+Instalar el glpi-agent
+
+Instalación GLPI  
+
+1 Typical
+
+2 [http://192.168.200.56/](http://192.168.200.56/) 
+
+3 Navegador: localhost: 62354 (carga)  
+
+4 Force an inventory  
+
+5 Back  
+
+6 Localhost:62354/status
+
+#### Troubleshooting
+
+Error 2503,2502 entrar a:  
+
+Unidad C: /Windows/Temp 
+Borro lo que hay adentro
+
+Entrar propiedades de temp
+
+Fichero de Seguridad (entrar)
+
+Click en el usuario q se este usando (fijarse en configuración)
+
+Seleccionar el usuario y editar
+
+Seleccionar el usuario otra vez y seleccionar control total y aceptar todo
 
 ### Linux
+
+Descargamos el glpi-agent
+
+```bash
+wget https://github.com/glpi-project/glpi-agent/releases/download/1.4/glpi-agent-1.4-with-snap-linux-installer.pl
+```
+
+Instalamos el glpi-agent
+
+```bash
+sudo perl glpi-agent-1.4-with-snap-linux-installer.pl --install
+```
+
+```bash
+sudo vim /etc/glpi-agent/agent.cfg
+```
+
+```bash
+sudo vim /etc/glpi-agent/inventory-server-plugin.cfg
+```
+
+```bash
+sudo vim /etc/glpi-agent/toolbox-plugin.cfg
+```
+
+```shell-session
+# By default, a plugin is always disabled unless "disabled" is set to "no" or "0".
+# You can uncomment the following line or set it in included configuration file
+# at the end of this configuration
+#disabled = no
+
+# Set base url matching for API
+#url_path = /toolbox
+
+# Port on which to listen for inventory requests, default to legacy port
+#port = 0
+
+# YAML file of the toolbox base configuration
+#yaml = toolbox.yaml
+
+# We don't authorize raw yaml edition by default
+#raw_edition = no
+
+# PNG logo replacement, max size, 200x55
+# Can be a full path or a relative path to share/html
+#logo = toolbox/logo.png
+
+# Color for header background of pages, in 'rrvvbb' format using hex digits,
+# ffffff is white, ff0000 is red, 0000ff is blue, ...
+#headercolor =
+
+# The plugin navbar can include the following link as last navigation link
+# The format is the full http link with a text to show separated with a pipe
+#addnavlink = http://localhost:62354/|Local agent
+
+# You should create and define you specific parameter in the following
+# included configuration file to override any default.
+# For example just set "disabled = no" in it to enable the plugin
+#include "toolbox-plugin.local"
+disabled = no
+```
+
+```bash
+sudo cp -pfv  /etc/glpi-agent/inventory-server-plugin.cfg /etc/glpi-agent/inventory-server-plugin.local
+```
+
+```bash
+sudo systemctl start glpi-agent.service
+```
+
+```bash
+sudo systemctl enabled glpi-agent.service
+```
