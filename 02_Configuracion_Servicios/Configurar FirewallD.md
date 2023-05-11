@@ -38,7 +38,7 @@ inicio del servicio
 sudo systemctl start firewalld
 ```
 
-## Verificaion del estado de firewalld
+## Verificación del estado de firewalld
 
 ```bash
 sudo firewall-cmd --state
@@ -64,7 +64,7 @@ Output
 public
 ```
 
-#### Verificando zona predetrminada
+#### Verificando zona predeterminada
 
 ```bash
   firewall-cmd --get-active-zones
@@ -161,7 +161,6 @@ home
   source-ports:
   icmp-blocks:
   rich rules:
-
 ```
 
 #### Ver la configuración específica asociada a todas las zona
@@ -235,9 +234,9 @@ Verificar la operacion realizada
  sudo firewall-cmd --zone=public --list-services
 ```
 
-> **Nota.-** para volver la regla en permanate se usa el idicador `--permanent` y para adicionar las reglas actules vomo permanete se utiliza el idicador `--runtime-to-permanent`
+> **Nota.-** para volver la regla en permanente se usa el indicador `--permanent` y para adicionar las reglas actuales como permanente se utiliza el indicador `--runtime-to-permanent`
 
-verifiacar las reglas permanentes
+verificar las reglas permanentes
 
 ```bash
 sudo firewall-cmd --zone=public --list-services --permanent
@@ -263,13 +262,13 @@ sudo firewall-cmd --zone=public --add-port=4990-4999/udp
 
 ### Definir un servicio
 
-Un servicio es mas facl de administrar dado que es un cojunto de puertos, para este fin se debe de copiar `/usr/lib/firewalld/services`) al directorio `/etc/firewalld/services` donde el firewall busca definiciones no estándar.
+Un servicio es mas facil de administrar dado que es un conjunto de puertos, para este fin se debe de copiar `/usr/lib/firewalld/services`) al directorio `/etc/firewalld/services` donde el firewall busca definiciones no estándar.
 
 ```bash
 sudo cp /usr/lib/firewalld/services/ssh.xml /etc/firewalld/services/example.xml
 ```
 
-Editar la definicion del servicio
+Editar la definición del servicio
 
 ```bash
 sudo vim /etc/firewalld/services/example.xml
@@ -320,12 +319,8 @@ sudo firewall-cmd --reload
 
 ya se pueden asignar nuvos servicios y puertos a la nueva zona.
 
-
-
 ## Recarga  de configuracion de Firewalld
 
 ```bash
 sudo firewall-cmd --reload
 ```
-
-## 
