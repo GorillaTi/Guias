@@ -38,7 +38,7 @@ Nginx
 sudo apt install -y certbot python3-certbot-nginx
 ```
 
-Verificamos la instalacion
+Verificamos la instalación
 
 ```bash
 sudo cerbot --version
@@ -71,7 +71,7 @@ sudo apt-get remove certbot
 RHEL/Fedora/CentOS
 
 ```bash
-sudo dnf remove 
+sudo dnf remove certbot
 ```
 
 Configurando Python virtual environment
@@ -80,9 +80,13 @@ Configurando Python virtual environment
 sudo python3 -m venv /opt/certbot/
 ```
 
+Instalando `pip`
+
 ```bash
 sudo /opt/certbot/bin/pip install --upgrade pip
 ```
+
+> Para instalar una versión mas actualizada de pip consultar la siguiente guía.
 
 Instalar Certbot
 
@@ -90,13 +94,13 @@ Instalar Certbot
 sudo /opt/certbot/bin/pip install certbot
 ```
 
-Preparacion del comando Certbot
+Preparación del comando Certbot
 
 ```bash
 sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot
 ```
 
-### Actualiazacion
+### Actualización
 
 ```bash
 sudo /opt/certbot/bin/pip install --upgrade certbot
@@ -124,7 +128,7 @@ Nginx
 sudo certbot --nginx -d [tu_dominio.com] -d www.[tu_dominio.com] --register-unsafely-without-email
 ```
 
-Para subdominio especifico
+Para sub-dominio especifico
 
 ```bash
 sudo certbot --nginx -d subdominio.[tu_dominio.com] --register-unsafely-without-email
@@ -162,7 +166,7 @@ IMPORTANT NOTES:
    Donating to EFF:                    https://eff.org/donate-le
 ```
 
-Configurando VirtualHost  Manual
+Configurando Virtual Host  Manual
 
 Apache
 
@@ -354,7 +358,7 @@ IMPORTANT NOTES:
    Donating to EFF:                    https://eff.org/donate-le
 ```
 
-Y ya está generado el certificado wildcard creado para usarlo con múltiples subdominios.
+Y ya está generado el certificado wildcard creado para usarlo con múltiples sub-dominios.
 
 ## Renovacion Automática
 
@@ -396,7 +400,7 @@ Editamos el cron
 sudo crontab -e
 ```
 
-Inserta la siguiente linea que ejecutar la renovación todos los días a la 1 y las 13 horas, 2 vedes por dia segun recomendacion de Let's Encrypt para:
+Inserta la siguiente linea que ejecutar la renovación todos los días a la 1 y las 13 horas, 2 vedes por día según recomendación de Let's Encrypt para:
 
 Apache
 
