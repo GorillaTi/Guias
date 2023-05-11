@@ -264,7 +264,10 @@ sudo ufw enable
 
 ```bash
 sudo apt -y install lsb-release apt-transport-https ca-certificates wget
-sudo wget -O /etc/apt/trusted.gpg.d/php.gpg     https://packages.sury.org/php/apt.gpg
+```
+
+```bash
+sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 ```
 
 - adicionamos el APP descargada al servidor
@@ -296,10 +299,6 @@ Instalamos exenciones básicas de PHP
 ```bash
 sudo apt install php7.4-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,bcmath} -y
 ```
-
-## En Ubuntu
-
-
 
 ## Configuraciones de seguridad de Apache2
 
@@ -738,8 +737,8 @@ Opción 1
 
 ```shell-session
 <Directory ~ “\.git”>
-    Order allow,deny
-    Deny from all
+    Order allow,deny
+    Deny from all
 </Directory>
 ```
 
