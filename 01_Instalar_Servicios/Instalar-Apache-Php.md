@@ -258,19 +258,21 @@ sudo ufw allow in 1000:2000/udp
 sudo ufw enable
 ```
 
-### Instalamos PHP
+### Instalamos PHP 7.x, 8.x mediante PPA Sury
 
-- Descargamos Sury PPA for PHP 7.4 usando `wget`
+- Instalar los requisitos mínimos
 
 ```bash
 sudo apt -y install lsb-release apt-transport-https ca-certificates wget
 ```
 
+- Descargamos la llave GPG para PPA Sury para PHP 7.x, 8.x usando `wget`
+
 ```bash
 sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 ```
 
-- adicionamos el APP descargada al servidor
+- Agregando la PPA Sury a la lista de repositorios.
 
 ```bash
 echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee     /etc/apt/sources.list.d/php.list
@@ -282,22 +284,30 @@ echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee    
 sudo apt update
 ```
 
-- Instalamos php
+- Instalamos PHP
+  
+  PHP7.x
 
 ```bash
-sudo apt install php7.4
+sudo apt install -y php7.4
 ```
 
-Verificamos la versión instalada
+        PHP8.x
+
+```bash
+sudo apt install -y php8.1
+```
+
+- Verificamos la versión instalada
 
 ```bash
 php -v
 ```
 
-Instalamos exenciones básicas de PHP
+### Instalamos exenciones básicas de PHP
 
 ```bash
-sudo apt install php7.4-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,bcmath} -y
+sudo apt install php8.1-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,bcmath} -y 
 ```
 
 ## Configuraciones de seguridad de Apache2
@@ -337,13 +347,13 @@ AddDefaultCharset UTF-8
 sudo vim security.conf
 ```
 
-- des comentamos la línea y colocamos en **off**
+- Des comentamos la línea y colocamos en **off**
 
 ```shell-session
 ServerSignature Off
 ```
 
-- de comentamos la linea y colocamos en **Prod**
+- De comentamos la linea y colocamos en **Prod**
 
 ```shell-session
 ServerTokens Prod
@@ -406,9 +416,9 @@ sudo ss -tpan | grep apache
 ```sh-session
 sysadmin@app01:/etc/apache2$ ss -tpan
 State       Recv-Q      Send-Q           Local Address:Port              Peer Address:Port       
-LISTEN      0           128              192.168.14.95:80                     0.0.0.0:*          
+LISTEN      0           128              192.168.0.95:80                     0.0.0.0:*          
 LISTEN      0           128                    0.0.0.0:22                     0.0.0.0:*          
-ESTAB       0           0                192.168.14.95:22              192.168.14.254:49748      
+ESTAB       0           0                192.168.10.95:22              192.168.14.254:49748      
 LISTEN      0           128                       [::]:22                        [::]:* 
 ```
 
