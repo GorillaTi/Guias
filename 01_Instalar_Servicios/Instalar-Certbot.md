@@ -18,7 +18,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ## Instalación de Certbot
 
-### Instalación por Repositorio (no tiene la ultima versión)
+### Por Repositorio (no tiene la ultima versión)
 
 Instalamos certbot
 
@@ -44,7 +44,7 @@ Verificamos la instalación
 sudo cerbot --version
 ```
 
-### Instalación por PIP
+### Por PIP
 
 Instalación de dependencias
 
@@ -106,11 +106,13 @@ sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot
 sudo /opt/certbot/bin/pip install --upgrade certbot
 ```
 
-## Certificado SSL mediante Dominio
+## Generando certificado SSL
+
+### Mediante Dominio
 
 Generamos el certificado SSL con configuración para:
 
-Apache
+#### Apache
 
 ```bash
 sudo certbot --apache -d [tu_dominio.com] -d www.[tu_dominio.com] --register-unsafely-without-email
@@ -122,7 +124,7 @@ Para sub-dominio especifico
 sudo certbot --apache -d subdominio.[tu_dominio.com] --register-unsafely-without-email
 ```
 
-Nginx
+#### Nginx
 
 ```bash
 sudo certbot --nginx -d [tu_dominio.com] -d www.[tu_dominio.com] --register-unsafely-without-email
@@ -134,7 +136,7 @@ Para sub-dominio especifico
 sudo certbot --nginx -d subdominio.[tu_dominio.com] --register-unsafely-without-email
 ```
 
-Sin configura apache o nginx
+#### Sin configura apache o nginx
 
 ```bash
 sudo certbot certonly -d tudominio.com --noninteractive --standalone --agree-tos --register-unsafely-without-email
@@ -240,26 +242,7 @@ server {
         }
 ```
 
-Eliminar certificado SSL
-
-```bash
-sudo certbot delete
-```
-
-elijes el dominio al cual pertenece el certificado
-
-```bash
-1 dominio1.com
-2 dominio2.com
-```
-
-o
-
-```bash
-sudo certbot delete --cert-name ejemplo.com
-```
-
-## Certificado SSL mediante DNS [Wildcard]
+### Mediante DNS [Wildcard]
 
 Generamos el certificado SSL
 
@@ -360,7 +343,7 @@ IMPORTANT NOTES:
 
 Y ya está generado el certificado wildcard creado para usarlo con múltiples sub-dominios.
 
-## Renovacion Automática
+## Renovación Automática
 
 ### Prueba de renovación del certificado
 
@@ -418,4 +401,23 @@ o
 
 ```bash
 echo "0 0,12 * * * root /opt/certbot/bin/python -c 'import random; import time; time.sleep(random.random() * 3600)' && sudo certbot renew -q" | sudo tee -a /etc/crontab > /dev/null
+```
+
+## Eliminar certificado SSL
+
+```bash
+sudo certbot delete
+```
+
+elijes el dominio al cual pertenece el certificado
+
+```bash
+1 dominio1.com
+2 dominio2.com
+```
+
+o
+
+```bash
+sudo certbot delete --cert-name ejemplo.com
 ```

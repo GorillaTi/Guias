@@ -310,7 +310,7 @@ php -v
 sudo apt install php8.1-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,bcmath} -y 
 ```
 
-## Configuraciones de seguridad de Apache2
+## Hardening de Apache2
 
 Ubicarse en la carpeta de configuración
 
@@ -390,6 +390,51 @@ Verificamos la configuraciones realizadas
 ```bash
 sudo apache2ctl -t
 ```
+
+### .git
+
+Editar el archivo de configuración
+
+- Debian
+
+```bash
+sudo vim /etc/apache2/apache2.conf
+```
+
+- CentOS
+
+```bash
+sudo vim /etc/httpd/httpd.conf
+```
+
+Insertamos el código para la restricción
+
+- Denegando el acceso al directorio
+
+Opción 1
+
+```shell-session
+<Directory ~ “\.git”>
+    Order allow,deny
+    Deny from all
+</Directory>
+```
+
+Opción 2
+
+```shell-session
+<DirectoryMatch "^/.*/\.git/">
+  Deny from all
+</Directorymatch>
+```
+
+- Denegar el acceso por medios de código 404
+
+```shell-session
+RedirectMatch 404 /\.git
+```
+
+> **Nota.-** esto evita dar mayor información al atacante de la existencia del directorio de configuración .git 
 
 ### Reinicio del Servicio
 
@@ -537,87 +582,6 @@ expose_php = Off
   * http://192.168.0.95/test
   * http://[tu_dominio]/test
 
-## Certificado SSL
-
-### Instalamos certbot
-
-apache
-
-```bash
-sudo apt install -y certbot python3-certbot-apache
-```
-
-nginx
-
-```bash
-sudo apt install -y certbot python3-certbot-nginx
-```
-
-Iniciamos la instalación y auto configuración del certificado
-
-Sin configura apache o nginx
-
-```bash
-sudo certbot certonly -d tudominio.com --noninteractive --standalone --agree-tos --register-unsafely-without-email
-```
-
-configurando Apache
-
-```bash
-sudo certbot --apache -d tudominio.com -d www.tudominio.com --register-unsafely-without-email
-```
-
-configurando Nginx
-
-```bash
-sudo certbot --nginx -d tudominio.com -d www.tudominio.com --register-unsafely-without-email
-```
-
-resultado
-
-```output
-Saving debug log to /var/log/letsencrypt/letsencrypt.log
-Plugins selected: Authenticator standalone, Installer None
-Obtaining a new certificate
-Performing the following challenges:
-http-01 challenge for [tudominio.com]
-Waiting for verification...
-Cleaning up challenges
-
-IMPORTANT NOTES:
- - Congratulations! Your certificate and chain have been saved at:
-   /etc/letsencrypt/live/[tudominio.com]/fullchain.pem
-   Your key file has been saved at:
-   /etc/letsencrypt/live/[tudominio.com]/privkey.pem
-   Your cert will expire on 2021-06-20. To obtain a new or tweaked
-   version of this certificate in the future, simply run certbot
-   again. To non-interactively renew *all* of your certificates, run
-   "certbot renew"
- - If you like Certbot, please consider supporting our work by:
-
-   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
-   Donating to EFF:                    https://eff.org/donate-le
-```
-
-### Eliminar certificado SSL
-
-```bash
-sudo certbot delete
-```
-
-elijes el dominio al cual pertenece el certificado
-
-```bash
-1 dominio1.com
-2 dominio2.com
-```
-
-o
-
-```bash
-sudo certbot delete --cert-name ejemplo.com
-```
-
 ## Configurando VirtualHost  Manual
 
 ### Apache
@@ -718,52 +682,3 @@ Define: DUMP_RUN_CFG
 User: name="www-data" id=33
 Group: name="www-data" id=33
 ```
-
----
-
-## Hardening
-
-### Restricción de Acceso a Configuración .git
-
-Editar el archivo de configuración
-
-- Debian
-
-```bash
-sudo vim /etc/apache2/apache2.conf
-```
-
-- CentOS
-
-```bash
-sudo vim /etc/httpd/httpd.conf
-```
-
-Insertamos el código para la restricción
-
-- Denegando el acceso al directorio 
-
-Opción 1
-
-```shell-session
-<Directory ~ “\.git”>
-    Order allow,deny
-    Deny from all
-</Directory>
-```
-
-Opción 2
-
-```shell-session
-<DirectoryMatch "^/.*/\.git/">
-  Deny from all
-</Directorymatch>
-```
-
-- Denegar el acceso por medios de código 404
-
-```shell-session
-RedirectMatch 404 /\.git
-```
-
-> **Nota.-** esto evita dar mayor información al atacante de la existencia del directorio de configuración .git
