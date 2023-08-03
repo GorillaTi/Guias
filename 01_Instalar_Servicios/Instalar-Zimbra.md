@@ -728,4 +728,20 @@ zmmtactl restart
 zmconfigdctl restart
 ```
 
- 
+## Configuración de Filtrado de listas de SPAM
+
+En nuestro apartado de administración de Zimbra iremos a **Configurar → Configuración General →MTA** y aquí bajaremos a la sección **Comprobaciones DNS**, donde añadiremos las siguientes listas negras por cada una de las secciones que vemos.
+
+- **Lista RBL**:
+  - zen.spamhaus.org
+  - bl.spamcop.net
+  - psbl.surriel.com
+- **Lista de RHSBL del cliente**:
+  - dbl.spamhaus.org
+  - multi.surbl.org
+- **Lista de RHSBL del remitente**:
+  - multi.surbl.org
+
+Con esto ya tenemos varias listas configuradas para que la detección 
+de emisores de spam sea mejor y haya mails que sean rechazados 
+automáticamente.
