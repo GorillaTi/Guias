@@ -4,7 +4,7 @@ Guía de:
 
 ### ACERCA DE:
 
-Versión: 1.0.0
+Versión: 2.0.0
 
 Nivel: Todos
 
@@ -90,6 +90,16 @@ sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/dock
 
 ```bash
 dnf install docker-ce docker-ce-cli containerd.io
+```
+
+---
+
+## Por medio de Script
+
+### Ejecutar el script
+
+```bash
+curl https://get.docker.com | sh
 ```
 
 ---
