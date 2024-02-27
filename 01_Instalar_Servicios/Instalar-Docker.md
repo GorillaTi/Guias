@@ -110,24 +110,44 @@ curl https://get.docker.com | sh
 sudo systemctl enable --now docker
 ```
 
+---
+
 ## Ejecutar sin sudo
 
-Agregamos nuestro usuario al grupo `docker`
+Creando el grupo docker
+
+```bash
+sudo groupadd docker
+```
+
+Agregar el usuario actual al grupo `docker`
 
 ```bash
 sudo usermod -aG docker ${USER}
 ```
 
-Habilitamos la configuración
+Refreccamos la configuración del usuario
 
 ```bash
 sudo - ${USER}
 ```
 
-Comprobamos
+o
+
+```bash
+newgrp docker
+```
+
+Comprobación
 
 ```bash
 groups
+```
+
+o
+
+```bash
+id
 ```
 
 ---
