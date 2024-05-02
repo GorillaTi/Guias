@@ -25,7 +25,7 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
   
   - Configuramos con el servidor de hora
 
-## Particionamiento
+### Particionamiento
 
 Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM con tipo de partición XFS.
 
@@ -44,11 +44,11 @@ Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM 
 
 > **Nota.-** partición basa en un HDD de 40 GB
 
-- Colocamos  el password para root definido por el encargado de Data Center
+- Colocamos  la contraseña para root definido por el encargado de Data Center
 
-- Creamos el usuario sysadmin, registramos su password y le damos privilegios de administrador
+- Creamos un usuario, registramos su contraseña y le damos privilegios de administrador
 
-## SWAP recomendado
+### SWAP recomendado
 
 | RAM Min. | RAM Max. | Swap  |
 | -------- | -------- | ----- |
@@ -66,7 +66,7 @@ Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM 
    ssh [usuario]@[ipservidor]
    ```
 
-4. Habilitamos el servicio web  de monitoreo para servidor
+4. Habilitamos el servicio web  de administración para servidor
    
    ```bash
    systemctl enable --now cockpit.socket
@@ -90,31 +90,33 @@ Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM 
    sudo dnf install -y dnf-utils
    ```
 
-8. Creamos el usuario *desarrollo*
+8. Creamos el usuario ***desarrollo***
    
    ```bash
    sudo adduser desarrollo
    ```
 
-9. Creamos contraseña de para el usuario *desarrollo*
+9. Asignamos una contraseña para el usuario ***desarrollo***
    
    ```bash
    sudo passwd desarrollo
    ```
 
-10. Incluimos al usuario *desarrollo* al grupo *sudoers*.
+10. Incluimos al usuario ***desarrollo*** al grupo *sudoers*.
     
     ```bash
     sudo usermod -aG wheel desarrollo
     ```
 
-11. Verificamos que el usuario desarrollo se encentra en el grupo wheel.
+11. Verificamos que el usuario ***desarrollo ***se encentra en el grupo wheel.
     
     ```bash
     sudo lid -g wheel
     ```
 
-## Configuración de red y el nombre del equipo
+## Configuración de red
+
+Ejecutar asistente de configuración de red y nombre del equipo
 
 ```bash
 sudo nmtui
@@ -136,18 +138,18 @@ cat /etc/os-release
 
 ```bash
 sudo yum update
-sudo yum -y upgrade
+sudo yum upgrade -y
 ```
 
 - Con dnf
 
 ```bash
-sudo dnf update
+sudo dnf update -y
 ```
 
-## Instalar paquetes adicionales
+## Paquetes adicionales
 
-Mejoramos DNF
+### Mejoramos DNF
 
 Editamos el archivo de configuración `/etc/dnf/dnf.conf`
 
@@ -162,15 +164,15 @@ fastestmirror=True
 max_parallel_downloads=10
 ```
 
-instalando paquetes adicionales de dependencias
+### Paquetes adicionales de dependencias
 
 ```bash
 sudo dnf install dnf-plugins-core
 ```
 
-### Instalando EPEL repo en AlmaLinux/Rocky
+### Instalando EPEL repo
 
-Instalando epel release
+Instalando epel-release
 
 ```bash
 sudo dnf install epel-release
@@ -184,7 +186,7 @@ sudo dnf config-manager --enable epel
 
 ### Habilitando PowerTools
 
-Instalando las urilidades de yum o dnf
+Instalando las utilidades de `yum` o `dnf`
 
 ```bash
 sudo dnf install yum-utils
@@ -196,15 +198,15 @@ o
 sudo dnf install dnf-utils
 ```
 
-Habilitamos el repositorio de las powertools
+Habilitamos el repositorio de las `powertools`
 
 ```bash
 sudo dnf config-manager --set-enabled powertools
 ```
 
-### Habilitando aplicativos adicionales
+### Aplicativos adicionales
 
-net-tools y DNS bind-utils
+Net-tools y DNS bind-utils
 
 ```bash
 sudo yum -y install net-tools bind-utils
@@ -222,7 +224,7 @@ o
 sudo ss -tpan
 ```
 
-## Revisamos si el sistema necesita reinicio.
+## Revisión si el sistema necesita reinicio.
 
 ```bash
 dnf whatprovides needs-restarting
@@ -241,4 +243,20 @@ systemctl enable --now cockpit.socket
 
 ```url
 https://ip-address-of-rhel8-server:9090
+```
+
+## Actualización
+
+### Dentro de la misma rama
+
+Limpiar la cache
+
+```bash
+sudo dnf clear all
+```
+
+Actualizar las GPG key del sistema operativo
+
+```bash
+rpm --import https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux 
 ```
