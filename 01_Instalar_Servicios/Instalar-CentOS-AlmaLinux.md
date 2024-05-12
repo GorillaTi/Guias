@@ -4,7 +4,7 @@ Guía de:
 
 ## Acerca de:
 
-Versión: 1.1.1
+Versión: 2.0.0
 
 Nivel: Medio
 
@@ -72,43 +72,37 @@ Creamos las particiones de acuerdo a la siguiente tabla de particiones bajo LVM 
    systemctl enable --now cockpit.socket
    ```
 
-5. Instalamos el repositorio de Fedora
-   
-   ```bash
-   sudo dnf install -y epel-release
-   ```
-
-6. Actualizamos e instalamos las actualizaciones.
+5. Actualizamos e instalamos las actualizaciones.
    
    ```bash
    sudo dnf update -y
    ```
 
-7. Instalar  utilidades de dnf
+6. Instalar  utilidades de dnf
    
    ```bash
    sudo dnf install -y dnf-utils
    ```
 
-8. Creamos el usuario ***desarrollo***
+7. Creamos el usuario ***usuario_nuevo***
    
    ```bash
-   sudo adduser desarrollo
+   sudo adduser usuario_nuevo
    ```
 
-9. Asignamos una contraseña para el usuario ***desarrollo***
+8. Asignamos una contraseña para el usuario ***usuario_nuevo***
    
    ```bash
-   sudo passwd desarrollo
+   sudo passwd usuario_nuevo
    ```
 
-10. Incluimos al usuario ***desarrollo*** al grupo *sudoers*.
-    
-    ```bash
-    sudo usermod -aG wheel desarrollo
-    ```
+9. Incluimos al usuario ***usuario_nuevo*** al grupo ***sudoers (wheel)***.
+   
+   ```bash
+   sudo usermod -aG wheel usuario_nuevo
+   ```
 
-11. Verificamos que el usuario ***desarrollo ***se encentra en el grupo wheel.
+10. Verificamos que el usuario ***usuario_nuevo*** se encentra en el grupo ***wheel***.
     
     ```bash
     sudo lid -g wheel
@@ -149,7 +143,7 @@ sudo dnf update -y
 
 ## Paquetes adicionales
 
-### Mejoramos DNF
+### Mejoramos dnf
 
 Editamos el archivo de configuración `/etc/dnf/dnf.conf`
 
@@ -170,7 +164,7 @@ max_parallel_downloads=10
 sudo dnf install dnf-plugins-core
 ```
 
-### Instalando EPEL repo
+### Instalando EPEL-RELEASE
 
 Instalando epel-release
 
@@ -258,5 +252,5 @@ sudo dnf clear all
 Actualizar las GPG key del sistema operativo
 
 ```bash
-rpm --import https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux 
+rpm --import https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux %
 ```
