@@ -4,9 +4,9 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0.3
+Versión: 2.0.1
 
-Nivel: Todos
+Nivel: Inicial
 
 Área: CPD
 
@@ -26,9 +26,9 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
   | min 20 GB | LVM      | /                |
   | min 20 GB | LVM      | /home            |
 
-* Colocamos  el password para root definido por el encargado de Data Center
+* Colocamos  la contraseña para root definida en  las políticas de seguridad. 
 
-* Creamos el usuario sysadmin, registramos su password 
+* Creamos el usuario estándar, registramos su contraseña. 
 
 * seleccionamos los servicios mínimos para su instalación
   
@@ -41,7 +41,7 @@ Iniciamos sesión con *root* y verificamos que este corriendo el servicio ssh.
 systemctl statsus sshd.service
 ```
 
-## Dar permisos de Super Ususario
+## Dar permisos de Super Usuario
 
 Instalamos las características sudo
 
@@ -52,13 +52,13 @@ apt install sudo
 
 ### a) Editando el archivo de sudoers
 
-Ejecutando el comado
+Ejecutando el comando
 
 ```bash
 visudo
 ```
 
-o editamos con el comado
+o editamos con el comando
 
 ```bash
 vim /etc/sudoer
@@ -78,30 +78,12 @@ sysadmin ALL=(ALL:ALL) ALL
 usermod -aG sudo [usuario] 
 ```
 
-> **Nota.-** Nos conectamos al servidor mediante ssh
-> 
-> ```bash
-> ssh sysadmin@ipservidor
-> ```
-> 
-> Para habilitar el grupo sudo se debe de ejecutar desde `/sbin/usermod`  o `su -` para poder usar el comado `usermod`
+> **Nota.-** Se debe de ejecutar desde `/sbin/usermod`  o `su -` para poder usar el comando `usermod`
 
 Verificar los usuarios que forman parte del grupo sudo
 
 ```bash
 getent group sudo
-```
-
-## Creamos el usuario desarrollo
-
-```bash
-sudo adduser desarrollo
-```
-
-Creamos contraseña de para el usuario *desarrollo*
-
-```bash
-sudo passwd desarrollo
 ```
 
 ## Verificamos versión de S.O.
@@ -112,11 +94,10 @@ cat /etc/*-release
 
 ## Actualizamos el S.O.
 
-Verificar paquetes de actualizacion y actualizar al sistema
+Verificar paquetes de actualización y actualizar al sistema
 
 ```bash
-sudo apt update
-sudo apt dist-upgrade -y
+sudo apt update && sudo apt dist-upgrade -y
 ```
 
 ## Instalar paquetes adicionales
