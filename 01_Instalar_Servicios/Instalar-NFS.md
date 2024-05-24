@@ -91,7 +91,7 @@ Creamos un directorio donde montar el directorio NFS
 mkdir compartido
 ```
 
-Damos permisos al directorio crado
+Damos permisos al directorio creado
 
 ```bash
 sudo chown nobody:nogroups [directorio_destino]  
