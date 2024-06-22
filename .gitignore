@@ -1,4 +1,11 @@
+# gitignore
+
+# excluciones especiales
 .BD_SIGMA.kate-swp
-To_Do
-*.ini
+
+# excliciones de en proceso
 td_*.md
+
+# directios de SO
+*.ini
+*.directory
