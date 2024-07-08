@@ -11,4 +11,6 @@
 
 03 [Mantenimiento de Servicios](https://github.com/GorillaTi/guias/tree/main/03_Guias_Mantenimiento)
 
-04 [Comando Linux](https://github.com/GorillaTi/Guias/tree/main/04_Linux)
+04 [Comandos](https://github.com/GorillaTi/Guias/tree/main/04_Linux)
+
+05 [Micelanea](https://github.com/GorillaTi/Guias/tree/main/05_Micelanea)
