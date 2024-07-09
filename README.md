@@ -1,9 +1,6 @@
-<p align="center">
-<img width="100%"
-     src="https://github.com/GorillaTi/GorillaTi/blob/main/images/banner_hithub.png?raw=true")
-</p>
+![](assets/2024-07-09-08-54-36-baner_gti.jpg)
 
-# GUÍAS DE
+# GUÍAS DE :
 
 01 [Instalación de Servicios](https://github.com/GorillaTi/guias/tree/main/01_Instalar_Servicios)
 
