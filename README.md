@@ -1,4 +1,7 @@
-![](assets/2024-07-09-08-54-36-baner_gti.jpg)
+<p align="center">
+<img width="100%"
+     src="https://github.com/GorillaTi/GorillaTi/blob/main/images/baner_gti.jpg?raw=true")
+</p>
 
 # GUÍAS DE :
 
