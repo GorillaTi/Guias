@@ -4,9 +4,9 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.2.0
+Versión: 2.0.0
 
-Nivel: Todos
+Nivel: Medio - Avanzado
 
 Área: CPD
 
@@ -18,183 +18,108 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ## En CentOS 8
 
-1. Instalamos y configuramos el servidor conforme a la Guía de Instalación de CentOS 8.
+Instalamos y configuramos el servidor conforme a la [Guía de Instalación de CentOS ](https://github.com/GorillaTi/Guias/blob/main/01_Instalar_Servicios/Instalar-CentOS-AlmaLinux.md#instalaci%C3%B3n-de-centos---alma-linux)
 
 ### Instalamos Apache2
 
-2. Actualizamos
-   
-   ```bash
-   sudo dnf upgrade
-   ```
+Actualizamos
 
-3. Instalamos http
-   
-   ```bash
-   sudo dnf install -y httpd
-   ```
+```bash
+sudo dnf upgrade -y
+```
+
+Instalamos `httpd`
+
+```bash
+sudo dnf install -y httpd
+```
 
 ### Configuración  de Firewall
 
-4. Habilitamos el  los puertos http y https en el firewall
-   
-   - Verificamos el estado del firewall
-   
-   ```bash
-   systemctl status firewalld
-   ```
-   
-   - Verificamos los servicios habilitados
-   
-   ```bash
-   sudo firewall-cmd --list-services
-   ```
-   
-   ```bash
-   sudo firewall-cmd --list-all
-   ```
-   
-   - Adicionamos el servicio de forma permanente
-   
-   ```bash
-   firewall-cmd --add-service=http --permanent
-   firewall-cmd --add-service=https --permanent
-   ```
-   
-   - Reiniciamos el servicio del firewall   
-   
-   ```bash
-   firewall-cmd --reload
-   ```
-   
-   - Verificamos los servicios habilitados
-   
-   ```bash
-   sudo firewall-cmd --list-services
-   ```
+Habilitamos el  los puertos `http` y `https` en el firewall
+
+- Verificamos el estado del firewall
+
+```bash
+sudo systemctl status firewalld
+```
+
+- Verificamos los servicios habilitados
+
+```bash
+sudo firewall-cmd --list-services
+```
+
+```bash
+sudo firewall-cmd --list-all
+```
+
+- Adicionamos el servicio de forma permanente
+
+```bash
+firewall-cmd --add-service=http --permanent
+firewall-cmd --add-service=https --permanent
+```
+
+- Reiniciamos el servicio del firewall   
+
+```bash
+firewall-cmd --reload
+```
+
+- Verificamos los servicios habilitados
+
+```bash
+sudo firewall-cmd --list-services
+```
 
 ### Instalación de PHP
 
-5. Revisamos la versión de PHP en los repositorios
-   
-   ```bash
-   sudo dnf module list php
-   ```
-   
-   Si la versiones disponibles cubren nuestras necesidades, la instalamos
-   
-   Caso contrario adicionamos el repositorio para versiones mas actuales en la pagina 
-   
-   https://rpms.remirepo.net/wizard/
+Revisamos la versión de PHP en los repositorios
 
-6. instalamos los módulos de php
-   
-   ```bash
-   sudo dnf install -y php php-opcache php-curl php-common php-mysqlnd php-gd
-   ```
+```bash
+sudo dnf module list php
+```
 
-7. habilitamos los servicios de php
-   
-   ```bash
-   sudo systemctl enable --now php-fpm.service
-   ```
-   
-   revisamos el estado del servicio
-   
-   ```bash
-   sudo systemctl status php-fpm.service
-   ```
-   
-   revisamos la versión de php
-   
-   ```bash
-   php -v
-   ```
-   
-   recargamos la configuración del servidor apache2
-   
-   ```bash
-   sudo systemctl reload htpd
-   ```
-   
-   para probar que todo esta funcionando nos creamos un archivo de prueba
-   
-   ```bash
-   sudo nano /var/www/html/info.php
-   ```
-   
-    ingresamos el siguiente código
-   
-   ```php
-   <?php
-   phpinfo();
-   ?>
-   ```
-   
-   ingresamos a la ruta del navegador ya se por IP o por URl
-   
-   http://192.168.0.95/info.php
-   
-   http://[tu_dominio]/info.php
+Si la versiones disponibles cubren nuestras necesidades, la instalamos
 
-8. Habilitando la publicación por medio de enlaces simbólicos desde las carpetas /home a /var/www/html
-   
-   modificamos la configuración de apache2
-   
-   ```bash
-   sudo nano /etc/httpd/conf/httpd.conf 
-   ```
-   
-   la necesaria para lo requerido
-   
-   ```tex
-   <Directory /var/www/html/>
-       Options Indexes FollowSymLinks MultiViews
-       AllowOverride All
-       Order allow,deny
-       allow from all
-   </Directory>
-   ```
-   
-   comprobamos la configuración de apache2
-   
-   ```bash
-   apachectl -t
-   ```
-   
-   recargamos la configuración del servidor apache2
-   
-   ```bash
-   sudo systemctl reload htpd
-   ```
-   
-   creamos una carpeta en la carpeta personal 
-   
-   ```bash
-   mkdir test
-   ```
-   
-   y movemos el archivo de /var/www/html a home/usuario
-   
-   ```bash
-   sudo mv -fv /var/www/html/info.php /home/[tu_usuario]/test/
-   ```
-   
-   cambiamos el propietario el grupo
-   
-   ```bash
-   sudo chown -R [usuario]:[Grupo] test/info.php
-   ```
-   
-   creamos el enlace simbólico
-   
-   ```bash
-   ln -s [origen] [destino]
-   ```
+Caso contrario adicionamos el repositorio para versiones mas actuales en la pagina 
+
+https://rpms.remirepo.net/wizard/
+
+Instalando PHP
+
+```bash
+sudo dnf install -y php
+```
+
+instalando los módulos de PHP
+
+```bash
+sudo dnf install -y php{opcache,curl,common,mysqlnd,gd}
+```
+
+habilitamos los servicios de PHP
+
+```bash
+sudo systemctl enable --now php-fpm.service
+```
+
+revisamos el estado del servicio
+
+```bash
+sudo systemctl status php-fpm.service
+```
+
+recargamos la configuración del servidor apache2
+
+```bash
+sudo systemctl reload httpd
+```
 
 ## En Debian 10
 
-Instalamos y configuramos el servidor conforme a la Guía de Instalación de **Debian 10**
+Instalamos y configuramos el servidor conforme a la [Guía de Instalación de Debian](https://github.com/GorillaTi/Guias/blob/main/01_Instalar_Servicios/Instalar-Debian.md#instalaci%C3%B3n-de-debian)
 
 ### Instalación de Apache2
 
@@ -304,7 +229,7 @@ sudo apt install -y php8.1
 php -v
 ```
 
-### Instalamos exenciones básicas de PHP
+### Instalar modulos de PHP
 
 ```bash
 sudo apt install php8.1-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,bcmath} -y 
@@ -318,7 +243,7 @@ Ubicarse en la carpeta de configuración
 cd /etc/apache2/conf-available/
 ```
 
-Respaldo de seguridad de los archivos **charset.conf **  y **security.con**
+Respaldo de seguridad de los archivos `charset.conf`   y `security.con`
 
 ```bash
 sudo cp -rpfv charset.conf charset.conf.orig
@@ -327,7 +252,7 @@ sudo cp -rpfv security.conf security.conf.orig
 
 ### Charset
 
-- Modificamos el archivo **charset.conf**
+- Modificamos el archivo `charset.conf`
 
 ```bash
 sudo vim charset.conf
@@ -341,19 +266,19 @@ AddDefaultCharset UTF-8
 
 ### Security
 
-- Modificamos el archivo **security.conf**
+- Modificamos el archivo `security.conf`
 
 ```bash
 sudo vim security.conf
 ```
 
-- Des comentamos la línea y colocamos en **off**
+- Des comentamos la línea y colocamos en `off`
 
 ```shell-session
 ServerSignature Off
 ```
 
-- De comentamos la linea y colocamos en **Prod**
+- De comentamos la linea y colocamos en `Prod`
 
 ```shell-session
 ServerTokens Prod
@@ -361,19 +286,19 @@ ServerTokens Prod
 
 ### Ports
 
-Ubicamos en el directorio **apache2**
+Ubicamos en el directorio `apache2`
 
 ```bash
 cd /etc/apache2/
 ```
 
-Respaldo de seguridad de  **ports.conf**
+Respaldo de seguridad de  `ports.conf`
 
 ```bash
 sudo cp -rpfv ports.conf ports.conf.orig 
 ```
 
-Editamos el archivo **ports.conf**
+Editamos el archivo `ports.conf`
 
 ```bash
 sudo vim ports.conf
@@ -450,7 +375,7 @@ o
 sudo apache2ctl restart
 ```
 
-### Revision del estado del Servicio
+### Revisión del estado del Servicio
 
 Revisamos los puertos
 
@@ -479,12 +404,28 @@ tcp6       0      0 :::80                   :::*                    LISTEN      
 tcp6       0      0 :::8081                 :::*                    LISTEN      41521/apache2
 ```
 
+## Revisando versión de PHP
+
+revisamos la versión de PHP
+
+```bash
+php -v
+```
+
+## Revisando versiones de PHP instaladas
+
+```bash
+sudo update-alternatives --config php
+```
+
+
+
 ## Prueba de Funcionamiento de la instalación de php
 
 * Para probar que todo esta funcionando nos creamos  carpeta `test` y archivo de prueba `index.php`
   
   ```bash
-  sudo mkdir /var/www/html/test
+  sudo mkdir -p /var/www/html/test
   sudo nano /var/www/html/test/index.php
   ```
 
@@ -498,18 +439,18 @@ tcp6       0      0 :::8081                 :::*                    LISTEN      
 
 * Revisamos  el resultado en la ruta del navegador ya se por IP o por URL
   
-  * http://[ip_servidor]/test
-  * http://[tu_dominio]/test
+  * http://10.10.0.1/test
+  * http://mi.dominio/test
 
-## Archivo de Configuración php.ini
+## Configuración php.ini
 
-Para editar el archivo de configuración
+Editar el archivo de configuración
 
 ```bash
 sudo nano /etc/php/7.4/fpm/php.ini
 ```
 
-Parámetros básicos de configuración para modificar
+Parámetros básicos de configuración
 
 ```shell-session
 upload_max_filesize = 32M 
@@ -520,7 +461,7 @@ max_input_vars = 3000
 max_input_time = 1000
 ```
 
-Ocultar version de PHP
+Ocultar versión de PHP
 
 ```shell-session
 expose_php = Off
@@ -528,10 +469,18 @@ expose_php = Off
 
 ## Configuración para enlaces simbólicos de `/home` a` /var/www/html`
 
-* Editar el archivo `apache.conf`
+* Editar el archivo `apache.conf` o `httpd.conf`
+  
+  Debian / Ubuntu
   
   ```bash
-  sudo nano apache.conf
+  sudo vim /etc/apache2/apache2.conf
+  ```
+  
+  CentOS / Alma Linux / Rocky Linux
+  
+  ```bash
+  sudo nano /etc/httpd/conf/httpd.conf 
   ```
 
 * Insertamos el siguiente código
@@ -553,8 +502,16 @@ expose_php = Off
 
 * Recargamos la Configuración de Apache.
   
+  Debian
+  
   ```bash
   sudo systemctl reload apache2.service 
+  ```
+  
+  CentOS / Alma Linux / Rocky Linux
+  
+  ```bash
+  sudo nano /etc/httpd/conf/httpd.conf 
   ```
 
 ## Prueba de funcionamiento de enlace simbólico
@@ -579,8 +536,8 @@ expose_php = Off
 
 * Revisamos en el navegador
   
-  * http://192.168.0.95/test
-  * http://[tu_dominio]/test
+  * http://10.10.0.1/test
+  * http://mi.dominio/test
 
 ## Configurando VirtualHost  Manual
 
