@@ -4,17 +4,19 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0.0
+Versión: 1.0.1
 
-Nivel: Todos
+Nivel: Avanzado
 
 Área: CPD
 
-Elaborado por: Edmundo Cespedes Ayllon
+Elaborado por: Edmundo Céspedes Ayllón
 
-Email: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
+e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ---
+
+:fire: :warning: **NO SE RECOMIENDA LA DESHABILITACION DE SELINUX EN SERVIDORES EN PRODUCCION**
 
 ## Deshabilitamos SElinix
 
