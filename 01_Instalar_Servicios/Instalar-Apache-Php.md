@@ -418,8 +418,6 @@ php -v
 sudo update-alternatives --config php
 ```
 
-
-
 ## Prueba de Funcionamiento de la instalación de php
 
 * Para probar que todo esta funcionando nos creamos  carpeta `test` y archivo de prueba `index.php`
@@ -452,7 +450,7 @@ sudo nano /etc/php/7.4/fpm/php.ini
 
 Parámetros básicos de configuración
 
-```shell-session
+```php
 upload_max_filesize = 32M 
 post_max_size = 48M 
 memory_limit = 256M 
@@ -463,7 +461,7 @@ max_input_time = 1000
 
 Ocultar versión de PHP
 
-```shell-session
+```php
 expose_php = Off
 ```
 
@@ -485,7 +483,7 @@ expose_php = Off
 
 * Insertamos el siguiente código
   
-  ```http
+  ```apacheconf
   <Directory /var/www/html/ >
       Options Indexes FollowSymLinks MultiViews
       AllowOverride All
@@ -545,7 +543,7 @@ expose_php = Off
 
 000-default.conf
 
-```shell-session
+```apacheconf
 <VirtualHost *:80>
         #ServerName www.example.com
         #ServerAdmin webmaster@localhost
@@ -566,7 +564,7 @@ expose_php = Off
 
  000-default-le-ssl.conf
 
-```shell-session
+```apacheconf
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
         ServerAdmin [tucorreo]@[tudominio.com]
@@ -585,32 +583,6 @@ expose_php = Off
         CustomLog /access.log combined
 </VirtualHost>
 </IfModule>
-```
-
-### Nginx
-
-```shell-session
-server {
-        listen 80 default_server;
-        return 301 https://$host$request_uri;
-        }
-
-server {
-        listen 443 ssl;
-
-        ssl_certificate     /etc/letsencrypt/live/[tudominio.com]/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/[tudominio.com]/privkey.pem;
-        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
-        ssl_ciphers         HIGH:!aNULL:!MD5;
-
-        root /var/www/html;
-
-        index index.html index.htm index.nginx-debian.html;
-
-        location / {
-                try_files $uri $uri/ =404;
-                }
-        }
 ```
 
 Verificamos el estado del VHost
@@ -638,4 +610,30 @@ Define: DUMP_VHOSTS
 Define: DUMP_RUN_CFG
 User: name="www-data" id=33
 Group: name="www-data" id=33
+```
+
+### Nginx
+
+```nginx
+server {
+        listen 80 default_server;
+        return 301 https://$host$request_uri;
+        }
+
+server {
+        listen 443 ssl;
+
+        ssl_certificate     /etc/letsencrypt/live/[tudominio.com]/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/[tudominio.com]/privkey.pem;
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        location / {
+                try_files $uri $uri/ =404;
+                }
+        }
 ```
