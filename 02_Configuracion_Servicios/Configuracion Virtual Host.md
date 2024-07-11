@@ -24,9 +24,13 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 Configuraciones
 
+- Debian / Ubuntu
+
 ```bash
 /etc/apache2
 ```
+
+- RHEL
 
 ```bash
 /etc/httpd
@@ -59,6 +63,8 @@ Alojamiento
 ## Configurando de acuerdo al Dominio
 
 Se crea archivos de configuración de acuerdo al `dominio` o `sub-dominio`
+
+- Debian / Ubuntu
 
 ```bash
 sudo vim /etc/pache2/sites-available/sitio.ejemplo.conf
@@ -115,6 +121,8 @@ Ejemplo de configuración:
 </VirtualHost>
 ```
 
+<a name="sintaxis"></a>
+
 ### Verificar sintaxis correcta
 
 ```bash
@@ -129,7 +137,9 @@ sudo a2ensite sitio.ejemplo.conf
 
 <a name="recarga"></a>
 
-### Recargar el servicio de apache2
+### Recargar el servicio apache2 / httpd
+
+- Debian / Ubuntu
 
 ```bash
 sudo sevice apache2 reload
@@ -141,13 +151,21 @@ o
 sudo systemctl reload apache2.service
 ```
 
+- RHEL
+
+```bash
+sudo systemctl restart httpd.service
+```
+
 ### Para des-habilitar el sitio
 
 ```bash
 sudo a2dissite sitio.ejemplo.conf
 ```
 
-Se debe recargar el servicio de apache.
+Se debe [recargar el servicio](#recargar) de apache.
+
+<a name="host"></a>
 
 ## Ver host virtuales activos
 
@@ -204,6 +222,8 @@ Verificando que este habilitado
 sudo apache2ctl -M
 ```
 
+Se debe [recargar el servicio](#recargar) para actualizar las configuraciones. 
+
 ### Habilitar AllowOverride en:
 
 #### General
@@ -220,7 +240,9 @@ Modificamos la lineas de `AllowOverride`
 AllowOverride All
 ```
 
-### VHost
+Se debe [recargar el servicio](#recargar) para actualizar las configuraciones.
+
+### VHost SSL
 
 Editar el archivo vhost en especifico
 
@@ -301,17 +323,9 @@ RewriteRule . /portal/index.php [L]
 
 > ***Nota.-*** Configuración recomendada par WordPress y URLs amigables.
 
-Reiniciar servicio `apache`
+[Verificar la configuración](sintaxis) realizada
 
-```bash
-sudo systemctl restart apache2.service
-```
-
-o
-
-```bash
-sudo apache2ctl restart
-```
+Se debe [recargar el servicio](#recargar) para actualizar las configuraciones.
 
 ## Configurar VHost para Proxy Reverso
 
@@ -350,21 +364,11 @@ Insertamos la siguiente configuración
 </VirtualHost>
 ```
 
-Recargamos el servicio
+[Verificar la configuración](sintaxis) realizada
 
-- Debian
+Se debe [recargar el servicio](#recargar) para actualizar las configuraciones.
 
-```bash
-sudo systemctl restart apache2.service
-```
-
-- RHEL
-
-```bash
-sudo systemctl restart httpd.service
-```
-
-## Asignación de Puertos
+## VHost por Puertos
 
 Editamos el archivo `ports.conf` o `httpd.conf`
 
@@ -421,19 +425,11 @@ Insertamos la siguiente configuración
 </VirtualHost>
 ```
 
-### Reiniciamos el servicio
+[Verificar la configuración](sintaxis) realizada
 
-Debian
+Se debe [recargar el servicio](#recargar) para actualizar las configuraciones.
 
-```bash
-sudo systemctl restart apache2
-```
-
-RHEL
-
-```bash
-sudo systemctl restart httpd
-```
+<a name="puertos"></a>
 
 ### Verificamos el estado de los puertos
 
@@ -478,4 +474,4 @@ sudo semanage port -m -t http_port_t -p tcp [numero_puerto]
 
 Se deber [reiniciar el servicio](#recarga)
 
-Verificamos el Estado de los puertos del Servicio
+Verificamos el Estado de los [puertos del Servicio](#puertos)
