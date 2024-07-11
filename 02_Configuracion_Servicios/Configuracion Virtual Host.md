@@ -163,9 +163,7 @@ sudo systemctl restart httpd.service
 sudo a2dissite sitio.ejemplo.conf
 ```
 
-Se debe [recargar el servicio](#recargar) de apache.
-
-<a name="host"></a>
+Se debe [recargar el servicio](#recarga) de apache.
 
 ## Ver host virtuales activos
 
@@ -222,7 +220,7 @@ Verificando que este habilitado
 sudo apache2ctl -M
 ```
 
-Se debe [recargar el servicio](#recargar) para actualizar las configuraciones. 
+Se debe [recargar el servicio](#recarga) para actualizar las configuraciones. 
 
 ### Habilitar AllowOverride en:
 
@@ -240,7 +238,7 @@ Modificamos la lineas de `AllowOverride`
 AllowOverride All
 ```
 
-Se debe [recargar el servicio](#recargar) para actualizar las configuraciones.
+Se debe [recargar el servicio](#recarga) para actualizar las configuraciones.
 
 ### VHost SSL
 
@@ -323,9 +321,9 @@ RewriteRule . /portal/index.php [L]
 
 > ***Nota.-*** Configuración recomendada par WordPress y URLs amigables.
 
-[Verificar la configuración](sintaxis) realizada
+[Verificar la configuración](#sintaxis) realizada
 
-Se debe [recargar el servicio](#recargar) para actualizar las configuraciones.
+Se debe [recargar el servicio](#recarga) para actualizar las configuraciones.
 
 ## Configurar VHost para Proxy Reverso
 
@@ -364,9 +362,9 @@ Insertamos la siguiente configuración
 </VirtualHost>
 ```
 
-[Verificar la configuración](sintaxis) realizada
+[Verificar la configuración](#sintaxis) realizada
 
-Se debe [recargar el servicio](#recargar) para actualizar las configuraciones.
+Se debe [recargar el servicio](#recarga) para actualizar las configuraciones.
 
 ## VHost por Puertos
 
@@ -425,9 +423,9 @@ Insertamos la siguiente configuración
 </VirtualHost>
 ```
 
-[Verificar la configuración](sintaxis) realizada
+[Verificar la configuración](#sintaxis) realizada
 
-Se debe [recargar el servicio](#recargar) para actualizar las configuraciones.
+Se debe [recargar el servicio](#recarga) para actualizar las configuraciones.
 
 <a name="puertos"></a>
 
