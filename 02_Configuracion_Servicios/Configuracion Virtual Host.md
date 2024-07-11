@@ -4,7 +4,7 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.2.2
+Versión: 1.2.3
 
 Nivel: Medio
 
@@ -16,9 +16,9 @@ e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ---
 
-## Carpetas de Trabajo
+## Directorios de Trabajo
 
-### APACHE2
+### APACHE2 / HTTPD
 
 #### Archivos de :
 
@@ -28,16 +28,22 @@ Configuraciones
 /etc/apache2
 ```
 
+```bash
+/etc/httpd
+```
+
 Alojamiento
 
 ```bash
 /var/www/html
 ```
 
-#### Carpeta de configuración de virtual host
+#### Directorios de configuración de virtual host
+
+- Debian / Ubuntu
 
 ```bash
-/etc/apache2/site-avaible/
+/etc/apache2/sites-available/
 ```
 
 ```bash
@@ -52,13 +58,17 @@ Alojamiento
 
 ## Configurando de acuerdo al Dominio
 
-Se crea archivos de configuración de acuerdo al dominio o sub-dominio, sitio.ejemplo.conf
+Se crea archivos de configuración de acuerdo al `dominio` o `sub-dominio`
+
+```bash
+sudo vim /etc/pache2/sites-available/sitio.ejemplo.conf
+```
 
 Ejemplo de configuración:
 
 ### ---NORMAL----
 
-```shell-session
+```apacheconf
 <VirtualHost *:80> ---(*) es la IP - (:80) Numero de Puerto
     ServerName [tu_dominio.com]--nombre del servidor
     ServerAdmin datacenter.gams@sucre.bo -- direccion email del sysadmin
@@ -72,7 +82,7 @@ Ejemplo de configuración:
 
 ### ----LARAVEL-----
 
-```shell-session
+```apacheconf
 <VirtualHost *:80>
     ServerName [tu_dominio.com]
     ServerAlias www.[tu_dominio.com]
@@ -117,19 +127,9 @@ sudo apache2ctl -t
 sudo a2ensite sitio.ejemplo.conf
 ```
 
-Se debe de recargar el servicio de apache2
+<a name="recarga"></a>
 
-```bash
-sudo sevice apache2 reload
-```
-
-### Para des-habilitar el sitio
-
-```bash
-sudo a2dissite sitio.ejemplo.conf
-```
-
-Se debe de recargar el servicio de apache2
+### Recargar el servicio de apache2
 
 ```bash
 sudo sevice apache2 reload
@@ -141,6 +141,14 @@ o
 sudo systemctl reload apache2.service
 ```
 
+### Para des-habilitar el sitio
+
+```bash
+sudo a2dissite sitio.ejemplo.conf
+```
+
+Se debe recargar el servicio de apache.
+
 ## Ver host virtuales activos
 
 ```bash
@@ -149,7 +157,7 @@ sudo apachectl -S
 
 Ejemplo:
 
-```output
+```shell-session
 AH00112: Warning: DocumentRoot [/var/www/html/laravel-prueba] does not exist
 VirtualHost configuration:
 *:80                   is a NameVirtualHost
@@ -208,7 +216,7 @@ sudo vim /etc/apache2/apache2.conf
 
 Modificamos la lineas de `AllowOverride`
 
-```shell-session
+```apacheconf
 AllowOverride All
 ```
 
@@ -222,7 +230,7 @@ sudo vim /etc/apache2/site-available/[vhost_a_modificar]
 
 Insertamos las siguientes configuraciones
 
-```shell-session
+```apacheconf
 <IfModule mod_ssl.c>
 <VirtualHost [ip_host]:443>
     ServerName [name_site]
@@ -279,7 +287,7 @@ sudo vim /var/www/html/[directorio]/.htaccess
 
 Insertamos el siguiente código
 
-```shell-session
+```apacheconf
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -291,7 +299,7 @@ RewriteRule . /portal/index.php [L]
 </IfModule>
 ```
 
-> *Nota.-* Configuración recomendada par WordPress y URLs amigables.
+> ***Nota.-*** Configuración recomendada par WordPress y URLs amigables.
 
 Reiniciar servicio `apache`
 
@@ -323,7 +331,7 @@ sudo vim /etc/httpd/conf.d/[nombre_archivo]
 
 Insertamos la siguiente configuración 
 
-```shell-session
+```apacheconf
 <VirtualHost *:80>
         ServerAdmin [email_admin_site]
         ServerName [ip_servidor]
@@ -360,13 +368,13 @@ sudo systemctl restart httpd.service
 
 Editamos el archivo `ports.conf` o `httpd.conf`
 
-Debian
+- Debian
 
 ```bash
 nano /etc/apache2/ports.conf
 ```
 
-RHEL
+- RHEL
 
 ```bash
 nano /etc/httpd/conf/httpd.conf
@@ -380,13 +388,13 @@ Listen [numero_puerto]
 
 Editamos o creamos el archivo VHost
 
-Debian
+- Debian
 
 ```bash
 sudo vim /etc/apache2/site-avaliable/[vhost_arch]
 ```
 
-RHEL
+- RHEL
 
 ```bash
 sudo vim /etc/httpd/conf.d/[vhost_arch]
@@ -394,7 +402,7 @@ sudo vim /etc/httpd/conf.d/[vhost_arch]
 
 Insertamos la siguiente configuración
 
-```shell-session
+```apacheconf
 <VirtualHost *:[numero_puerto]>
         ServerAdmin [mail_admin]
         ServerName [ip_servidor]
@@ -468,6 +476,6 @@ sudo semanage port -m -t http_port_t -p tcp [numero_puerto]
 > sudo dnf install policycoreutils-python
 > ```
 
-[Reiniciamos el Servicio](/Guias/02_Configuracion_Servicios/Configuracion APACHE2 Virtual Host###Reiniciamos el servicio)
+Se deber [reiniciar el servicio](#recarga)
 
 Verificamos el Estado de los puertos del Servicio
