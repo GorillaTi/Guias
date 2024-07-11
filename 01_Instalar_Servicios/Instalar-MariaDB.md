@@ -4,182 +4,216 @@ Guía de:
 
 ## ACERCA DE:
 
-Versión: 1.0.1
+Versión: 2.0.0
 
 Nivel: Medio
 
 Área: CPD
 
-Elaborado por: Edmundo Cespedes Ayllon
+Elaborado por: Edmundo Céspedes Ayllón
 
 e-mail: [ed.cespedesa@gmail.com](ed.cespedesa@gmail.com)
 
 ----
 
-1. Instalamos CentOS 8 minimal, de acuerdo al manual
+## Requisitos
 
-2. Nos conectamos al servidor mediante ssh
+1. Instalamos el sistema operativo de acuerdo al manual de instalación.
+
+2. Conectarse al servidor mediante ssh
    
    ```bash
    ssh [usuario]@[ipservidor]
    ```
 
-3. Actualizamos e instalamos las actualizaciones.
+## En CenOS 8 / Alma Linux 8.x / RokiLinux 8.x
+
+1. Actualizamos e instalamos las actualizaciones.
    
    ```bash
    sudo dnf update -y
    ```
 
-## En CenOS 8 - Alma Linux 8.x
-
-4. Instalamos mariadb
+2. Instalamos MariaDB
    
    ```bash
    sudo dnf install mariadb-server -y
    ```
 
-5. Revisamos el estado del servidor mariadb.
+## En Debian 11
+
+1. Actualizamos e instalamos las actualizaciones.
+   
+   ```bash
+   sudo apt-get update && sudo apt-get upgrade -y
+   ```
+
+2. Instalando paquetes necesarios
+   
+   ```bash
+   sudo apt-get install software-properties-common dirmngr gnupg2 -y
+   ```
+   
+   ```bash
+   sudo apt-get install apt-transport-https wget curl -y
+   ```
+
+3. Instalamos MariaDB
+   
+   ```bash
+   sudo apt-get install mariadb-server -y
+   ```
+
+## Iniciando MariaDB
+
+1. Estado del servicio MariaDB.
    
    ```bash
    sudo systemctl status mariadb
    ```
-   
-   si esta inactivo lo iniciamos
-   
-   ```bash
-   sudo systmctl start mariadb
-   ```
 
-6. Habilitamos el servicio de mariadb para que inicie con el sistema
+2. Habilitar el servicio de MariaDB para que inicie con el sistema
    
    ```bash
    sudo systemctl enable --now mariadb
    ```
 
-7. Aseguramos la instalación de mariadb
+3. Iniciando MariaDB
+   
+   ```bash
+   sudo systmctl start mariadb
+   ```
+
+## Asegurando MariaDB
+
+1. Aseguramos la instalación de MariaDB
    
    ```bash
    sudo mysql_secure_installation
    ```
    
-   el usuario root no tiene una contraseña das "Y" pedirá una contraseña para ese usuario, le das "Y" a todo  
+   o
+   
+   ```bash
+   sudo /usr/bin/mysql_secure_installation
+   ```
+   
+       el usuario root no tiene una contraseña seleccionas  `Y` pedirá        una contraseña para ese usuario, le das "`Y`" a todo 
 
-8. Conexión a la base de datos
+## Accediendo a MariaDB
+
+1. Conexión a la base de datos
    
    ```bash
    mysql -u root -p
    ```
 
-9. Creamos el usuario *sysadmin* y *desarrollo* para la base de datos con acceso remoto
+## Creación de Usuarios
+
+1. Creando usuarios para todas la base de datos con acceso remoto
    
-   ```mysql
-   GRANT ALL ON *.* TO 'desarrollo'@'%' IDENTIFIED BY 'pass_usuario' WITH GRANT OPTION;
+   ```sql
+   GRANT ALL ON *.* TO 'usuario'@'%' IDENTIFIED BY 'pass_usuario' WITH GRANT OPTION;
+   ```
+
+2. Reiniciando privilegios
+   
+   ```sql
    FLUSH PRIVILEGES;
+   ```
+
+3. Listando usuarios
+   
+   ```sql
    select user, host from mysql.user;
    ```
 
-10. Habilitamos el acceso remoto editando el archivo de configuración.
-    
-    ```bash
-    sudo nano /etc/my.cnf.d/mariadb-server.cnf
-    ```
-    
-    habilitamos borrando # de la línea 
-    
-    ```output
-    bind-address = 0.0.0.0,
-    ```
-    
-    reiniciamos el servicio mariadb.
-    
-    ```bash
-    sudo systemctl restart mariadb
-    ```
+4. Saliendo de la consola de MariaDB
+   
+   ```sql
+   exit;
+   ```
+   
+   o
+   
+   ```sql
+   quit;
+   ```
 
-11. Deshabilitamos SElinix
-    
-    revisamos el estado del servicio
-    
-    ```bash
-    sestatus
-    ```
-    
-    si esta habilitado procedemos a deshabilitar
-    
-    ```bash
-    sudo nano /etc/selinux/config
-    ```
-    
-    editamos la línea
-    
-    ```
-    SELINUX=disabled
-    ```
-    
-    reiniciamos el servidor para aplicar los cambios
-    
-    ```bash
-    sudo shutdown -r now
-    ```
-    
-    o
-    
-    ```bash
-    sudo reboot
-    ```
-    
-    revisamos el estado del servicio
-    
-    ```bash
-    sestatus
-    ```
-    
-    ```output
-    SELinux status:                 disabled
-    ```
+## Habilitando acceso Remoto
 
-12. Habilitamos los puertos del servicio mariadb el firewall
-    
-    Verificamos el estado del firewall
-    
-    ```bash
-    systemctl status firewalld
-    ```
-    
-    Verificamos los servicios habilitados
-    
-    ```bash
-    sudo firewall-cmd --list-services
-    ```
-    
-    Adicionamos el servicio de forma permanente
-    
-    ```bash
-    firewall-cmd --add-service=mysql --permanent
-    ```
-    
-    Reiniciamos el servicio del firewall
-    
-    ```bash
-    firewall-cmd --reload
-    ```
-    
-    Verificamos los servicios habilitados
-    
-    ```bash
-    sudo firewall-cmd --list-services
-    ```
-    
-    :bangbang: **​NOTA.-** Si fuera necesario el cambio de password o host de un usuario se puede utilizar la siguiente sentencia
-    
-    ```mysql
-    UPDATE mysql.user SET Password=PASSWORD(‘NuevaContraseña’) WHERE USER=’nombreUsuario’ AND Host=”NombreHost”;
-    ```
-    
-    ```mysql
-    FLUSH PRIVILEGES;
-    ```
-    
-    ```mysql
-    select user, host from mysql.user
-    ```
+1. Habilitar acceso remoto editando el archivo de configuración.
+   
+   En CentOS
+   
+   ```bash
+   sudo nano /etc/my.cnf.d/mariadb-server.cnf
+   ```
+   
+   En Debian
+   
+   ```bash
+   sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
+   ```
+
+2. Habilitamos borrando # de la línea 
+   
+   ```shell-session
+   bind-address = 0.0.0.0,
+   ```
+
+3. Reiniciamos el servicio MariaDB.
+   
+   ```bas
+   sudo systemctl restart mariadb
+   ```
+
+## Configurar firewall para MariaDB
+
+### En CentOS
+
+Verificamos el estado del firewall
+
+```bash
+systemctl status firewalld
+```
+
+Verificamos los servicios habilitados
+
+```bash
+sudo firewall-cmd --list-services
+```
+
+Adicionamos el servicio de forma permanente
+
+```bash
+firewall-cmd --add-service=mysql --permanent
+```
+
+Reiniciamos el servicio del firewall
+
+```bash
+firewall-cmd --reload
+```
+
+Verificamos los servicios habilitados
+
+```bash
+sudo firewall-cmd --list-services
+```
+
+## Cambio de Password o Host
+
+Si fuera necesario el cambio de password o host de un usuario se puede utilizar la siguiente sentencia
+
+```sql
+UPDATE mysql.user SET Password=PASSWORD(‘NuevaContraseña’) WHERE USER=’nombreUsuario’ AND Host=”NombreHost”;
+```
+
+```sql
+FLUSH PRIVILEGES;
+```
+
+```sql
+select user, host from mysql.user
+```
